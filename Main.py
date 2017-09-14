@@ -5,6 +5,7 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 from Auxs import OBJ
 
+
 verticies = (
     (1, -1, -1),
     (1, 1, -1),
