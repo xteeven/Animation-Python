@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ce465d5d-8b2e-4198-8847-df58a4974577" name="Default" comment="" />
+    <list default="true" id="ce465d5d-8b2e-4198-8847-df58a4974577" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Animation/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../Animation/.idea/workspace.xml" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,7 +32,7 @@
         <entry file="file://$PROJECT_DIR$/../Animation/Auxs.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="102">
-              <caret line="33" column="16" lean-forward="true" selection-start-line="33" selection-start-column="16" selection-end-line="33" selection-end-column="16" />
+              <caret line="102" column="19" lean-forward="true" selection-start-line="102" selection-start-column="19" selection-end-line="102" selection-end-column="19" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
                 <element signature="e#62#1187#0" expanded="false" />
@@ -51,6 +53,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Xteeven" />
+      </list>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../Animation" />
   </component>
   <component name="IdeDocumentHistory">
@@ -298,6 +305,14 @@
       <option name="presentableId" value="Default" />
       <updated>1505414850267</updated>
     </task>
+    <task id="LOCAL-00001" summary="thr">
+      <created>1505428589420</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1505428589421</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -333,6 +348,10 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="thr" />
+    <option name="LAST_COMMIT_MESSAGE" value="thr" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
@@ -351,7 +370,7 @@
     <entry file="file://$PROJECT_DIR$/../Animation/Auxs.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
-          <caret line="33" column="16" lean-forward="true" selection-start-line="33" selection-start-column="16" selection-end-line="33" selection-end-column="16" />
+          <caret line="102" column="19" lean-forward="true" selection-start-line="102" selection-start-column="19" selection-end-line="102" selection-end-column="19" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
             <element signature="e#62#1187#0" expanded="false" />
