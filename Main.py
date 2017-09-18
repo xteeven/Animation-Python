@@ -3,29 +3,46 @@ from pygame.locals import *
 import numpy as np
 from OpenGL.GL import *
 from OpenGL.GLU import *
-from Auxs import OBJ
+from Auxs import OBJ, translationMatrix
 
 parametric = []
-for t in range(1000):
-    parametric.append((10*np.tan(t/np.pi)+np.sin(t / np.pi), (np.log(t+1/ np.pi)),2*np.cos(t / np.pi)))
+for t in range(50):
+    parametric.append((np.sin(t / np.pi), ((t/ np.pi)) ,2*np.cos(t / np.pi)))
 
 
 def drawCurve(Curve):
     glBegin(GL_LINE_STRIP)
+    # glLineWidth(2)
+    glColor3f(1.0, 1.0, 1.0)
     for t in range(len(Curve)):
         glVertex3fv(Curve[t])
     glEnd()
 
+def drawTriangle():
+    glBegin(GL_TRIANGLE_STRIP)
+    points = ((0, 1, 0), (1, 0, 0), (0, -1, 0))
+    glColor3f(1.0, 0.0, 0.0)
+    [glVertex3fv(i) for i in points]
+    glEnd()
 
+
+def drawGrid():
+
+    glBegin(GL_LINES)
+    glColor3f(.5, .5, .5)
+    for i in range(-20, 20):
+        [glVertex3fv((i/2.0, j/2.0, -5)) for j in range(-20, 20)]
+    for i in range(-20, 20):
+        [glVertex3fv((j / 2.0, i / 2.0, -5)) for j in range(-20, 20)]
+    glEnd()
 
 
 def main():
     pygame.init()
     display = (800,600)
     pygame.display.set_mode(display, DOUBLEBUF | OPENGL)
-
-    gluPerspective(45, (display[0]/display[1]), 0.1, 500.0)
-
+    glMatrixMode(GL_MODELVIEW)
+    gluPerspective(45, (display[0]/display[1]), 0.1, 250.0)
     glTranslatef(0.0,0.0, -10)
 
     while True:
@@ -42,8 +59,19 @@ def main():
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
         glTranslatef(0.0, 0.0, 0)
-        # Cube()
+
         drawCurve(parametric)
+
+
+        # glPushMatrix()
+        # # glRotatef(pygame.time.get_ticks()/10.0,1,0,0)
+        #
+        #
+        drawGrid()
+        drawTriangle()
+
+        # glPopMatrix()
+
         pygame.display.flip()
         pygame.time.wait(10)
 
