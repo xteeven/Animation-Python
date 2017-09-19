@@ -1,0 +1,196 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"ce465d5d-8b2e-4198-8847-df58a4974577\" name=\"Default\" comment=\"\">\n      <change type=\"MODIFICATION\" beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" />\n      <change type=\"MODIFICATION\" beforePath=\"$PROJECT_DIR$/Main.py\" afterPath=\"$PROJECT_DIR$/Main.py\" />\n    </list>\n    <option name=\"EXCLUDED_CONVERTED_TO_IGNORED\" value=\"true\" />\n    <option name=\"TRACKING_ENABLED\" value=\"true\" />\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"CoverageDataManager\">\n    <SUITE FILE_PATH=\"coverage/Animation$Main.coverage\" NAME=\"Main Coverage Results\" MODIFIED=\"1505773442070\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"coverage.py\" COVERAGE_BY_TEST_ENABLED=\"true\" COVERAGE_TRACING_ENABLED=\"false\" WORKING_DIRECTORY=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"DatabaseView\">\n    <option name=\"SHOW_INTERMEDIATE\" value=\"true\" />\n    <option name=\"GROUP_SCHEMA\" value=\"true\" />\n    <option name=\"GROUP_CONTENTS\" value=\"false\" />\n    <option name=\"SORT_POSITIONED\" value=\"false\" />\n    <option name=\"SHOW_TABLE_DETAILS\" value=\"true\" />\n    <option name=\"SHOW_EMPTY_GROUPS\" value=\"false\" />\n    <option name=\"AUTO_SCROLL_FROM_SOURCE\" value=\"false\" />\n    <expand />\n    <select />\n  </component>\n  <component name=\"FileEditorManager\">\n    <leaf SIDE_TABS_SIZE_LIMIT_KEY=\"300\">\n      <file leaf-file-name=\"Main.py\" pinned=\"false\" current-in-tab=\"true\">\n        <entry file=\"file://$PROJECT_DIR$/Main.py\">\n          <provider selected=\"true\" editor-type-id=\"text-editor\">\n            <state relative-caret-position=\"323\">\n              <caret line=\"31\" column=\"24\" lean-forward=\"false\" selection-start-line=\"31\" selection-start-column=\"24\" selection-end-line=\"31\" selection-end-column=\"24\" />\n              <folding>\n                <element signature=\"e#0#13#0\" expanded=\"true\" />\n              </folding>\n            </state>\n          </provider>\n        </entry>\n      </file>\n      <file leaf-file-name=\"Auxs.py\" pinned=\"false\" current-in-tab=\"false\">\n        <entry file=\"file://$PROJECT_DIR$/Auxs.py\">\n          <provider selected=\"true\" editor-type-id=\"text-editor\">\n            <state relative-caret-position=\"663\">\n              <caret line=\"135\" column=\"27\" lean-forward=\"false\" selection-start-line=\"135\" selection-start-column=\"27\" selection-end-line=\"135\" selection-end-column=\"27\" />\n              <folding>\n                <element signature=\"e#0#13#0\" expanded=\"true\" />\n                <element signature=\"e#81#1206#0\" expanded=\"false\" />\n                <element signature=\"e#155#1186#0\" expanded=\"false\" />\n                <element signature=\"e#1275#3817#0\" expanded=\"false\" />\n              </folding>\n            </state>\n          </provider>\n        </entry>\n      </file>\n    </leaf>\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Python Script\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"PREVIOUS_COMMIT_AUTHORS\">\n      <list>\n        <option value=\"David Steeven Villa Salazar &lt;david7246@gmail.com&gt;\" />\n        <option value=\"Xteeven\" />\n      </list>\n    </option>\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"IdeDocumentHistory\">\n    <option name=\"CHANGED_PATHS\">\n      <list>\n        <option value=\"$PROJECT_DIR$/Auxs.py\" />\n        <option value=\"$PROJECT_DIR$/Main.py\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"JsBuildToolGruntFileManager\" detection-done=\"true\" sorting=\"DEFINITION_ORDER\" />\n  <component name=\"JsBuildToolPackageJson\" detection-done=\"true\" sorting=\"DEFINITION_ORDER\" />\n  <component name=\"JsGulpfileManager\">\n    <detection-done>true</detection-done>\n    <sorting>DEFINITION_ORDER</sorting>\n  </component>\n  <component name=\"ProjectFrameBounds\" extendedState=\"6\">\n    <option name=\"x\" value=\"-1669\" />\n    <option name=\"y\" value=\"-19\" />\n    <option name=\"width\" value=\"1400\" />\n    <option name=\"height\" value=\"1000\" />\n  </component>\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\n  <component name=\"ProjectView\">\n    <navigator currentView=\"ProjectPane\" proportions=\"\" version=\"1\">\n      <flattenPackages />\n      <showMembers />\n      <showModules />\n      <showLibraryContents />\n      <hideEmptyPackages />\n      <abbreviatePackageNames />\n      <autoscrollToSource />\n      <autoscrollFromSource />\n      <sortByType />\n      <manualOrder />\n      <foldersAlwaysOnTop value=\"true\" />\n    </navigator>\n    <panes>\n      <pane id=\"Scope\" />\n      <pane id=\"Scratches\" />\n      <pane id=\"ProjectPane\">\n        <subPane>\n          <expand>\n            <path>\n              <item name=\"Animation\" type=\"b2602c69:ProjectViewProjectNode\" />\n              <item name=\"Animation\" type=\"462c0819:PsiDirectoryNode\" />\n            </path>\n          </expand>\n          <select />\n        </subPane>\n      </pane>\n    </panes>\n  </component>\n  <component name=\"PropertiesComponent\">\n    <property name=\"settings.editor.selected.configurable\" value=\"preferences.keymap\" />\n    <property name=\"last_opened_file_path\" value=\"$PROJECT_DIR$\" />\n    <property name=\"WebServerToolWindowFactoryState\" value=\"false\" />\n  </component>\n  <component name=\"RunDashboard\">\n    <option name=\"ruleStates\">\n      <list>\n        <RuleState>\n          <option name=\"name\" value=\"ConfigurationTypeDashboardGroupingRule\" />\n        </RuleState>\n        <RuleState>\n          <option name=\"name\" value=\"StatusDashboardGroupingRule\" />\n        </RuleState>\n      </list>\n    </option>\n  </component>\n  <component name=\"RunManager\" selected=\"Python.Main\">\n    <configuration name=\"Main\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\">\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\n      <option name=\"PARENT_ENVS\" value=\"true\" />\n      <envs>\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\n      </envs>\n      <option name=\"SDK_HOME\" value=\"C:\\Python27\\python.exe\" />\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$\" />\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\n      <module name=\"Animation\" />\n      <EXTENSION ID=\"PythonCoverageRunConfigurationExtension\" enabled=\"false\" sample_coverage=\"true\" runner=\"coverage.py\" />\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/Main.py\" />\n      <option name=\"PARAMETERS\" value=\"\" />\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\n    </configuration>\n    <configuration default=\"true\" type=\"PyBehaveRunConfigurationType\" factoryName=\"Behave\">\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\n      <option name=\"PARENT_ENVS\" value=\"true\" />\n      <envs />\n      <option name=\"SDK_HOME\" value=\"\" />\n      <option name=\"WORKING_DIRECTORY\" value=\"\" />\n      <option name=\"IS_MODULE_SDK\" value=\"false\" />\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\n      <module name=\"untitled\" />\n      <EXTENSION ID=\"PythonCoverageRunConfigurationExtension\" enabled=\"false\" sample_coverage=\"true\" runner=\"coverage.py\" />\n      <option name=\"ADDITIONAL_ARGS\" value=\"\" />\n    </configuration>\n    <configuration default=\"true\" type=\"DjangoTestsConfigurationType\" factoryName=\"Django tests\">\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\n      <option name=\"PARENT_ENVS\" value=\"true\" />\n      <envs>\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\n      </envs>\n      <option name=\"SDK_HOME\" value=\"\" />\n      <option name=\"WORKING_DIRECTORY\" value=\"\" />\n      <option name=\"IS_MODULE_SDK\" value=\"false\" />\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\n      <module name=\"untitled\" />\n      <EXTENSION ID=\"PythonCoverageRunConfigurationExtension\" enabled=\"false\" sample_coverage=\"true\" runner=\"coverage.py\" />\n      <option name=\"TARGET\" value=\"\" />\n      <option name=\"SETTINGS_FILE\" value=\"\" />\n      <option name=\"CUSTOM_SETTINGS\" value=\"false\" />\n      <option name=\"USE_OPTIONS\" value=\"false\" />\n      <option name=\"OPTIONS\" value=\"\" />\n    </configuration>\n    <configuration default=\"true\" type=\"tests\" factoryName=\"Doctests\">\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\n      <option name=\"PARENT_ENVS\" value=\"true\" />\n      <envs />\n      <option name=\"SDK_HOME\" value=\"\" />\n      <option name=\"WORKING_DIRECTORY\" value=\"\" />\n      <option name=\"IS_MODULE_SDK\" value=\"false\" />\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\n      <module name=\"untitled\" />\n      <EXTENSION ID=\"PythonCoverageRunConfigurationExtension\" enabled=\"false\" sample_coverage=\"true\" runner=\"coverage.py\" />\n      <option name=\"SCRIPT_NAME\" value=\"\" />\n      <option name=\"CLASS_NAME\" value=\"\" />\n      <option name=\"METHOD_NAME\" value=\"\" />\n      <option name=\"FOLDER_NAME\" value=\"\" />\n      <option name=\"TEST_TYPE\" value=\"TEST_SCRIPT\" />\n      <option name=\"PATTERN\" value=\"\" />\n      <option name=\"USE_PATTERN\" value=\"false\" />\n    </configuration>\n    <configuration default=\"true\" type=\"PyLettuceRunConfigurationType\" factoryName=\"Lettuce\">\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\n      <option name=\"PARENT_ENVS\" value=\"true\" />\n      <envs />\n      <option name=\"SDK_HOME\" value=\"\" />\n      <option name=\"WORKING_DIRECTORY\" value=\"\" />\n      <option name=\"IS_MODULE_SDK\" value=\"false\" />\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\n      <module name=\"untitled\" />\n      <EXTENSION ID=\"PythonCoverageRunConfigurationExtension\" enabled=\"false\" sample_coverage=\"true\" runner=\"coverage.py\" />\n      <option name=\"ADDITIONAL_ARGS\" value=\"\" />\n    </configuration>\n    <configuration default=\"true\" type=\"PythonConfigurationType\" factoryName=\"Python\">\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\n      <option name=\"PARENT_ENVS\" value=\"true\" />\n      <envs>\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\n      </envs>\n      <option name=\"SDK_HOME\" value=\"C:\\Python27\\python.exe\" />\n      <option name=\"WORKING_DIRECTORY\" value=\"\" />\n      <option name=\"IS_MODULE_SDK\" value=\"false\" />\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\n      <module name=\"Animation\" />\n      <EXTENSION ID=\"PythonCoverageRunConfigurationExtension\" enabled=\"false\" sample_coverage=\"true\" runner=\"coverage.py\" />\n      <option name=\"SCRIPT_NAME\" value=\"\" />\n      <option name=\"PARAMETERS\" value=\"\" />\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\n    </configuration>\n    <configuration default=\"true\" type=\"Tox\" factoryName=\"Tox\">\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\n      <option name=\"PARENT_ENVS\" value=\"true\" />\n      <envs />\n      <option name=\"SDK_HOME\" value=\"\" />\n      <option name=\"WORKING_DIRECTORY\" value=\"\" />\n      <option name=\"IS_MODULE_SDK\" value=\"false\" />\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\n      <EXTENSION ID=\"PythonCoverageRunConfigurationExtension\" enabled=\"false\" sample_coverage=\"true\" runner=\"coverage.py\" />\n      <module name=\"untitled\" />\n    </configuration>\n    <configuration default=\"true\" type=\"tests\" factoryName=\"Nosetests\">\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\n      <option name=\"PARENT_ENVS\" value=\"true\" />\n      <envs />\n      <option name=\"SDK_HOME\" value=\"\" />\n      <option name=\"WORKING_DIRECTORY\" value=\"\" />\n      <option name=\"IS_MODULE_SDK\" value=\"false\" />\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\n      <module name=\"untitled\" />\n      <EXTENSION ID=\"PythonCoverageRunConfigurationExtension\" enabled=\"false\" sample_coverage=\"true\" runner=\"coverage.py\" />\n      <option name=\"_new_regexPattern\" value=\"&quot;&quot;\" />\n      <option name=\"_new_additionalArguments\" value=\"&quot;&quot;\" />\n      <option name=\"_new_target\" value=\"&quot;&quot;\" />\n      <option name=\"_new_targetType\" value=\"&quot;PATH&quot;\" />\n    </configuration>\n    <configuration default=\"true\" type=\"tests\" factoryName=\"Unittests\">\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\n      <option name=\"PARENT_ENVS\" value=\"true\" />\n      <envs />\n      <option name=\"SDK_HOME\" value=\"\" />\n      <option name=\"WORKING_DIRECTORY\" value=\"\" />\n      <option name=\"IS_MODULE_SDK\" value=\"false\" />\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\n      <module name=\"untitled\" />\n      <EXTENSION ID=\"PythonCoverageRunConfigurationExtension\" enabled=\"false\" sample_coverage=\"true\" runner=\"coverage.py\" />\n      <option name=\"_new_additionalArguments\" value=\"&quot;&quot;\" />\n      <option name=\"_new_target\" value=\"&quot;&quot;\" />\n      <option name=\"_new_targetType\" value=\"&quot;PATH&quot;\" />\n    </configuration>\n    <configuration default=\"true\" type=\"tests\" factoryName=\"py.test\">\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\n      <option name=\"PARENT_ENVS\" value=\"true\" />\n      <envs />\n      <option name=\"SDK_HOME\" value=\"\" />\n      <option name=\"WORKING_DIRECTORY\" value=\"\" />\n      <option name=\"IS_MODULE_SDK\" value=\"false\" />\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\n      <module name=\"untitled\" />\n      <EXTENSION ID=\"PythonCoverageRunConfigurationExtension\" enabled=\"false\" sample_coverage=\"true\" runner=\"coverage.py\" />\n      <option name=\"_new_keywords\" value=\"&quot;&quot;\" />\n      <option name=\"_new_additionalArguments\" value=\"&quot;&quot;\" />\n      <option name=\"_new_target\" value=\"&quot;&quot;\" />\n      <option name=\"_new_targetType\" value=\"&quot;PATH&quot;\" />\n    </configuration>\n    <recent_temporary>\n      <list size=\"1\">\n        <item index=\"0\" class=\"java.lang.String\" itemvalue=\"Python.Main\" />\n      </list>\n    </recent_temporary>\n  </component>\n  <component name=\"ShelveChangesManager\" show_recycled=\"false\">\n    <option name=\"remove_strategy\" value=\"false\" />\n  </component>\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"ce465d5d-8b2e-4198-8847-df58a4974577\" name=\"Default\" comment=\"\" />\n      <created>1505414850267</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1505414850267</updated>\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"thr\">\n      <created>1505428589420</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1505428589421</updated>\n    </task>\n    <task id=\"LOCAL-00002\" summary=\"thr\">\n      <created>1505429596542</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1505429596542</updated>\n    </task>\n    <task id=\"LOCAL-00003\" summary=\"thr\">\n      <created>1505429759051</created>\n      <option name=\"number\" value=\"00003\" />\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1505429759051</updated>\n    </task>\n    <task id=\"LOCAL-00004\" summary=\"thr\">\n      <created>1505517630952</created>\n      <option name=\"number\" value=\"00004\" />\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1505517630952</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"5\" />\n    <servers />\n  </component>\n  <component name=\"ToolWindowManager\">\n    <frame x=\"-1928\" y=\"22\" width=\"1936\" height=\"1066\" extended-state=\"6\" />\n    <editor active=\"true\" />\n    <layout>\n      <window_info id=\"Project\" active=\"false\" anchor=\"left\" auto_hide=\"false\" internal_type=\"DOCKED\" type=\"DOCKED\" visible=\"true\" show_stripe_button=\"true\" weight=\"0.25586355\" sideWeight=\"0.5\" order=\"0\" side_tool=\"false\" content_ui=\"combo\" />\n      <window_info id=\"TODO\" active=\"false\" anchor=\"bottom\" auto_hide=\"false\" internal_type=\"DOCKED\" type=\"DOCKED\" visible=\"false\" show_stripe_button=\"true\" weight=\"0.33\" sideWeight=\"0.5\" order=\"6\" side_tool=\"false\" content_ui=\"tabs\" />\n      <window_info id=\"Event Log\" active=\"false\" anchor=\"bottom\" auto_hide=\"false\" internal_type=\"DOCKED\" type=\"DOCKED\" visible=\"false\" show_stripe_button=\"true\" weight=\"0.33\" sideWeight=\"0.5\" order=\"7\" side_tool=\"true\" content_ui=\"tabs\" />\n      <window_info id=\"Database\" active=\"false\" anchor=\"right\" auto_hide=\"false\" internal_type=\"DOCKED\" type=\"DOCKED\" visible=\"false\" show_stripe_button=\"true\" weight=\"0.32995737\" sideWeight=\"0.5\" order=\"3\" side_tool=\"false\" content_ui=\"tabs\" />\n      <window_info id=\"Version Control\" active=\"false\" anchor=\"bottom\" auto_hide=\"false\" internal_type=\"DOCKED\" type=\"DOCKED\" visible=\"false\" show_stripe_button=\"true\" weight=\"0.33\" sideWeight=\"0.5\" order=\"7\" side_tool=\"false\" content_ui=\"tabs\" />\n      <window_info id=\"Python Console\" active=\"false\" anchor=\"bottom\" auto_hide=\"false\" internal_type=\"DOCKED\" type=\"DOCKED\" visible=\"false\" show_stripe_button=\"true\" weight=\"0.3376344\" sideWeight=\"0.5\" order=\"7\" side_tool=\"false\" content_ui=\"tabs\" />\n      <window_info id=\"Run\" active=\"false\" anchor=\"bottom\" auto_hide=\"false\" internal_type=\"DOCKED\" type=\"DOCKED\" visible=\"true\" show_stripe_button=\"true\" weight=\"0.19892474\" sideWeight=\"0.5\" order=\"2\" side_tool=\"false\" content_ui=\"tabs\" />\n      <window_info id=\"Structure\" active=\"false\" anchor=\"left\" auto_hide=\"false\" internal_type=\"DOCKED\" type=\"DOCKED\" visible=\"false\" show_stripe_button=\"true\" weight=\"0.25\" sideWeight=\"0.5\" order=\"1\" side_tool=\"false\" content_ui=\"tabs\" />\n      <window_info id=\"Terminal\" active=\"false\" anchor=\"bottom\" auto_hide=\"false\" internal_type=\"DOCKED\" type=\"DOCKED\" visible=\"false\" show_stripe_button=\"true\" weight=\"0.33\" sideWeight=\"0.5\" order=\"7\" side_tool=\"false\" content_ui=\"tabs\" />\n      <window_info id=\"Favorites\" active=\"false\" anchor=\"left\" auto_hide=\"false\" internal_type=\"DOCKED\" type=\"DOCKED\" visible=\"false\" show_stripe_button=\"true\" weight=\"0.33\" sideWeight=\"0.5\" order=\"2\" side_tool=\"true\" content_ui=\"tabs\" />\n      <window_info id=\"Debug\" active=\"false\" anchor=\"bottom\" auto_hide=\"false\" internal_type=\"DOCKED\" type=\"DOCKED\" visible=\"false\" show_stripe_button=\"true\" weight=\"0.39979014\" sideWeight=\"0.5\" order=\"3\" side_tool=\"false\" content_ui=\"tabs\" />\n      <window_info id=\"Data View\" active=\"false\" anchor=\"right\" auto_hide=\"false\" internal_type=\"DOCKED\" type=\"DOCKED\" visible=\"false\" show_stripe_button=\"true\" weight=\"0.33\" sideWeight=\"0.5\" order=\"3\" side_tool=\"false\" content_ui=\"tabs\" />\n      <window_info id=\"Cvs\" active=\"false\" anchor=\"bottom\" auto_hide=\"false\" internal_type=\"DOCKED\" type=\"DOCKED\" visible=\"false\" show_stripe_button=\"true\" weight=\"0.25\" sideWeight=\"0.5\" order=\"4\" side_tool=\"false\" content_ui=\"tabs\" />\n      <window_info id=\"Message\" active=\"false\" anchor=\"bottom\" auto_hide=\"false\" internal_type=\"DOCKED\" type=\"DOCKED\" visible=\"false\" show_stripe_button=\"true\" weight=\"0.33\" sideWeight=\"0.5\" order=\"0\" side_tool=\"false\" content_ui=\"tabs\" />\n      <window_info id=\"Commander\" active=\"false\" anchor=\"right\" auto_hide=\"false\" internal_type=\"DOCKED\" type=\"DOCKED\" visible=\"false\" show_stripe_button=\"true\" weight=\"0.4\" sideWeight=\"0.5\" order=\"0\" side_tool=\"false\" content_ui=\"tabs\" />\n      <window_info id=\"Inspection\" active=\"false\" anchor=\"bottom\" auto_hide=\"false\" internal_type=\"DOCKED\" type=\"DOCKED\" visible=\"false\" show_stripe_button=\"true\" weight=\"0.4\" sideWeight=\"0.5\" order=\"5\" side_tool=\"false\" content_ui=\"tabs\" />\n      <window_info id=\"Coverage\" active=\"false\" anchor=\"right\" auto_hide=\"false\" internal_type=\"DOCKED\" type=\"DOCKED\" visible=\"false\" show_stripe_button=\"true\" weight=\"0.33\" sideWeight=\"0.5\" order=\"3\" side_tool=\"true\" content_ui=\"tabs\" />\n      <window_info id=\"Hierarchy\" active=\"false\" anchor=\"right\" auto_hide=\"false\" internal_type=\"DOCKED\" type=\"DOCKED\" visible=\"false\" show_stripe_button=\"true\" weight=\"0.25\" sideWeight=\"0.5\" order=\"2\" side_tool=\"false\" content_ui=\"combo\" />\n      <window_info id=\"Find\" active=\"false\" anchor=\"bottom\" auto_hide=\"false\" internal_type=\"DOCKED\" type=\"DOCKED\" visible=\"false\" show_stripe_button=\"true\" weight=\"0.33\" sideWeight=\"0.5\" order=\"1\" side_tool=\"false\" content_ui=\"tabs\" />\n      <window_info id=\"Ant Build\" active=\"false\" anchor=\"right\" auto_hide=\"false\" internal_type=\"DOCKED\" type=\"DOCKED\" visible=\"false\" show_stripe_button=\"true\" weight=\"0.25\" sideWeight=\"0.5\" order=\"1\" side_tool=\"false\" content_ui=\"tabs\" />\n      <window_info id=\"Concurrent Activities Diagram\" active=\"false\" anchor=\"bottom\" auto_hide=\"false\" internal_type=\"DOCKED\" type=\"DOCKED\" visible=\"false\" show_stripe_button=\"true\" weight=\"0.32948583\" sideWeight=\"0.5\" order=\"7\" side_tool=\"false\" content_ui=\"tabs\" />\n    </layout>\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"1\" />\n  </component>\n  <component name=\"VcsContentAnnotationSettings\">\n    <option name=\"myLimit\" value=\"2678400000\" />\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"thr\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"thr\" />\n  </component>\n  <component name=\"XDebuggerManager\">\n    <breakpoint-manager />\n    <watches-manager />\n  </component>\n  <component name=\"editorHistoryManager\">\n    <entry file=\"file://$PROJECT_DIR$/Main.py\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"697\">\n          <caret line=\"46\" column=\"40\" lean-forward=\"false\" selection-start-line=\"46\" selection-start-column=\"40\" selection-end-line=\"46\" selection-end-column=\"40\" />\n          <folding>\n            <element signature=\"e#0#13#0\" expanded=\"true\" />\n          </folding>\n        </state>\n      </provider>\n    </entry>\n    <entry file=\"file://$PROJECT_DIR$/Auxs.py\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"425\">\n          <caret line=\"121\" column=\"18\" lean-forward=\"false\" selection-start-line=\"121\" selection-start-column=\"18\" selection-end-line=\"121\" selection-end-column=\"18\" />\n          <folding>\n            <element signature=\"e#0#13#0\" expanded=\"true\" />\n            <element signature=\"e#81#1206#0\" expanded=\"false\" />\n            <element signature=\"e#155#1186#0\" expanded=\"false\" />\n            <element signature=\"e#1275#3817#0\" expanded=\"false\" />\n          </folding>\n        </state>\n      </provider>\n    </entry>\n    <entry file=\"uml://Python/#C:/Users/Xteev/PycharmProjects/Animation/Main.py\">\n      <provider selected=\"true\" editor-type-id=\"UmlEditorProvider\">\n        <state>\n          <ID>Python</ID>\n          <OriginalElement>#C:/Users/Xteev/PycharmProjects/Animation/Main.py</OriginalElement>\n          <nodes />\n          <notes />\n          <edges />\n          <settings layout=\"Hierarchic Group\" zoom=\"1.0\" x=\"720.0\" y=\"293.5\" />\n          <SelectedNodes />\n          <Categories />\n        </state>\n      </provider>\n    </entry>\n    <entry file=\"file://$PROJECT_DIR$/Auxs.py\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"663\">\n          <caret line=\"135\" column=\"27\" lean-forward=\"false\" selection-start-line=\"135\" selection-start-column=\"27\" selection-end-line=\"135\" selection-end-column=\"27\" />\n          <folding>\n            <element signature=\"e#0#13#0\" expanded=\"true\" />\n            <element signature=\"e#81#1206#0\" expanded=\"false\" />\n            <element signature=\"e#155#1186#0\" expanded=\"false\" />\n            <element signature=\"e#1275#3817#0\" expanded=\"false\" />\n          </folding>\n        </state>\n      </provider>\n    </entry>\n    <entry file=\"file://$PROJECT_DIR$/Main.py\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"323\">\n          <caret line=\"31\" column=\"24\" lean-forward=\"false\" selection-start-line=\"31\" selection-start-column=\"24\" selection-end-line=\"31\" selection-end-column=\"24\" />\n          <folding>\n            <element signature=\"e#0#13#0\" expanded=\"true\" />\n          </folding>\n        </state>\n      </provider>\n    </entry>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/workspace.xml	(revision 3ba48dc7040c2a0cb709a9551e27d50d4aa3007e)
++++ .idea/workspace.xml	(revision )
+@@ -1,9 +1,8 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ChangeListManager">
+-    <list default="true" id="ce465d5d-8b2e-4198-8847-df58a4974577" name="Default" comment="">
++    <list default="true" id="ce465d5d-8b2e-4198-8847-df58a4974577" name="Default" comment="thr">
+       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Main.py" afterPath="$PROJECT_DIR$/Main.py" />
+     </list>
+     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+     <option name="TRACKING_ENABLED" value="true" />
+@@ -13,7 +12,7 @@
+     <option name="LAST_RESOLUTION" value="IGNORE" />
+   </component>
+   <component name="CoverageDataManager">
+-    <SUITE FILE_PATH="coverage/Animation$Main.coverage" NAME="Main Coverage Results" MODIFIED="1505773442070" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
++    <SUITE FILE_PATH="coverage/Animation$Main.coverage" NAME="Main Coverage Results" MODIFIED="1505777198669" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+   </component>
+   <component name="DatabaseView">
+     <option name="SHOW_INTERMEDIATE" value="true" />
+@@ -31,8 +30,8 @@
+       <file leaf-file-name="Main.py" pinned="false" current-in-tab="true">
+         <entry file="file://$PROJECT_DIR$/Main.py">
+           <provider selected="true" editor-type-id="text-editor">
+-            <state relative-caret-position="323">
+-              <caret line="31" column="24" lean-forward="false" selection-start-line="31" selection-start-column="24" selection-end-line="31" selection-end-column="24" />
++            <state relative-caret-position="-155">
++              <caret line="23" column="28" lean-forward="false" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
+               <folding>
+                 <element signature="e#0#13#0" expanded="true" />
+               </folding>
+@@ -71,6 +70,7 @@
+         <option value="Xteeven" />
+       </list>
+     </option>
++    <option name="UPDATE_CHANGES_POLICY" value="SHELVE" />
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+   </component>
+   <component name="IdeDocumentHistory">
+@@ -109,7 +109,6 @@
+       <foldersAlwaysOnTop value="true" />
+     </navigator>
+     <panes>
+-      <pane id="Scope" />
+       <pane id="Scratches" />
+       <pane id="ProjectPane">
+         <subPane>
+@@ -122,6 +121,7 @@
+           <select />
+         </subPane>
+       </pane>
++      <pane id="Scope" />
+     </panes>
+   </component>
+   <component name="PropertiesComponent">
+@@ -351,15 +351,14 @@
+   </component>
+   <component name="ToolWindowManager">
+     <frame x="-1928" y="22" width="1936" height="1066" extended-state="6" />
+-    <editor active="true" />
+     <layout>
+-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25586355" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
++      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2585288" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3376344" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19892474" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
++      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19892474" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+@@ -393,6 +392,29 @@
+   <component name="editorHistoryManager">
+     <entry file="file://$PROJECT_DIR$/Main.py">
+       <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="0">
++          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
++          <folding>
++            <element signature="e#0#13#0" expanded="true" />
++          </folding>
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/Auxs.py">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="2295">
++          <caret line="135" column="27" lean-forward="false" selection-start-line="135" selection-start-column="27" selection-end-line="135" selection-end-column="27" />
++          <folding>
++            <element signature="e#0#13#0" expanded="true" />
++            <element signature="e#81#1206#0" expanded="false" />
++            <element signature="e#155#1186#0" expanded="false" />
++            <element signature="e#1275#3817#0" expanded="false" />
++          </folding>
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/Main.py">
++      <provider selected="true" editor-type-id="text-editor">
+         <state relative-caret-position="697">
+           <caret line="46" column="40" lean-forward="false" selection-start-line="46" selection-start-column="40" selection-end-line="46" selection-end-column="40" />
+           <folding>
+@@ -422,9 +444,10 @@
+           <nodes />
+           <notes />
+           <edges />
+-          <settings layout="Hierarchic Group" zoom="1.0" x="720.0" y="293.5" />
++          <settings layout="Hierarchic Group" zoom="1.0" x="720.0" y="294.0" />
+           <SelectedNodes />
+           <Categories />
++          <SCOPE>All</SCOPE>
+         </state>
+       </provider>
+     </entry>
+@@ -443,8 +466,69 @@
+     </entry>
+     <entry file="file://$PROJECT_DIR$/Main.py">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="323">
+-          <caret line="31" column="24" lean-forward="false" selection-start-line="31" selection-start-column="24" selection-end-line="31" selection-end-column="24" />
++        <state relative-caret-position="391">
++          <caret line="23" column="28" lean-forward="true" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
++          <folding>
++            <element signature="e#0#13#0" expanded="true" />
++          </folding>
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/Main.py">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="697">
++          <caret line="46" column="40" lean-forward="false" selection-start-line="46" selection-start-column="40" selection-end-line="46" selection-end-column="40" />
++          <folding>
++            <element signature="e#0#13#0" expanded="true" />
++          </folding>
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/Auxs.py">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="425">
++          <caret line="121" column="18" lean-forward="false" selection-start-line="121" selection-start-column="18" selection-end-line="121" selection-end-column="18" />
++          <folding>
++            <element signature="e#0#13#0" expanded="true" />
++            <element signature="e#81#1206#0" expanded="false" />
++            <element signature="e#155#1186#0" expanded="false" />
++            <element signature="e#1275#3817#0" expanded="false" />
++          </folding>
++        </state>
++      </provider>
++    </entry>
++    <entry file="uml://Python/#C:/Users/Xteev/PycharmProjects/Animation/Main.py">
++      <provider selected="true" editor-type-id="UmlEditorProvider">
++        <state>
++          <ID>Python</ID>
++          <OriginalElement>#C:/Users/Xteev/PycharmProjects/Animation/Main.py</OriginalElement>
++          <nodes />
++          <notes />
++          <edges />
++          <settings layout="Hierarchic Group" zoom="1.0" x="720.0" y="294.0" />
++          <SelectedNodes />
++          <Categories />
++          <SCOPE>All</SCOPE>
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/Auxs.py">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="663">
++          <caret line="135" column="27" lean-forward="false" selection-start-line="135" selection-start-column="27" selection-end-line="135" selection-end-column="27" />
++          <folding>
++            <element signature="e#0#13#0" expanded="true" />
++            <element signature="e#81#1206#0" expanded="false" />
++            <element signature="e#155#1186#0" expanded="false" />
++            <element signature="e#1275#3817#0" expanded="false" />
++          </folding>
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/Main.py">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="-155">
++          <caret line="23" column="28" lean-forward="false" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
+           <folding>
+             <element signature="e#0#13#0" expanded="true" />
+           </folding>
