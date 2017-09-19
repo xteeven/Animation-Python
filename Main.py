@@ -11,7 +11,7 @@ def sumtup(a, b):
 
 parametric = []
 for t in range(50):
-    parametric.append((np.sin(t / np.pi), ((t/ np.pi)) ,2*np.cos(t / np.pi)))
+    parametric.append((np.sin(t / np.pi), ((t/ np.pi))/2 ,2*np.cos(t / np.pi)))
 
 
 def drawCoord(origin=(0, 0, 0)):
@@ -98,6 +98,13 @@ def setup():
     glTranslatef(0.0,0, -10)
 
 
+def drawLine(dir = [1,1,1], pos = (0,0,0)):
+    glLineWidth(1)
+    glBegin(GL_LINES)
+    glColor3f(.5, .5, .5)
+    glVertex3fv(pos)
+    glVertex3fv((dir[0]+pos[0], dir[1]+pos[1], dir[2]+pos[2]))
+    glEnd()
 
 def main():
 
@@ -117,10 +124,14 @@ def main():
         glPushMatrix()
         # glRotatef(pygame.time.get_ticks()/10.0,1,0,0)
         glTranslatef(parametric[iterar][0], parametric[iterar][1], parametric[iterar][2])
+        magnitud = np.linalg.norm(np.subtract(parametric[iterar+1], parametric[iterar]))
+        direccion = np.subtract(parametric[iterar+1], parametric[iterar])
+        print direccion/magnitud, magnitud
         drawTriangle()
         glPopMatrix()
+        drawLine(direccion/magnitud, parametric[iterar])
         drawGrid()
-        iterar = iterar + 1 if iterar < len(parametric)-1 else 0
+        iterar = iterar + 1 if iterar < len(parametric)-2 else 0
 
         pygame.display.flip()
         pygame.time.wait(20)
