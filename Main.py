@@ -3,38 +3,39 @@ from pygame.locals import *
 import numpy as np
 from OpenGL.GL import *
 from OpenGL.GLU import *
-from OpenGL.GLUT import glutSolidTeapot, glutInit
-glutInit()
-from Auxs import OBJ, translationMatrix
+from Auxs import *
 
-def sumtup(a, b):
-    return tuple(map(sum, zip(a, b)))
-
+# Drawing a Curve
 parametric = []
 for t in np.linspace(-25, 25, 400):
     parametric.append((np.cos(t/5), ((t/ np.pi))/2 , 2*np.cos(t / np.pi)))
 
+def sumtup(a, b):
+    return tuple(map(sum, zip(a, b)))
+
 
 def drawCoord(origin=(0, 0, 0)):
 
-    direccion = (1,0,0)
-    magnitud = np.linalg.norm(direccion)
-    direccion2 = np.cross(direccion / magnitud, (0, 1, 0))
-    magnitud2 = np.linalg.norm(direccion2)
-    direccion3 = np.cross(direccion / magnitud, direccion2 / magnitud2)
-    magnitud3 = np.linalg.norm(direccion3)
+    axis1 = (1,0,0)
+    axis1m = np.linalg.norm(axis1)
+    axis2 = np.cross(axis1 / axis1m, (0, 0, 1))
+    axis2m = np.linalg.norm(axis2)
+    axis3 = np.cross(axis1 / axis1m, axis2 / axis2m)
+    axis3m = np.linalg.norm(axis3)
+
     glLineWidth(4)
     glBegin(GL_LINES)
     glColor(0.5, 0, 0)
     glVertex(origin)
-    glVertex(sumtup(tuple(direccion), origin))
+    glVertex(sumtup(tuple(axis1), origin))
     glColor(0, 1, 0)
     glVertex(origin)
-    glVertex(sumtup(tuple(direccion2), origin))
+    glVertex(sumtup(tuple(axis2), origin))
     glColor(0, 0, 1)
     glVertex(origin)
-    glVertex(sumtup(tuple(direccion3), origin))
+    glVertex(sumtup(tuple(axis3), origin))
     glEnd()
+
 
 def drawCurve(Curve):
     glLineWidth(1)
@@ -48,13 +49,24 @@ def drawCurve(Curve):
 
 
 def drawTriangle():
+    drawCoord()
+    glPushMatrix()
+    glMultMatrixf(np.hstack((0, 0, -1/2.0, 0,
+                             -1/2.0, 0, 0, 0,
+                             0, -1/2.0, 0, 0,
+                             0, -1/2.0, 0, 1)))
     glLineWidth(1)
-    # drawCoord()
     glBegin(GL_TRIANGLE_STRIP)
-    points = ((-1, 0, 0), (0, 0, 1), (1, 0, 0))
+    points = ((-2, 2, 0), (-1, 0, 0), (-1, 2, 0),
+              (0, 0, -1), (0, 2, -1), (0, 2, -1),
+              (1, 2, 0), (0, 0, -1), (1, 0, 0),
+              (2, 2, 0), (1, 2, 0))
+
     glColor3f(1.0, 0.0, 0.0)
     [glVertex3fv(i) for i in points]
     glEnd()
+
+    glPopMatrix()
 
 
 def drawGrid():
@@ -73,6 +85,7 @@ def mouseMove():
     if pygame.mouse.get_pressed()[1] & ((mouse[0] != 0) | (mouse[0] != 0)):
         vel = np.power(mouse[0] ** 2 + mouse[1] ** 2, 1 / 2.0)
         glRotatef(int(np.abs(vel)), mouse[1], 0, mouse[0])
+
 
 def ketboardMove():
     keyboard = pygame.key.get_pressed()
@@ -95,15 +108,13 @@ def ketboardMove():
                      modelView[2][2])
 
 
-
-
 def setup():
     pygame.init()
     display = (800,600)
     pygame.display.set_mode(display, DOUBLEBUF | OPENGL)
     glMatrixMode(GL_MODELVIEW)
     gluPerspective(45, (display[0]/display[1]), 0.1, 250.0)
-    glTranslatef(0.0,0, -10)
+    glTranslatef(0.0, 0, -10)
 
 
 def drawLine(dir=[1, 1, 1], pos=(0, 0, 0)):
@@ -113,6 +124,7 @@ def drawLine(dir=[1, 1, 1], pos=(0, 0, 0)):
     glVertex3fv(pos)
     glVertex3fv((dir[0]+pos[0], dir[1]+pos[1], dir[2]+pos[2]))
     glEnd()
+
 
 def main():
 
@@ -135,33 +147,31 @@ def main():
 
         glPushMatrix()
 
-        glTranslatef(parametric[iterar][0], parametric[iterar][1], parametric[iterar][2])
-        direccion = np.subtract(parametric[iterar+1], parametric[iterar])
-        magnitud = np.linalg.norm(np.subtract(parametric[iterar + 1], parametric[iterar]))
-        direccion2 = np.cross(direccion/magnitud, (1, 0, 0))
-        magnitud2 = np.linalg.norm(direccion2)
-        direccion3 = np.cross(direccion/magnitud, direccion2/magnitud2)
-        magnitud3 = np.linalg.norm(direccion3)
+        vectorx = np.subtract(parametric[iterar+1], parametric[iterar])
+        modulex = np.linalg.norm(np.subtract(parametric[iterar + 1], parametric[iterar]))
+        vectory = np.cross(vectorx/modulex, (1, 0, 0))
+        moduley = np.linalg.norm(vectory)
+        vectorz = np.cross(vectorx/modulex, vectory/moduley)
+        modulez = np.linalg.norm(vectorz)
+        glMultMatrixf(np.hstack((vectorx/modulex,    0,
+                                vectory/moduley,    0,
+                                vectorz,    0,
+                                parametric[iterar],      1)))
 
-        glMultMatrixf(np.hstack((direccion,     0,
-                                 direccion2,    0,
-                                 direccion3,    0,
-                                 0, 0,  0,      1)))
-        glutSolidTeapot(2)
+
         drawTriangle()
+
         glPopMatrix()
 
-
-        drawLine(direccion3 / magnitud3, parametric[iterar])
-        drawLine(direccion2 / magnitud2, parametric[iterar])
-        drawLine(direccion/magnitud, parametric[iterar])
+        drawLine(vectorz / modulez, parametric[iterar])
+        drawLine(vectory / moduley, parametric[iterar])
+        drawLine(vectorx/modulex, parametric[iterar])
 
 
         drawGrid()
-        iterar = iterar + 1 if iterar < len(parametric)-2 else 0
 
         pygame.display.flip()
-
+        iterar = iterar + 1 if iterar < len(parametric) - 2 else 0
         pygame.time.wait(10)
 
 
