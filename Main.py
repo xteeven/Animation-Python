@@ -7,8 +7,8 @@ from Auxs import *
 
 # Drawing a Curve
 parametric = []
-for t in np.linspace(-25, 25, 400):
-    parametric.append((np.cos(t/5), ((t/ np.pi))/2 , 2*np.cos(t / np.pi)))
+for t in np.linspace(-5, 5, 400):
+    parametric.append((1*np.cos(t), t**2*np.sin(t), t))
 
 def sumtup(a, b):
     return tuple(map(sum, zip(a, b)))
@@ -72,7 +72,7 @@ def drawTriangle():
 def drawGrid():
     glLineWidth(1)
     glBegin(GL_LINES)
-    glColor3f(.5, .5, .5)
+    glColor3f(.2, .2, .2)
     for i in range(-20, 20):
         [glVertex3fv((i/2.0, j/2.0, -5)) for j in range(-20, 20)]
     for i in range(-20, 20):
