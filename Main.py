@@ -7,8 +7,13 @@ from Auxs import *
 
 # Drawing a Curve
 parametric = []
-for t in np.linspace(-5, 5, 400):
-    parametric.append((1*np.cos(t), t**2*np.sin(t), t))
+for t in np.linspace(-2.5, 2.5, 90):
+    parametric.append((1*np.cos(t), t**2*np.sin(t), t**2))
+
+# parametric = interpcurve(100, parametric)
+
+def param(i):
+    return (1*np.cos(t), t**2*np.sin(t), t**2)
 
 def sumtup(a, b):
     return tuple(map(sum, zip(a, b)))
