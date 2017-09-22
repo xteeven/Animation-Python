@@ -11,6 +11,7 @@ for t in np.linspace(-10, 10, 500):
 parametric = interpcurve(200, parametric)
 
 def setup():
+    # Setting Up  the screen resolution and the buffers and then the initial camera position
     pygame.init()
     display = (800,600)
     pygame.display.set_mode(display, DOUBLEBUF | OPENGL)
@@ -20,39 +21,37 @@ def setup():
     glRotate(-45, 1, 0, 1)
 
 def main():
-
     setup()
-
-    iterar = 0
-
-    while True:
+    frame = 0
+    while True: # Catch close window event
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
 
-
+        # Handle mouse events
         mouseMove()
-
+        # Handle keyboard events
         ketboardMove()
-
+        # Clear buffers
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-
+        # Drawing the path from a previously generated curve
         drawCurve(parametric)
-
+        # Draw a grid
+        drawGrid()
+        # Performing the operations along the patch
         glPushMatrix()
-
-        rotateInCurve(parametric, iterar)
-
-        drawTriangle()
-
+        # Moving and rotating the ModelView in curve direction.
+        moveInCurve(parametric, frame)
+        # Draws a simple paper plane
+        drawPlane()
         glPopMatrix()
 
-        drawGrid()
-
+        # Clear and refresh the screen
         pygame.display.flip()
-        iterar = iterar + 1 if iterar < len(parametric) - 2 else 0
+        frame = frame + 1 if frame < len(parametric) - 2 else 0
         pygame.time.wait(10)
 
 
-main()
+if __name__ == "__main__":
+    main()

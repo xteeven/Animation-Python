@@ -6,6 +6,10 @@ from pygame.locals import *
 from Auxs import *
 
 def drawLine(dir=[1, 1, 1], pos=(0, 0, 0)):
+
+    # Draw a test line to evaluate the directions
+    # and positions previously calculated. (Only debuging)
+
     glLineWidth(1)
     glBegin(GL_LINES)
     glColor3f(.5, .5, .5)
@@ -15,6 +19,8 @@ def drawLine(dir=[1, 1, 1], pos=(0, 0, 0)):
 
 
 def drawCoord(origin=(0, 0, 0)):
+
+    # Draw coordinate systems in the given position
 
     axis1 = (1,0,0)
     axis1m = np.linalg.norm(axis1)
@@ -38,9 +44,12 @@ def drawCoord(origin=(0, 0, 0)):
 
 
 def drawCurve(Curve):
+
+    # Draw a given curve (taking as argument a list of 3D points (tuples))
+
     glLineWidth(1)
-    # glBegin(GL_LINE_STRIP)
-    glBegin(GL_POINTS)
+    glBegin(GL_LINE_STRIP)
+    # glBegin(GL_POINTS)
     # glLineWidth(2)
     glColor3f(1.0, 1.0, 1.0)
     for t in range(len(Curve)):
@@ -48,13 +57,20 @@ def drawCurve(Curve):
     glEnd()
 
 
-def drawTriangle():
+def drawPlane():
+
+    # Draw a simple plane to follow the path
+
     drawCoord()
     glPushMatrix()
+
+    # Adjust the initial position of the plane
+
     glMultMatrixf(np.hstack((0, 0, -1/2.0, 0,
                              -1/2.0, 0, 0, 0,
                              0, -1/2.0, 0, 0,
                              0, -1/2.0, 0, 1)))
+
     glLineWidth(1)
     glBegin(GL_TRIANGLE_STRIP)
     points = ((-2, 2, 0), (-1, 0, 0), (-1, 2, 0),
@@ -65,11 +81,11 @@ def drawTriangle():
     glColor3f(1.0, 0.0, 0.0)
     [glVertex3fv(i) for i in points]
     glEnd()
-
     glPopMatrix()
 
 
 def drawGrid():
+
     glLineWidth(1)
     glBegin(GL_LINES)
     glColor3f(.2, .2, .2)
