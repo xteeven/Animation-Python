@@ -4,6 +4,7 @@ from OpenGL.GLU import *
 import pygame
 from pygame.locals import *
 
+
 def moveInCurve(curve, i):
 
     # Performs both rotation and translation
@@ -24,6 +25,17 @@ def moveInCurve(curve, i):
                              vectory / moduley, 0,
                              vectorz, 0,
                              curve[i], 1)))
+
+def interpIndex(curve):
+    curve = np.array(curve)
+    segments = np.diff(curve, 1, axis=0)
+    norm = np.linalg.norm(segments, axis=1)
+    total = np.cumsum(norm)
+    totaluni = total / total[-1]
+    num = np.linspace(0, 1, len(total))
+    inter = np.digitize(num, totaluni)
+    return inter
+
 
 def interpcurve(N, curve):
 
@@ -55,14 +67,35 @@ def sumtup(a, b):
     return tuple(map(sum, zip(a, b)))
 
 
-def mouseMove():
-
+def mouseMove(event):
     # handles the mouse events to move the camera
-
     mouse = pygame.mouse.get_rel()
-    if pygame.mouse.get_pressed()[1] & ((mouse[0] != 0) | (mouse[0] != 0)):
-        vel = np.power(mouse[0] ** 2 + mouse[1] ** 2, 1 / 2.0)
+    mousepressed = pygame.mouse.get_pressed()
+    modelView = glGetFloatv(GL_MODELVIEW_MATRIX)
+    vel = np.power(mouse[0] ** 2 + mouse[1] ** 2, 1 / 2.0)
+    if mousepressed[2] & ((mouse[0] != 0) | (mouse[0] != 0)):
         glRotatef(int(np.abs(vel)), mouse[1], 0, mouse[0])
+    if mousepressed[1]:
+        print mouse[0], mouse[1]
+        glTranslatef(modelView[0][0] * mouse[0] / 100.0,
+                     modelView[1][0] * mouse[0] / 100.0,
+                     modelView[2][0] * mouse[0] / 100.0)
+
+        glTranslatef(modelView[0][1] * (-1) * mouse[1] / 100.0,
+                     modelView[1][1] * (-1) * mouse[1] / 100.0,
+                     modelView[2][1] * (-1) * mouse[1] / 100.0)
+
+    if event.type == pygame.MOUSEBUTTONDOWN:
+        if event.button == 4:
+            glTranslatef(modelView[0][2] * (-1) * 2,
+                         modelView[1][2] * (-1) * 2,
+                         modelView[2][2] * (-1) * 2)
+        elif event.button == 5:
+            glTranslatef(modelView[0][2]*2,
+                         modelView[1][2]*2,
+                         modelView[2][2]*2)
+
+
 
 
 def ketboardMove():
@@ -83,12 +116,22 @@ def ketboardMove():
                      modelView[2][0]*(-1)/2.0)
 
     if keyboard[K_UP]:
-        glTranslatef(modelView[0][2]*(-1),
-                     modelView[1][2]*(-1),
-                     modelView[2][2]*(-1))
+        glTranslatef(modelView[0][1]*(-1),
+                     modelView[1][1]*(-1),
+                     modelView[2][1]*(-1))
 
     if keyboard[K_DOWN]:
-        glTranslatef(modelView[0][2],
-                     modelView[1][2],
-                     modelView[2][2])
+        glTranslatef(modelView[0][1],
+                     modelView[1][1],
+                     modelView[2][1])
 
+
+def eventsHandle(mouse=mouseMove, keyboard=ketboardMove):
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            quit()
+        else:
+            mouse(event)
+    keyboard()

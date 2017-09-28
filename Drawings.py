@@ -84,13 +84,53 @@ def drawPlane():
     glPopMatrix()
 
 
-def drawGrid():
+def drawGrid(zpos):
 
     glLineWidth(1)
     glBegin(GL_LINES)
     glColor3f(.2, .2, .2)
     for i in range(-20, 20):
-        [glVertex3fv((i/2.0, j/2.0, -5)) for j in range(-20, 20)]
+        [glVertex3fv((i/2.0, j/2.0, zpos)) for j in range(-20, 20)]
     for i in range(-20, 20):
-        [glVertex3fv((j / 2.0, i / 2.0, -5)) for j in range(-20, 20)]
+        [glVertex3fv((j / 2.0, i / 2.0, zpos)) for j in range(-20, 20)]
     glEnd()
+
+def drawLink(x=1, y=1, z=1, color = (.2, 0, 0)):
+
+    glPushMatrix()
+    glMultMatrixf(np.hstack((x, 0, 0, 0,
+                             0, y, 0, 0,
+                             0, 0, z, 0,
+                             0, 0, 0, 1)))
+    vertices = (
+        (.5, -.5, 0),
+        (.5, .5, 0),
+        (-.5, .5, 0),
+        (-.5, -.5, 0),
+        (.5, -.5, 1),
+        (.5, .5, 1),
+        (-.5, -.5, 1),
+        (-.5, .5, 1))
+    edges = (
+        (0,1),
+        (0,3),
+        (0,4),
+        (2,1),
+        (2,3),
+        (2,7),
+        (6,3),
+        (6,4),
+        (6,7),
+        (5,1),
+        (5,4),
+        (5,7)
+    )
+    glBegin(GL_TRIANGLE_FAN)
+    points = (())
+    # glBegin(GL_LINES)
+    glColor3f(color[0], color[1], color[2])
+    for edge in edges:
+        for vertex in edge:
+            glVertex3fv(vertices[vertex])
+    glEnd()
+    glPopMatrix()
