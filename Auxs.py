@@ -5,6 +5,7 @@ import pygame
 from pygame.locals import *
 
 
+
 def moveInCurve(curve, i):
 
     # Performs both rotation and translation
@@ -67,16 +68,30 @@ def sumtup(a, b):
     return tuple(map(sum, zip(a, b)))
 
 
+
+
 def mouseMove(event):
     # handles the mouse events to move the camera
     mouse = pygame.mouse.get_rel()
+    mousepos = pygame.mouse.get_pos()
     mousepressed = pygame.mouse.get_pressed()
-    modelView = glGetFloatv(GL_MODELVIEW_MATRIX)
+    modelView = glGetDoublev(GL_MODELVIEW_MATRIX)
+    projection = glGetDoublev(GL_PROJECTION_MATRIX)
+    viewport = glGetIntegerv(GL_VIEWPORT)
     vel = np.power(mouse[0] ** 2 + mouse[1] ** 2, 1 / 2.0)
-    if mousepressed[2] & ((mouse[0] != 0) | (mouse[0] != 0)):
-        glRotatef(int(np.abs(vel)), mouse[1], 0, mouse[0])
+    keyboard = pygame.key.get_pressed()
+
+    p3d = gluUnProject(mousepos[0], mousepos[1], 0, modelView, projection, viewport)
+    print p3d
+
+    if mousepressed[2] & keyboard[K_LSHIFT] & ((mouse[0] != 0)):
+        glRotatef(int((vel)), 0, 0, mouse[0])
+
+    elif mousepressed[2] & ((mouse[0] != 0) | (mouse[1] != 0)):
+        glRotatef(int(np.abs(vel)), mouse[1], mouse[0], 0)
+
     if mousepressed[1]:
-        print mouse[0], mouse[1]
+
         glTranslatef(modelView[0][0] * mouse[0] / 100.0,
                      modelView[1][0] * mouse[0] / 100.0,
                      modelView[2][0] * mouse[0] / 100.0)
@@ -86,10 +101,12 @@ def mouseMove(event):
                      modelView[2][1] * (-1) * mouse[1] / 100.0)
 
     if event.type == pygame.MOUSEBUTTONDOWN:
+
         if event.button == 4:
             glTranslatef(modelView[0][2] * (-1) * 2,
                          modelView[1][2] * (-1) * 2,
                          modelView[2][2] * (-1) * 2)
+
         elif event.button == 5:
             glTranslatef(modelView[0][2]*2,
                          modelView[1][2]*2,

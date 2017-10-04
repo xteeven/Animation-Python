@@ -7,6 +7,7 @@ from Drawings import *
 
 
 
+
 def setup():
     # Setting Up  the screen resolution and the buffers and then the initial camera position
     pygame.init()
@@ -30,13 +31,13 @@ def main():
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
         # Draw a grid
         drawGrid(0)
-        drawLink(.5, .5, 5, (1, 0, 0))
+        glPushMatrix()
+        drawLink(.5, .5, 5, (1, 0, 0)) #First Joint
+        glTranslatef(0,0,4)
+        drawLink(.5, .5, 4, (0, 1, 0)) # Second Joint
         glPushMatrix()
         glTranslatef(0,0,4)
-        drawLink(.5, .5, 4, (0, 1, 0))
-        glPushMatrix()
-        glTranslatef(0,0,4)
-        drawLink(.5, .5, 2, (0, 0, 1))
+        drawLink(.5, .5, 2, (0, 0, 1)) #Third Joint
         glPopMatrix()
         glPopMatrix()
         pygame.display.flip()
