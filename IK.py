@@ -32,12 +32,24 @@ def main():
         # Draw a grid
         drawGrid(0)
         glPushMatrix()
-        drawLink(.5, .5, 5, (1, 0, 0)) #First Joint
-        glTranslatef(0,0,4)
-        drawLink(.5, .5, 4, (0, 1, 0)) # Second Joint
+
+        drawLink(.5, .5, 5, (1, 0, 0))  # First Joint
+
+
         glPushMatrix()
-        glTranslatef(0,0,4)
-        drawLink(.5, .5, 2, (0, 0, 1)) #Third Joint
+        glTranslatef(0, 0, 5)
+        glRotatef(10, 1, 0, 0)
+        drawLink(.5, .5, 4, (0, 1, 0))  # Second Joint
+
+
+        glPushMatrix()
+        glTranslatef(0, 0, 4)
+        glRotatef(70, 1, 0, 0)
+        drawLink(.5, .5, 2, (0, 0, 1))  # Third Joint
+
+
+
+        glPopMatrix()
         glPopMatrix()
         glPopMatrix()
         pygame.display.flip()
