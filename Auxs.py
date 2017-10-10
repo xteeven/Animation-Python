@@ -152,3 +152,7 @@ def eventsHandle(mouse=mouseMove, keyboard=ketboardMove):
         else:
             mouse(event)
     keyboard()
+
+
+if __name__ == "__main__":
+    pass

@@ -3,6 +3,7 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 from Drawings import *
 
+from numpy.random import randint
 
 
 
@@ -23,7 +24,7 @@ def setup():
 def main():
 
     setup()
-
+    angle = [0, 0, 0]
     while True: # Catch close window event
 
         eventsHandle()
@@ -33,20 +34,25 @@ def main():
         drawGrid(0)
         glPushMatrix()
 
+        glRotatef(angle[0], 1, 0, 0)
+        glRotatef(angle[1], 0, 1, 0)
         drawLink(.5, .5, 5, (1, 0, 0))  # First Joint
 
 
         glPushMatrix()
         glTranslatef(0, 0, 5)
-        glRotatef(10, 1, 0, 0)
+        glRotatef(angle[1], 1, 0, 0)
+        glRotatef(angle[2], 0, 1, 0)
         drawLink(.5, .5, 4, (0, 1, 0))  # Second Joint
 
 
         glPushMatrix()
         glTranslatef(0, 0, 4)
-        glRotatef(70, 1, 0, 0)
+        glRotatef(angle[2], 1, 0, 0)
+        glRotatef(angle[0], 0, 1, 0)
         drawLink(.5, .5, 2, (0, 0, 1))  # Third Joint
 
+        angle = [i+randint(-1,1)/2.0 for i in angle]
 
 
         glPopMatrix()
