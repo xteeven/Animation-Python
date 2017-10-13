@@ -140,7 +140,6 @@ def main():
         robot.update()
 
         drawCoord(robot.currentPos)
-
         i += 1
 
         pygame.display.flip()
