@@ -113,8 +113,6 @@ def mouseMove(event):
                          modelView[2][2]*2)
 
 
-
-
 def ketboardMove():
 
     # handles the keyboard events to move the camera
