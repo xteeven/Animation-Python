@@ -157,7 +157,6 @@ def main():
     net = prn.train_LM(P, Y, net, verbose=True, k_max=100, E_stop=1e-5)
 
 
-    #
 
 
 
