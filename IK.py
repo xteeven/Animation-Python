@@ -3,7 +3,8 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 from Drawings import *
 import numpy as np
-from math import sin, cos, radians, degrees
+from math import sin, cos, radians, degrees, atan
+import pyrenn as prn
 
 
 class Link:
@@ -84,14 +85,22 @@ class Arm:
         self.length = [link.size[2] for link in self.links]
         self.angles = [link.angle for link in self.links]
         self.currentPos = np.zeros([len(self.links), 3])
+        self.xy = 0
 
+    def setRotation(self, *args):
+        for angle in enumerate(args):
+            self.links[angle[0]].rotation = angle[1]
+
+    def setAngle(self, *args):
+        for angle in enumerate(args):
+            self.links[angle[0]].angle = angle[1]
 
     def update(self):
         self.angles = [link.angle for link in self.links]
         for j in range(len(self.links)):
-            xy = -sum([self.length[link] * sind(sum(self.angles[:link + 1])) for link in range(len(self.links)-j)])
-            self.currentPos[j][0] = xy * sind(-self.links[0].rotation)
-            self.currentPos[j][1] = xy * cosd(-self.links[0].rotation)
+            self.xy = -sum([self.length[link] * sind(sum(self.angles[:link + 1])) for link in range(len(self.links)-j)])
+            self.currentPos[j][0] = self.xy * sind(-self.links[0].rotation)
+            self.currentPos[j][1] = self.xy * cosd(-self.links[0].rotation)
             self.currentPos[j][2] = \
                 sum([self.length[link] * cosd(sum(self.angles[:link + 1])) for link in range(len(self.links)-j)])
 
@@ -130,8 +139,30 @@ def main():
     robot = Arm(base, link1, link2, link3)
 
     point = [3, 3, 3]
-    ang = 0
+    P = []
+    Y = []
+    for i in range(100):
+        out = [np.random.randint(0, 360),
+               np.random.randint(-90, 90),
+               np.random.randint(-90, 90),
+               np.random.randint(-90, 90)]
+        robot.setRotation(out[0])
+        robot.setAngle(0, out[1], out[2], out[3])
+        robot.update()
+        P.append(robot.currentPos[0])
+        Y.append(out)
+    P = np.asarray(P).transpose()
+    Y = np.asarray(Y).transpose()
+    net = prn.CreateNN([3, 10, 5, 8, 4], dIn=[0], dIntern=[], dOut=[1])
+    net = prn.train_LM(P, Y, net, verbose=True, k_max=100, E_stop=1e-5)
+
+
+    #
+
+
+
     i = 0
+
     while True:  # Catch close window event
 
         target = eventsHandle(returnCoords=True)
@@ -141,11 +172,24 @@ def main():
         # Draw a grid
         drawGrid(0)
 
-        robot.links[0].rotation = i*2.1
-        robot.links[1].angle = angl(robot.currentPos[0], point, robot.currentPos[3])
-        robot.links[2].angle = angl(robot.currentPos[0], point, robot.currentPos[2])
-        robot.links[3].angle = angl(robot.currentPos[0], point, robot.currentPos[1])
+        ytest = prn.NNOut(np.array(zip(point)), net)
+
+        robot.setRotation(ytest[0])
+
+        robot.setAngle(0,
+                       ytest[1],
+                       ytest[2],
+                       ytest[3])
+
+        # robot.setRotation(0)
+        # robot.setAngle(0,
+        #                0,
+        #                0,
+        #                0)
+
+
         robot.update()
+
 
         if target[1]:
             point = target[0]
@@ -153,8 +197,6 @@ def main():
         drawCoord(point)
         drawCoord(robot.currentPos[0])
 
-
-        print degrees(ang)
         i += 1
 
         pygame.display.flip()
