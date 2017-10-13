@@ -2,7 +2,9 @@ import pygame
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from Drawings import *
-from math import sin, cos, pi, radians
+import numpy as np
+from math import sin, cos, radians, degrees
+
 
 class Link:
 
@@ -74,21 +76,25 @@ class Link:
         glEnd()
         glPopMatrix()
 
+
 class Arm:
 
     def __init__(self, *args):
         self.links = args
         self.length = [link.size[2] for link in self.links]
         self.angles = [link.angle for link in self.links]
-        self.currentPos = [0, 0, 0]
+        self.currentPos = np.zeros([len(self.links), 3])
+
 
     def update(self):
         self.angles = [link.angle for link in self.links]
-        xy = -sum([self.length[link] * sind(sum(self.angles[:link + 1])) for link in range(len(self.links))])
-        self.currentPos[0] = xy * sind(-self.links[0].rotation)
-        self.currentPos[1] = xy * cosd(-self.links[0].rotation)
-        self.currentPos[2] = \
-            sum([self.length[link] * cosd(sum(self.angles[:link + 1])) for link in range(len(self.links))])
+        for j in range(len(self.links)):
+            xy = -sum([self.length[link] * sind(sum(self.angles[:link + 1])) for link in range(len(self.links)-j)])
+            self.currentPos[j][0] = xy * sind(-self.links[0].rotation)
+            self.currentPos[j][1] = xy * cosd(-self.links[0].rotation)
+            self.currentPos[j][2] = \
+                sum([self.length[link] * cosd(sum(self.angles[:link + 1])) for link in range(len(self.links)-j)])
+
         self.links[0].update()
 
 
@@ -109,7 +115,6 @@ def setup():
     glRotate(-45, 1, 0, 1)
 
 
-
 def main():
 
     setup()
@@ -124,28 +129,43 @@ def main():
 
     robot = Arm(base, link1, link2, link3)
 
+    point = [3, 3, 3]
+    ang = 0
     i = 0
     while True:  # Catch close window event
 
-        eventsHandle()
+        target = eventsHandle(returnCoords=True)
+
         # Clear buffers
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
         # Draw a grid
         drawGrid(0)
 
-        robot.links[0].rotation = i
-        robot.links[1].angle = 90*cos(i/50.0-1)
-        robot.links[2].angle = 90*cos(i/50.0+1)
-        robot.links[3].angle = 90*cos(i/50.0)
+        robot.links[0].rotation = i*2.1
+        robot.links[1].angle = angl(robot.currentPos[0], point, robot.currentPos[3])
+        robot.links[2].angle = angl(robot.currentPos[0], point, robot.currentPos[2])
+        robot.links[3].angle = angl(robot.currentPos[0], point, robot.currentPos[1])
         robot.update()
 
-        drawCoord(robot.currentPos)
+        if target[1]:
+            point = target[0]
+
+        drawCoord(point)
+        drawCoord(robot.currentPos[0])
+
+
+        print degrees(ang)
         i += 1
 
         pygame.display.flip()
 
         pygame.time.wait(10)
 
+def angl(efector, target, joint):
+    ej = np.subtract(efector, target)
+    tj = np.subtract(joint, target)
+    angle = np.dot(ej, tj) / (np.linalg.norm(ej) * np.linalg.norm(tj))
+    return degrees(angle)
 
 if __name__ == "__main__":
     main()

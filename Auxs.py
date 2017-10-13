@@ -81,8 +81,8 @@ def mouseMove(event):
     vel = np.power(mouse[0] ** 2 + mouse[1] ** 2, 1 / 2.0)
     keyboard = pygame.key.get_pressed()
 
-    p3d = gluUnProject(mousepos[0], mousepos[1], 0, modelView, projection, viewport)
-    print p3d
+    p3d = gluUnProject(mousepos[0], 600-mousepos[1], 0.997, modelView, projection, viewport)
+    # print p3d
 
     if mousepressed[2] & keyboard[K_LSHIFT] & ((mouse[0] != 0)):
         glRotatef(int((vel)), 0, 0, mouse[0])
@@ -111,6 +111,7 @@ def mouseMove(event):
             glTranslatef(modelView[0][2]*2,
                          modelView[1][2]*2,
                          modelView[2][2]*2)
+    return p3d, mousepressed[0]
 
 
 def ketboardMove():
@@ -141,16 +142,20 @@ def ketboardMove():
                      modelView[2][1])
 
 
-def eventsHandle(mouse=mouseMove, keyboard=ketboardMove):
-
+def eventsHandle(mouse=mouseMove, keyboard=ketboardMove, returnCoords = False):
+    coords = 0
+    key = 0
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             quit()
+        elif returnCoords is True:
+            coords, key = mouse(event)
         else:
             mouse(event)
     keyboard()
-
+    if returnCoords is True:
+        return coords, key
 
 if __name__ == "__main__":
     pass
