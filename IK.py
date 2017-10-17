@@ -4,6 +4,8 @@ from OpenGL.GLU import *
 from Drawings import *
 import numpy as np
 from math import sin, cos, radians, degrees, atan
+import os
+
 
 
 class Link:
@@ -142,9 +144,12 @@ def main():
     link2.appendArm(link3)
 
     robot = Arm(base, link1, link2, link3)
-
+    robot.setAngle(0,
+                   0,
+                   90,
+                   0)
     point = [3, 3, 3]
-
+    robot.update()
 
     i = 0
 
@@ -157,12 +162,22 @@ def main():
         # Draw a grid
         drawGrid(0)
 
+        J = np.matrix([np.cross([0, 0, 1], robot.currentPos[0]),
+             np.cross([0, 1, 0], robot.currentPos[0]-robot.currentPos[3]),
+             np.cross([0, 1, 0], robot.currentPos[0]-robot.currentPos[2]),
+             np.cross([0, 1, 0], robot.currentPos[0]-robot.currentPos[1])
+             ])
+
+        test = 0.1*J*np.matrix(robot.currentPos[0]-point).transpose()
+        # test = [degrees(angle) for angle in test]
+        print J
+
         rotation = 90*(1-np.sign(point[1]))-degrees(atan(point[0]/point[1]))
-        robot.setRotation(rotation)
+        robot.setRotation(robot.links[0].rotation+test[0])
         robot.setAngle(0,
-                       0,
-                       i,
-                       0)
+                       robot.links[1].angle+test[1],
+                       robot.links[2].angle+test[2],
+                       robot.links[3].angle+test[3])
 
         robot.update()
 
