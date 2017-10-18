@@ -10,7 +10,7 @@ import os
 
 class Link:
 
-    def __init__(self, size=(0, 0, 1), color=(0, 0, 0)):
+    def __init__(self, size=(0, 0, 1), color=(0, 0, 0), direction = [1, 0, 0]):
         self.size = size
         self.color = color
         self.child = None
@@ -18,6 +18,7 @@ class Link:
         self.angle = 0
         self.rotation = 0
         self.currentpos = [0, 0, 0]
+        self.direction = direction
 
     def appendArm(self, arm):
         self.child = True
@@ -83,6 +84,10 @@ class Arm:
 
     def __init__(self, *args):
         self.links = args
+
+        for link in range(len(args)-1):
+            args[link].appendArm(args[link+1])
+
         self.length = [link.size[2] for link in self.links]
         self.angles = [link.angle for link in self.links]
         self.currentPos = np.zeros([len(self.links), 3])
@@ -90,11 +95,28 @@ class Arm:
 
     def setRotation(self, *args):
         for angle in enumerate(args):
-            self.links[angle[0]].rotation = angle[1]
+            self.links[angle[0]].rotation -= angle[1]
 
     def setAngle(self, *args):
         for angle in enumerate(args):
-            self.links[angle[0]].angle = angle[1]
+            self.links[angle[0]].angle -= angle[1]
+
+    def follow(self, point):
+        J = np.matrix(
+            [np.cross(self.links[0].direction, self.currentPos[0]),
+             np.cross(self.links[1].direction, self.currentPos[0]-self.currentPos[3]),
+             np.cross(self.links[2].direction, self.currentPos[0]-self.currentPos[2]),
+             np.cross(self.links[3].direction, self.currentPos[0]-self.currentPos[1])
+             ])
+
+        newAngles = 0.5 * J * np.matrix(self.currentPos[0] - point).transpose()
+
+        self.setRotation(newAngles[0])
+        self.setAngle(0,
+                      newAngles[1],
+                      newAngles[2],
+                      newAngles[3])
+        self.update()
 
     def update(self):
         self.angles = [link.angle for link in self.links]
@@ -134,24 +156,24 @@ def setup():
 def main():
 
     setup()
-    base = Link((1, 1, 1), (1, 0, 0))
+    base = Link((1, 1, 1), (1, 0, 0), direction= [0, 0, 1])
     link1 = Link((.2, .2, 3), (0, 1, 0))
     link2 = Link((.2, .2, 2), (0, 0, 1))
     link3 = Link((.2, .2, 1), (1, 0, 1))
 
-    base.appendArm(link1)
-    link1.appendArm(link2)
-    link2.appendArm(link3)
 
     robot = Arm(base, link1, link2, link3)
-    robot.setAngle(0,
-                   0,
-                   90,
-                   0)
+
     point = [3, 3, 3]
     robot.update()
 
-    i = 0
+    pygame.display.set_caption('IK')
+
+    pygame.font.init()  # you have to call this at the start,
+    # if you want to use this module.
+    myfont = pygame.font.SysFont('Comic Sans MS', 30)
+
+    textsurface = myfont.render('Some Text', False, (0, 0, 0))
 
     while True:  # Catch close window event
 
@@ -162,42 +184,16 @@ def main():
         # Draw a grid
         drawGrid(0)
 
-        J = np.matrix([np.cross([0, 0, 1], robot.currentPos[0]),
-             np.cross([0, 1, 0], robot.currentPos[0]-robot.currentPos[3]),
-             np.cross([0, 1, 0], robot.currentPos[0]-robot.currentPos[2]),
-             np.cross([0, 1, 0], robot.currentPos[0]-robot.currentPos[1])
-             ])
+        robot.follow(point)
 
-        test = 0.1*J*np.matrix(robot.currentPos[0]-point).transpose()
-        # test = [degrees(angle) for angle in test]
-        print J
-
-        rotation = 90*(1-np.sign(point[1]))-degrees(atan(point[0]/point[1]))
-        robot.setRotation(robot.links[0].rotation+test[0])
-        robot.setAngle(0,
-                       robot.links[1].angle+test[1],
-                       robot.links[2].angle+test[2],
-                       robot.links[3].angle+test[3])
-
-        robot.update()
-
+        drawCoord(point)
 
         if target[1]:
             point = target[0]
 
-        drawCoord(point)
-        drawCoord(robot.currentPos[0])
-        i = i-1 if i < 360 else 0
-
         pygame.display.flip()
 
         pygame.time.wait(10)
-
-def angl(efector, target, joint):
-    ej = np.subtract(efector, target)
-    tj = np.subtract(joint, target)
-    angle = np.dot(ej, tj) / (np.linalg.norm(ej) * np.linalg.norm(tj))
-    return degrees(angle)
 
 if __name__ == "__main__":
     main()
