@@ -38,7 +38,6 @@ def interpIndex(curve):
     inter = np.digitize(num, totaluni)
     return inter
 
-
 def interpcurve(N, curve):
 
     # This function performs an interpolation based in the length
@@ -111,7 +110,6 @@ def mouseMove(event):
                          modelView[2][2]*2)
     return p3d, mousepressed[0]
 
-
 def ketboardMove():
 
     # handles the keyboard events to move the camera
@@ -138,7 +136,6 @@ def ketboardMove():
         glTranslatef(modelView[0][1],
                      modelView[1][1],
                      modelView[2][1])
-
 
 def eventsHandle(mouse=mouseMove, keyboard=ketboardMove, returnCoords = False):
     coords = 0

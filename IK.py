@@ -31,11 +31,13 @@ def main():
 
     link0 = Link((1, 1, 1), (1, 0, 0), direction= [0, 0, 1])
     link1 = Link((.2, .2, 3), (0, 1, 0))
-    link2 = Link((.2, .2, 2), (0, 0, 1))
+    link2 = Link((.2, .2, 1), (0, 0, 1))
     link3 = Link((.2, .2, 1), (1, 0, 1))
-    link4 = Link((.2, .2, 3), (0, 1, 1))
+    link4 = Link((.2, .2, 1), (0, 1, 1))
+    link5 = Link((.2, .2, 1), (1, 1, 0))
+    link6 = Link((.2, .2, 1), (1, 1, 5))
 
-    robot = Arm(link0, link1, link2, link3, link4)
+    robot = Arm(link0, link1, link2, link3, link4, link5, link6)
 
     point = [3, 3, 3]
 
