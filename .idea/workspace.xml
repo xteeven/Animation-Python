@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ce465d5d-8b2e-4198-8847-df58a4974577" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Interface.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Mass-Spring.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Auxs.py" afterPath="$PROJECT_DIR$/Auxs.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IK.py" afterPath="$PROJECT_DIR$/IK.py" />
     </list>
     <ignored path="C:\Users\Xteev\PycharmProjects\Animation\.idea\shelf/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -18,8 +18,12 @@
     <SUITE FILE_PATH="coverage/Animation$View.coverage" NAME="View Coverage Results" MODIFIED="1506968598884" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Animation$IK.coverage" NAME="IK Coverage Results" MODIFIED="1508358929827" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Animation$example_using_P0Y0_compair.coverage" NAME="example_using_P0Y0_compair Coverage Results" MODIFIED="1507923303306" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
+    <SUITE FILE_PATH="coverage/Animation$hellogl_pyw.coverage" NAME="hellogl.pyw Coverage Results" MODIFIED="1509576199768" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="C:/Python27/Lib/site-packages/PyQt4/examples/opengl" />
+    <SUITE FILE_PATH="coverage/Animation$Mass_Spring.coverage" NAME="Mass-Spring Coverage Results" MODIFIED="1509549105234" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Animation$example_compair.coverage" NAME="example_compair Coverage Results" MODIFIED="1507925808566" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
     <SUITE FILE_PATH="coverage/Animation$Main.coverage" NAME="Main Coverage Results" MODIFIED="1506542153473" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Animation$Interface.coverage" NAME="Interface Coverage Results" MODIFIED="1509576895596" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Animation$samplebuffers_pyw.coverage" NAME="samplebuffers.pyw Coverage Results" MODIFIED="1509550131156" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="C:/Python27/Lib/site-packages/PyQt4/examples/opengl" />
     <SUITE FILE_PATH="coverage/Animation$Auxs.coverage" NAME="Auxs Coverage Results" MODIFIED="1507914890579" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="DatabaseView">
@@ -34,60 +38,88 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="IK.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/IK.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="663">
-              <caret line="39" column="63" lean-forward="false" selection-start-line="39" selection-start-column="63" selection-end-line="39" selection-end-column="63" />
-              <folding>
-                <element signature="e#0#13#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Auxs.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Auxs.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="561">
-              <caret line="280" column="8" lean-forward="true" selection-start-line="280" selection-start-column="8" selection-end-line="280" selection-end-column="8" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-                <element signature="e#213#961#0" expanded="false" />
-                <element signature="e#213#253#0" expanded="false" />
-                <element signature="e#804#958#0" expanded="false" />
-                <element signature="e#991#1256#0" expanded="false" />
-                <element signature="e#1290#2312#0" expanded="false" />
-                <element signature="e#1290#1351#0" expanded="false" />
-                <element signature="e#2337#2410#0" expanded="false" />
-                <element signature="e#2438#4014#0" expanded="false" />
-                <element signature="e#3226#3581#0" expanded="false" />
-                <element signature="e#3637#3982#0" expanded="false" />
-                <element signature="e#3671#3817#0" expanded="false" />
-                <element signature="e#3863#3982#0" expanded="false" />
-                <element signature="e#4041#4821#0" expanded="false" />
-                <element signature="e#4041#4089#0" expanded="false" />
-                <element signature="e#4243#4360#0" expanded="false" />
-                <element signature="e#4396#4528#0" expanded="false" />
-                <element signature="e#4561#4681#0" expanded="false" />
-                <element signature="e#4716#4821#0" expanded="false" />
-                <element signature="e#4907#5233#0" expanded="false" />
-                <element signature="e#5017#5049#0" expanded="false" />
-                <element signature="e#5252#7098#0" expanded="false" />
-                <element signature="e#7116#9044#0" expanded="false" />
-                <element signature="e#7151#7452#0" expanded="false" />
-                <element signature="e#7495#7578#0" expanded="false" />
-                <element signature="e#7618#7698#0" expanded="false" />
-                <element signature="e#7738#8465#0" expanded="false" />
-                <element signature="e#8497#9044#0" expanded="false" />
-                <marker date="1508364089588" expanded="false" signature="2433:2883" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.5">
+      <split-first>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file leaf-file-name="Mass-Spring.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/Mass-Spring.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="374">
+                  <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+                  <folding>
+                    <element signature="e#0#13#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Interface.py" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/Interface.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="2635">
+                  <caret line="214" column="34" lean-forward="true" selection-start-line="214" selection-start-column="34" selection-end-line="214" selection-end-column="34" />
+                  <folding>
+                    <element signature="e#2057#2079#0" expanded="true" />
+                    <element signature="e#2456#4276#0" expanded="false" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Auxs.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/Auxs.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="390">
+                  <caret line="102" column="0" lean-forward="false" selection-start-line="102" selection-start-column="0" selection-end-line="105" selection-end-column="0" />
+                  <folding>
+                    <element signature="e#0#18#0" expanded="true" />
+                    <element signature="e#213#961#0" expanded="false" />
+                    <element signature="e#213#253#0" expanded="false" />
+                    <element signature="e#804#958#0" expanded="false" />
+                    <element signature="e#991#1256#0" expanded="false" />
+                    <element signature="e#1290#2312#0" expanded="false" />
+                    <element signature="e#1290#1351#0" expanded="false" />
+                    <element signature="e#2337#2410#0" expanded="false" />
+                    <element signature="e#4041#4821#0" expanded="false" />
+                    <element signature="e#4041#4089#0" expanded="false" />
+                    <element signature="e#4243#4360#0" expanded="false" />
+                    <element signature="e#4396#4528#0" expanded="false" />
+                    <element signature="e#4561#4681#0" expanded="false" />
+                    <element signature="e#4716#4821#0" expanded="false" />
+                    <element signature="e#4907#5233#0" expanded="false" />
+                    <element signature="e#5017#5049#0" expanded="false" />
+                    <element signature="e#5252#7098#0" expanded="false" />
+                    <element signature="e#7116#9044#0" expanded="false" />
+                    <element signature="e#7151#7452#0" expanded="false" />
+                    <element signature="e#7495#7578#0" expanded="false" />
+                    <element signature="e#7618#7698#0" expanded="false" />
+                    <element signature="e#7738#8465#0" expanded="false" />
+                    <element signature="e#8497#9044#0" expanded="false" />
+                    <marker date="1508364089588" expanded="true" signature="2433:2883" ph="..." />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file leaf-file-name="IK.py" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/IK.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="374">
+                  <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+                  <folding>
+                    <element signature="e#0#13#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -117,6 +149,10 @@
         <option value="$PROJECT_DIR$/examples/example_compair.py" />
         <option value="$PROJECT_DIR$/IK.py" />
         <option value="$PROJECT_DIR$/Auxs.py" />
+        <option value="$PROJECT_DIR$/.idea/Mass-Spring.py" />
+        <option value="$PROJECT_DIR$/Mass-Spring.py" />
+        <option value="C:/Python27/Lib/site-packages/PyQt4/examples/opengl/hellogl.pyw" />
+        <option value="$PROJECT_DIR$/Interface.py" />
       </list>
     </option>
   </component>
@@ -127,10 +163,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-1930" />
-    <option name="y" value="31" />
-    <option name="width" value="1938" />
-    <option name="height" value="1008" />
+    <option name="x" value="49" />
+    <option name="y" value="-23" />
+    <option name="width" value="1936" />
+    <option name="height" value="1092" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -159,148 +195,64 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
       <pane id="Scope">
         <subPane subId="Project Files">
           <expand>
             <path>
               <item name="Root" type="cbb8eebc:String" user="Root" />
-              <item name="Animation-Python" type="cbb8eebc:String" user="Animation-Python" />
+              <item name="Animation" type="cbb8eebc:String" user="Animation" />
             </path>
             <path>
               <item name="Root" type="cbb8eebc:String" user="Root" />
-              <item name="Animation-Python" type="cbb8eebc:String" user="Animation-Python" />
               <item name="Animation" type="cbb8eebc:String" user="Animation" />
+              <item name="Animation" type="cbb8eebc:String" user="Animation" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="External Dependencies" type="cbb8eebc:String" user="External Dependencies" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="External Dependencies" type="cbb8eebc:String" user="External Dependencies" />
+              <item name="C:" type="cbb8eebc:String" user="C:" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="External Dependencies" type="cbb8eebc:String" user="External Dependencies" />
+              <item name="C:" type="cbb8eebc:String" user="C:" />
+              <item name="Python27" type="cbb8eebc:String" user="Python27" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="External Dependencies" type="cbb8eebc:String" user="External Dependencies" />
+              <item name="C:" type="cbb8eebc:String" user="C:" />
+              <item name="Python27" type="cbb8eebc:String" user="Python27" />
+              <item name="Lib" type="cbb8eebc:String" user="Lib" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="External Dependencies" type="cbb8eebc:String" user="External Dependencies" />
+              <item name="C:" type="cbb8eebc:String" user="C:" />
+              <item name="Python27" type="cbb8eebc:String" user="Python27" />
+              <item name="Lib" type="cbb8eebc:String" user="Lib" />
+              <item name="site-packages" type="cbb8eebc:String" user="site-packages" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Python" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="WebServerToolWindowFactoryState" value="false" />
   </component>
-  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
-    <UpdatedFiles>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Updated from server" />
-        <option name="myStatusName" value="Changed on server" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="CHANGED_ON_SERVER" />
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Updated" />
-          <option name="myStatusName" value="Changed" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/IK.py</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Created" />
-          <option name="myStatusName" value="Created" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="CREATED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Deleted" />
-          <option name="myStatusName" value="Deleted" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="true" />
-          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/examples/example_compair.py</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/examples/example_data.xlsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/examples/example_friction.py</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/examples/example_narendra4.py</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/examples/example_pt2.py</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/examples/example_using_P0Y0_compair.py</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/examples/example_using_P0Y0_narendra4.py</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/examples/gradient_calculation.py</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/pyrenn.py</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Restored" />
-          <option name="myStatusName" value="Will be restored" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="RESTORED" />
-        </FILE-GROUP>
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Modified" />
-        <option name="myStatusName" value="Modified" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MODIFIED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Skipped" />
-        <option name="myStatusName" value="Skipped" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SKIPPED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with conflicts" />
-        <option name="myStatusName" value="Will be merged with conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_CONFLICTS" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with tree conflicts" />
-        <option name="myStatusName" value="Merged with tree conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with property conflicts" />
-        <option name="myStatusName" value="Will be merged with property conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged" />
-        <option name="myStatusName" value="Will be merged" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Not in repository" />
-        <option name="myStatusName" value="Not in repository" />
-        <option name="mySupportsDeletion" value="true" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="UNKNOWN" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally added" />
-        <option name="myStatusName" value="Locally added" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_ADDED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally removed" />
-        <option name="myStatusName" value="Locally removed" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_REMOVED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Switched" />
-        <option name="myStatusName" value="Switched" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SWITCHED" />
-      </FILE-GROUP>
-    </UpdatedFiles>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Xteev\PycharmProjects\Animation" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -314,25 +266,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.IK">
-    <configuration name="Auxs" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="C:\Python27\python.exe" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Animation-Python" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Auxs.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-    </configuration>
+  <component name="RunManager" selected="Python.Interface">
     <configuration name="IK" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -351,7 +285,7 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
-    <configuration name="View" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="Interface" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -364,7 +298,25 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Animation" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/View.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Interface.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
+    <configuration name="Mass-Spring" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Python27\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Animation" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Mass-Spring.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -510,56 +462,56 @@
       <option name="_new_target" value="&quot;&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
     </configuration>
-    <configuration name="example_compair" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="hellogl.pyw" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="C:\Python27\python.exe" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/examples" />
+      <option name="WORKING_DIRECTORY" value="C:/Python27/Lib/site-packages/PyQt4/examples/opengl" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Animation-Python" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/examples/example_compair.py" />
+      <option name="SCRIPT_NAME" value="C:/Python27/Lib/site-packages/PyQt4/examples/opengl/hellogl.pyw" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
-    <configuration name="example_using_P0Y0_compair" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="samplebuffers.pyw" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="C:\Python27\python.exe" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/examples" />
+      <option name="WORKING_DIRECTORY" value="C:/Python27/Lib/site-packages/PyQt4/examples/opengl" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Animation" />
+      <module name="Animation-Python" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/examples/example_using_P0Y0_compair.py" />
+      <option name="SCRIPT_NAME" value="C:/Python27/Lib/site-packages/PyQt4/examples/opengl/samplebuffers.pyw" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.Auxs" />
-      <item index="1" class="java.lang.String" itemvalue="Python.IK" />
-      <item index="2" class="java.lang.String" itemvalue="Python.View" />
-      <item index="3" class="java.lang.String" itemvalue="Python.example_compair" />
-      <item index="4" class="java.lang.String" itemvalue="Python.example_using_P0Y0_compair" />
+      <item index="0" class="java.lang.String" itemvalue="Python.IK" />
+      <item index="1" class="java.lang.String" itemvalue="Python.Mass-Spring" />
+      <item index="2" class="java.lang.String" itemvalue="Python.hellogl.pyw" />
+      <item index="3" class="java.lang.String" itemvalue="Python.samplebuffers.pyw" />
+      <item index="4" class="java.lang.String" itemvalue="Python.Interface" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.IK" />
-        <item index="1" class="java.lang.String" itemvalue="Python.example_compair" />
-        <item index="2" class="java.lang.String" itemvalue="Python.example_using_P0Y0_compair" />
-        <item index="3" class="java.lang.String" itemvalue="Python.Auxs" />
-        <item index="4" class="java.lang.String" itemvalue="Python.View" />
+        <item index="0" class="java.lang.String" itemvalue="Python.Interface" />
+        <item index="1" class="java.lang.String" itemvalue="Python.hellogl.pyw" />
+        <item index="2" class="java.lang.String" itemvalue="Python.samplebuffers.pyw" />
+        <item index="3" class="java.lang.String" itemvalue="Python.Mass-Spring" />
+        <item index="4" class="java.lang.String" itemvalue="Python.IK" />
       </list>
     </recent_temporary>
   </component>
@@ -689,20 +641,27 @@
       <option name="project" value="LOCAL" />
       <updated>1508357615576</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="IK finished">
+      <created>1508429629419</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1508429629419</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1928" y="22" width="1936" height="1066" extended-state="6" />
+    <frame x="-8" y="22" width="1936" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16684435" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1716418" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33736265" sideWeight="0.50625" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32867885" sideWeight="0.49573562" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19978517" sideWeight="0.5234541" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19978517" sideWeight="0.47654584" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19763695" sideWeight="0.53411514" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19763695" sideWeight="0.46588486" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32975295" sideWeight="0.4978678" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -759,7 +718,8 @@
     <MESSAGE value="TEST RNNd" />
     <MESSAGE value="Jacobian Applied" />
     <MESSAGE value="Extended to n Joints" />
-    <option name="LAST_COMMIT_MESSAGE" value="Extended to n Joints" />
+    <MESSAGE value="IK finished" />
+    <option name="LAST_COMMIT_MESSAGE" value="IK finished" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -770,49 +730,15 @@
           <option name="timeStamp" value="10" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="17" />
+      <option name="time" value="18" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/IK.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/example_compair.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="37" column="0" lean-forward="false" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/gradient_calculation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/example_using_P0Y0_narendra4.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Auxs.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1751">
-          <caret line="155" column="14" lean-forward="false" selection-start-line="155" selection-start-column="14" selection-end-line="155" selection-end-column="14" />
+        <state relative-caret-position="561">
+          <caret line="280" column="8" lean-forward="true" selection-start-line="280" selection-start-column="8" selection-end-line="280" selection-end-column="8" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
             <element signature="e#213#961#0" expanded="false" />
@@ -822,11 +748,6 @@
             <element signature="e#1290#2312#0" expanded="false" />
             <element signature="e#1290#1351#0" expanded="false" />
             <element signature="e#2337#2410#0" expanded="false" />
-            <element signature="e#2438#4014#0" expanded="false" />
-            <element signature="e#3226#3581#0" expanded="false" />
-            <element signature="e#3637#3982#0" expanded="false" />
-            <element signature="e#3671#3817#0" expanded="false" />
-            <element signature="e#3863#3982#0" expanded="false" />
             <element signature="e#4041#4821#0" expanded="false" />
             <element signature="e#4041#4089#0" expanded="false" />
             <element signature="e#4243#4360#0" expanded="false" />
@@ -842,7 +763,53 @@
             <element signature="e#7618#7698#0" expanded="false" />
             <element signature="e#7738#8465#0" expanded="false" />
             <element signature="e#8497#9044#0" expanded="false" />
-            <marker date="1508364089588" expanded="false" signature="2433:2883" ph="..." />
+            <marker date="1508364089588" expanded="true" signature="2433:2883" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IK.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/example_compair.py" />
+    <entry file="file://$PROJECT_DIR$/examples/gradient_calculation.py" />
+    <entry file="file://$PROJECT_DIR$/examples/example_using_P0Y0_narendra4.py" />
+    <entry file="file://$PROJECT_DIR$/Auxs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1751">
+          <caret line="155" column="14" lean-forward="false" selection-start-line="155" selection-start-column="14" selection-end-line="155" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#213#961#0" expanded="false" />
+            <element signature="e#213#253#0" expanded="false" />
+            <element signature="e#804#958#0" expanded="false" />
+            <element signature="e#991#1256#0" expanded="false" />
+            <element signature="e#1290#2312#0" expanded="false" />
+            <element signature="e#1290#1351#0" expanded="false" />
+            <element signature="e#2337#2410#0" expanded="false" />
+            <element signature="e#4041#4821#0" expanded="false" />
+            <element signature="e#4041#4089#0" expanded="false" />
+            <element signature="e#4243#4360#0" expanded="false" />
+            <element signature="e#4396#4528#0" expanded="false" />
+            <element signature="e#4561#4681#0" expanded="false" />
+            <element signature="e#4716#4821#0" expanded="false" />
+            <element signature="e#4907#5233#0" expanded="false" />
+            <element signature="e#5017#5049#0" expanded="false" />
+            <element signature="e#5252#7098#0" expanded="false" />
+            <element signature="e#7116#9044#0" expanded="false" />
+            <element signature="e#7151#7452#0" expanded="false" />
+            <element signature="e#7495#7578#0" expanded="false" />
+            <element signature="e#7618#7698#0" expanded="false" />
+            <element signature="e#7738#8465#0" expanded="false" />
+            <element signature="e#8497#9044#0" expanded="false" />
+            <marker date="1508364089588" expanded="true" signature="2433:2883" ph="..." />
           </folding>
         </state>
       </provider>
@@ -857,14 +824,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pyrenn.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="327" column="0" lean-forward="false" selection-start-line="327" selection-start-column="0" selection-end-line="327" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/pyrenn.py" />
     <entry file="file://$PROJECT_DIR$/Auxs.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1751">
@@ -878,11 +838,6 @@
             <element signature="e#1290#2312#0" expanded="false" />
             <element signature="e#1290#1351#0" expanded="false" />
             <element signature="e#2337#2410#0" expanded="false" />
-            <element signature="e#2438#4014#0" expanded="false" />
-            <element signature="e#3226#3581#0" expanded="false" />
-            <element signature="e#3637#3982#0" expanded="false" />
-            <element signature="e#3671#3817#0" expanded="false" />
-            <element signature="e#3863#3982#0" expanded="false" />
             <element signature="e#4041#4821#0" expanded="false" />
             <element signature="e#4041#4089#0" expanded="false" />
             <element signature="e#4243#4360#0" expanded="false" />
@@ -898,7 +853,7 @@
             <element signature="e#7618#7698#0" expanded="false" />
             <element signature="e#7738#8465#0" expanded="false" />
             <element signature="e#8497#9044#0" expanded="false" />
-            <marker date="1508364089588" expanded="false" signature="2433:2883" ph="..." />
+            <marker date="1508364089588" expanded="true" signature="2433:2883" ph="..." />
           </folding>
         </state>
       </provider>
@@ -914,14 +869,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/examples/example_compair.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="15" column="20" lean-forward="true" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/example_compair.py" />
     <entry file="file://$PROJECT_DIR$/IK.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="595">
@@ -956,11 +904,6 @@
             <element signature="e#1290#2312#0" expanded="false" />
             <element signature="e#1290#1351#0" expanded="false" />
             <element signature="e#2337#2410#0" expanded="false" />
-            <element signature="e#2438#4014#0" expanded="false" />
-            <element signature="e#3226#3581#0" expanded="false" />
-            <element signature="e#3637#3982#0" expanded="false" />
-            <element signature="e#3671#3817#0" expanded="false" />
-            <element signature="e#3863#3982#0" expanded="false" />
             <element signature="e#4041#4821#0" expanded="false" />
             <element signature="e#4041#4089#0" expanded="false" />
             <element signature="e#4243#4360#0" expanded="false" />
@@ -976,7 +919,7 @@
             <element signature="e#7618#7698#0" expanded="false" />
             <element signature="e#7738#8465#0" expanded="false" />
             <element signature="e#8497#9044#0" expanded="false" />
-            <marker date="1508364089588" expanded="false" signature="2433:2883" ph="..." />
+            <marker date="1508364089588" expanded="true" signature="2433:2883" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1022,11 +965,6 @@
             <element signature="e#1290#2312#0" expanded="false" />
             <element signature="e#1290#1351#0" expanded="false" />
             <element signature="e#2337#2410#0" expanded="false" />
-            <element signature="e#2438#4014#0" expanded="false" />
-            <element signature="e#3226#3581#0" expanded="false" />
-            <element signature="e#3637#3982#0" expanded="false" />
-            <element signature="e#3671#3817#0" expanded="false" />
-            <element signature="e#3863#3982#0" expanded="false" />
             <element signature="e#4041#4821#0" expanded="false" />
             <element signature="e#4041#4089#0" expanded="false" />
             <element signature="e#4243#4360#0" expanded="false" />
@@ -1042,7 +980,7 @@
             <element signature="e#7618#7698#0" expanded="false" />
             <element signature="e#7738#8465#0" expanded="false" />
             <element signature="e#8497#9044#0" expanded="false" />
-            <marker date="1508364089588" expanded="false" signature="2433:2883" ph="..." />
+            <marker date="1508364089588" expanded="true" signature="2433:2883" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1067,11 +1005,6 @@
             <element signature="e#1290#2312#0" expanded="false" />
             <element signature="e#1290#1351#0" expanded="false" />
             <element signature="e#2337#2410#0" expanded="false" />
-            <element signature="e#2438#4014#0" expanded="false" />
-            <element signature="e#3226#3581#0" expanded="false" />
-            <element signature="e#3637#3982#0" expanded="false" />
-            <element signature="e#3671#3817#0" expanded="false" />
-            <element signature="e#3863#3982#0" expanded="false" />
             <element signature="e#4041#4821#0" expanded="false" />
             <element signature="e#4041#4089#0" expanded="false" />
             <element signature="e#4243#4360#0" expanded="false" />
@@ -1087,7 +1020,7 @@
             <element signature="e#7618#7698#0" expanded="false" />
             <element signature="e#7738#8465#0" expanded="false" />
             <element signature="e#8497#9044#0" expanded="false" />
-            <marker date="1508364089588" expanded="false" signature="2433:2883" ph="..." />
+            <marker date="1508364089588" expanded="true" signature="2433:2883" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1134,11 +1067,6 @@
             <element signature="e#1290#2312#0" expanded="false" />
             <element signature="e#1290#1351#0" expanded="false" />
             <element signature="e#2337#2410#0" expanded="false" />
-            <element signature="e#2438#4014#0" expanded="false" />
-            <element signature="e#3226#3581#0" expanded="false" />
-            <element signature="e#3637#3982#0" expanded="false" />
-            <element signature="e#3671#3817#0" expanded="false" />
-            <element signature="e#3863#3982#0" expanded="false" />
             <element signature="e#4041#4821#0" expanded="false" />
             <element signature="e#4041#4089#0" expanded="false" />
             <element signature="e#4243#4360#0" expanded="false" />
@@ -1154,7 +1082,7 @@
             <element signature="e#7618#7698#0" expanded="false" />
             <element signature="e#7738#8465#0" expanded="false" />
             <element signature="e#8497#9044#0" expanded="false" />
-            <marker date="1508364089588" expanded="false" signature="2433:2883" ph="..." />
+            <marker date="1508364089588" expanded="true" signature="2433:2883" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1179,11 +1107,6 @@
             <element signature="e#1290#2312#0" expanded="false" />
             <element signature="e#1290#1351#0" expanded="false" />
             <element signature="e#2337#2410#0" expanded="false" />
-            <element signature="e#2438#4014#0" expanded="false" />
-            <element signature="e#3226#3581#0" expanded="false" />
-            <element signature="e#3637#3982#0" expanded="false" />
-            <element signature="e#3671#3817#0" expanded="false" />
-            <element signature="e#3863#3982#0" expanded="false" />
             <element signature="e#4041#4821#0" expanded="false" />
             <element signature="e#4041#4089#0" expanded="false" />
             <element signature="e#4243#4360#0" expanded="false" />
@@ -1199,7 +1122,7 @@
             <element signature="e#7618#7698#0" expanded="false" />
             <element signature="e#7738#8465#0" expanded="false" />
             <element signature="e#8497#9044#0" expanded="false" />
-            <marker date="1508364089588" expanded="false" signature="2433:2883" ph="..." />
+            <marker date="1508364089588" expanded="true" signature="2433:2883" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1224,11 +1147,6 @@
             <element signature="e#1290#2312#0" expanded="false" />
             <element signature="e#1290#1351#0" expanded="false" />
             <element signature="e#2337#2410#0" expanded="false" />
-            <element signature="e#2438#4014#0" expanded="false" />
-            <element signature="e#3226#3581#0" expanded="false" />
-            <element signature="e#3637#3982#0" expanded="false" />
-            <element signature="e#3671#3817#0" expanded="false" />
-            <element signature="e#3863#3982#0" expanded="false" />
             <element signature="e#4041#4821#0" expanded="false" />
             <element signature="e#4041#4089#0" expanded="false" />
             <element signature="e#4243#4360#0" expanded="false" />
@@ -1244,7 +1162,7 @@
             <element signature="e#7618#7698#0" expanded="false" />
             <element signature="e#7738#8465#0" expanded="false" />
             <element signature="e#8497#9044#0" expanded="false" />
-            <marker date="1508364089588" expanded="false" signature="2433:2883" ph="..." />
+            <marker date="1508364089588" expanded="true" signature="2433:2883" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1269,11 +1187,6 @@
             <element signature="e#1290#2312#0" expanded="false" />
             <element signature="e#1290#1351#0" expanded="false" />
             <element signature="e#2337#2410#0" expanded="false" />
-            <element signature="e#2438#4014#0" expanded="false" />
-            <element signature="e#3226#3581#0" expanded="false" />
-            <element signature="e#3637#3982#0" expanded="false" />
-            <element signature="e#3671#3817#0" expanded="false" />
-            <element signature="e#3863#3982#0" expanded="false" />
             <element signature="e#4041#4821#0" expanded="false" />
             <element signature="e#4041#4089#0" expanded="false" />
             <element signature="e#4243#4360#0" expanded="false" />
@@ -1289,7 +1202,7 @@
             <element signature="e#7618#7698#0" expanded="false" />
             <element signature="e#7738#8465#0" expanded="false" />
             <element signature="e#8497#9044#0" expanded="false" />
-            <marker date="1508364089588" expanded="false" signature="2433:2883" ph="..." />
+            <marker date="1508364089588" expanded="true" signature="2433:2883" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1328,7 +1241,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="239">
           <caret line="57" column="0" lean-forward="false" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1347,74 +1259,47 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/examples/example_pt2.py">
+    <entry file="file://$PROJECT_DIR$/examples/example_pt2.py" />
+    <entry file="file://$PROJECT_DIR$/examples/example_friction.py" />
+    <entry file="file://$PROJECT_DIR$/examples/gradient_calculation.py" />
+    <entry file="file://$PROJECT_DIR$/examples/example_narendra4.py" />
+    <entry file="file://$PROJECT_DIR$/examples/example_using_P0Y0_compair.py" />
+    <entry file="file://$PROJECT_DIR$/examples/example_using_P0Y0_narendra4.py" />
+    <entry file="file://$PROJECT_DIR$/pyrenn.py" />
+    <entry file="file://$PROJECT_DIR$/examples/example_compair.py" />
+    <entry file="file://C:/Python27/Lib/site-packages/PyQt4/examples/opengl/samplebuffers.pyw">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state relative-caret-position="-1235">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/example_friction.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/gradient_calculation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/example_narendra4.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/example_using_P0Y0_compair.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/example_using_P0Y0_narendra4.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pyrenn.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="816">
-          <caret line="797" column="0" lean-forward="false" selection-start-line="797" selection-start-column="0" selection-end-line="797" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/example_compair.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="37" column="0" lean-forward="false" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/IK.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="663">
-          <caret line="39" column="63" lean-forward="false" selection-start-line="39" selection-start-column="63" selection-end-line="39" selection-end-column="63" />
+        <state relative-caret-position="374">
+          <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python27/Lib/site-packages/PyQt4/examples/opengl/hellogl.pyw">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Mass-Spring.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
@@ -1423,8 +1308,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Auxs.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="280" column="8" lean-forward="true" selection-start-line="280" selection-start-column="8" selection-end-line="280" selection-end-column="8" />
+        <state relative-caret-position="390">
+          <caret line="102" column="0" lean-forward="false" selection-start-line="102" selection-start-column="0" selection-end-line="105" selection-end-column="0" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
             <element signature="e#213#961#0" expanded="false" />
@@ -1434,11 +1319,6 @@
             <element signature="e#1290#2312#0" expanded="false" />
             <element signature="e#1290#1351#0" expanded="false" />
             <element signature="e#2337#2410#0" expanded="false" />
-            <element signature="e#2438#4014#0" expanded="false" />
-            <element signature="e#3226#3581#0" expanded="false" />
-            <element signature="e#3637#3982#0" expanded="false" />
-            <element signature="e#3671#3817#0" expanded="false" />
-            <element signature="e#3863#3982#0" expanded="false" />
             <element signature="e#4041#4821#0" expanded="false" />
             <element signature="e#4041#4089#0" expanded="false" />
             <element signature="e#4243#4360#0" expanded="false" />
@@ -1454,7 +1334,18 @@
             <element signature="e#7618#7698#0" expanded="false" />
             <element signature="e#7738#8465#0" expanded="false" />
             <element signature="e#8497#9044#0" expanded="false" />
-            <marker date="1508364089588" expanded="false" signature="2433:2883" ph="..." />
+            <marker date="1508364089588" expanded="true" signature="2433:2883" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Interface.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2635">
+          <caret line="214" column="34" lean-forward="true" selection-start-line="214" selection-start-column="34" selection-end-line="214" selection-end-column="34" />
+          <folding>
+            <element signature="e#2057#2079#0" expanded="true" />
+            <element signature="e#2456#4276#0" expanded="false" />
           </folding>
         </state>
       </provider>
