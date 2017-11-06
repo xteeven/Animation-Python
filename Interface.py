@@ -134,7 +134,7 @@ class GLWidget(QtOpenGL.QGLWidget):
         self.xRot = 0
         self.yRot = 0
         self.zRot = 0
-        self.zoom = np.array([0.0, 0.0, -10.0])
+        self.zoom = 0
         pygame.init()
 
         self.lastPos = QtCore.QPoint()
@@ -177,7 +177,7 @@ class GLWidget(QtOpenGL.QGLWidget):
         GL.glShadeModel(GL.GL_FLAT)
         GL.glMatrixMode(GL.GL_MODELVIEW)
         GL.glViewport(0, 0, self.frameGeometry().width(), self.frameGeometry().height())
-        GL.glTranslatef(self.zoom[0], self.zoom[1], self.zoom[2])
+
 
         GL.glRotate(-45, 1, 0, 1)
         GL.glMatrixMode(GL.GL_PROJECTION)
@@ -188,36 +188,32 @@ class GLWidget(QtOpenGL.QGLWidget):
         GL.glEnable(GL.GL_DEPTH_TEST)
         GL.glEnable(GL.GL_CULL_FACE)
 
-    def paintGL(self):
-        # print 'paint'
-        GL.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT)
-        # GL.glPushMatrix()
-        GL.glLoadIdentity()
-        # print self.zoom
-        GL.glTranslatef(0, 5, -11)
+    def moveEvents(self):
+        modelView = glGetDoublev(GL_MODELVIEW_MATRIX)
+        glTranslatef(modelView[0][2] * 2 * self.zoom,
+                     modelView[1][2] * 2 * self.zoom,
+                     modelView[2][2] * 2 * self.zoom)
         GL.glRotated(self.xRot / 16.0, 1.0, 0.0, 0.0)
         GL.glRotated(self.yRot / 16.0, 0.0, 1.0, 0.0)
         GL.glRotated(self.zRot / 16.0, 0.0, 0.0, 1.0)
-        drawCoord((0, 0, 1))
-        drawGrid(0)
-        # GL.glPopMatrix()
-        # print self.frameGeometry().width(), self.frameGeometry().height()
 
+    def paintGL(self):
+
+        GL.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT)
+        GL.glLoadIdentity()
+        self.moveEvents()
+        drawCoord((0, 0, 0))
+        drawGrid(0)
 
 
     def resizeGL(self, width, height):
         # print 'resize'
-        side = min(width, height)
+        side = max(width, height)
         if side < 0:
             return
-
-        GL.glViewport(0, 0, width, height)
-
-
+        GL.glViewport((width - side) // 2, (height - side) // 2, side, side)
         GL.glMatrixMode(GL.GL_MODELVIEW)
         GL.glLoadIdentity()
-
-
 
 
     def mousePressEvent(self, event):
@@ -238,16 +234,13 @@ class GLWidget(QtOpenGL.QGLWidget):
         self.lastPos = event.pos()
 
     def wheelEvent(self, event):
-        delta  = event.delta()/np.abs(event.delta())
+        delta  = event.delta()/np.abs(event.delta())*0.5
 
-        print 'done'
-        self.zoom += delta
-
-
-        print self.zoom
-
-
-
+        self.zoom = self.zoom + delta \
+            if (self.zoom+delta>-10) \
+            and (self.zoom+delta<1) \
+            else self.zoom
+        modelView = glGetDoublev(GL_MODELVIEW_MATRIX)
 
 
 
