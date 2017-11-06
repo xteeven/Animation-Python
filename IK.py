@@ -29,7 +29,7 @@ def main():
 
     setup()
 
-    link0 = Link((1, 1, 1), (1, 0, 0), direction= [0, 0, 1])
+    link0 = Link((1, 1, 1), (1, 0, 0), direction=[0, 0, 1])
     link1 = Link((.2, .2, 3), (0, 1, 0))
     link2 = Link((.2, .2, 1), (0, 0, 1))
     link3 = Link((.2, .2, 1), (1, 0, 1))

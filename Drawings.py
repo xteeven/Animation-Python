@@ -24,7 +24,7 @@ def drawCoord(origin=(0, 0, 0)):
 
     axis1 = (1,0,0)
     axis1m = np.linalg.norm(axis1)
-    axis2 = np.cross(axis1 / axis1m, (0, 0, 1))
+    axis2 = np.cross(axis1 / axis1m, (0, 1, 0))
     axis2m = np.linalg.norm(axis2)
     axis3 = np.cross(axis1 / axis1m, axis2 / axis2m)
     axis3m = np.linalg.norm(axis3)
