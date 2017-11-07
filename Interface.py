@@ -1,53 +1,10 @@
 #!/usr/bin/env python
 
-
-#############################################################################
-##
-## Copyright (C) 2010 Riverbank Computing Limited.
-## Copyright (C) 2010 Nokia Corporation and/or its subsidiary(-ies).
-## All rights reserved.
-##
-## This file is part of the examples of PyQt.
-##
-## $QT_BEGIN_LICENSE:BSD$
-## You may use this file under the terms of the BSD license as follows:
-##
-## "Redistribution and use in source and binary forms, with or without
-## modification, are permitted provided that the following conditions are
-## met:
-##   * Redistributions of source code must retain the above copyright
-##     notice, this list of conditions and the following disclaimer.
-##   * Redistributions in binary form must reproduce the above copyright
-##     notice, this list of conditions and the following disclaimer in
-##     the documentation and/or other materials provided with the
-##     distribution.
-##   * Neither the name of Nokia Corporation and its Subsidiary(-ies) nor
-##     the names of its contributors may be used to endorse or promote
-##     products derived from this software without specific prior written
-##     permission.
-##
-## THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-## "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-## LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-## A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
-## OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-## SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-## LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-## DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-## THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-## (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-## OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."
-## $QT_END_LICENSE$
-##
-#############################################################################
-
 from Drawings import *
-import pygame
 import sys
 import math
 
 from PyQt4 import QtCore, QtGui, QtOpenGL
-
 
 def tick():
     print 'tick'
@@ -56,7 +13,7 @@ try:
     from OpenGL import GL, GLU
 except ImportError:
     app = QtGui.QApplication(sys.argv)
-    QtGui.QMessageBox.critical(None, "OpenGL hellogl",
+    QtGui.QMessageBox.critical(None, "OpenGL Animation",
             "PyOpenGL must be installed to run this example.")
     sys.exit(1)
 
@@ -68,65 +25,46 @@ class Window(QtGui.QWidget):
 
 
         self.glWidget = GLWidget()
-
-        self.xSlider = self.createSlider()
-        self.ySlider = self.createSlider()
-        self.zSlider = self.createSlider()
         self.textbox = QtGui.QLabel('Click me')
+        self.textbox.setStyleSheet("background-color: black; color: white; font: bold 14px;")
 
 
-        self.xSlider.setStyleSheet("background-color: white")
-        self.ySlider.setStyleSheet("background-color: white")
-        self.zSlider.setStyleSheet("background-color: white")
-
-        self.xSlider.valueChanged.connect(self.glWidget.setXRotation)
-        self.glWidget.xRotationChanged.connect(self.xSlider.setValue)
-        self.ySlider.valueChanged.connect(self.glWidget.setYRotation)
-        self.glWidget.yRotationChanged.connect(self.ySlider.setValue)
-        self.zSlider.valueChanged.connect(self.glWidget.setZRotation)
-        self.glWidget.zRotationChanged.connect(self.zSlider.setValue)
-
+        self.glWidget.distance.connect(self.textbox.setText)
 
 
         mainLayout = QtGui.QHBoxLayout()
 
-
-
         mainLayout.addWidget(self.glWidget)
-        mainLayout.addWidget(self.xSlider)
-        mainLayout.addWidget(self.ySlider)
-        mainLayout.addWidget(self.zSlider)
+
 
         baseLayout = QtGui.QVBoxLayout()
         baseLayout.addWidget(self.textbox)
         baseLayout.addStretch(1)
         baseLayout.addLayout(mainLayout)
 
-        self.setStyleSheet("background-color: white")
+        self.setStyleSheet("background-color: black")
+
 
         self.setLayout(baseLayout)
-        self.xSlider.setValue(15 * 16)
-        self.ySlider.setValue(345 * 16)
-        self.zSlider.setValue(0 * 16)
 
         self.setWindowTitle("Deformavel")
 
     def createSlider(self):
         slider = QtGui.QSlider(QtCore.Qt.Vertical)
 
-        slider.setRange(0, 360 * 16)
-        slider.setSingleStep(16)
-        slider.setPageStep(15 * 16)
-        slider.setTickInterval(15 * 16)
+        slider.setRange(-90, 90)
+        slider.setSingleStep(1)
+        slider.setPageStep(1 * 1)
+        slider.setTickInterval(1 * 1)
         slider.setTickPosition(QtGui.QSlider.TicksRight)
 
         return slider
 
 
 class GLWidget(QtOpenGL.QGLWidget):
-    xRotationChanged = QtCore.pyqtSignal(int)
-    yRotationChanged = QtCore.pyqtSignal(int)
-    zRotationChanged = QtCore.pyqtSignal(int)
+
+    times = QtCore.pyqtSignal(str)
+    distance = QtCore.pyqtSignal(str)
 
     def __init__(self, parent=None):
         super(GLWidget, self).__init__(parent)
@@ -136,8 +74,15 @@ class GLWidget(QtOpenGL.QGLWidget):
         self.zRot = 0
         self.zoom = 0
         self.key = [0, 0, 0]  # axis, axis1value, axis2value
-        pygame.init()
-
+        self.dt = 0
+        self.bass = Ball(hue=85)
+        self.bass2 = Ball(hue=85)
+        self.ball = Ball(hue=15)
+        self.ball2 = Ball(hue=20)
+        self.tet = Matrix(5)
+        self.ball.pos = np.array([0, -5, 9])
+        self.bass.pos = np.array([-10, -10, 10])
+        self.bass2.pos = np.array([12, 0, 10])
         self.lastPos = QtCore.QPoint()
         self.retract_timer = QtCore.QTimer(self)
         self.retract_timer.setInterval(0)
@@ -155,22 +100,16 @@ class GLWidget(QtOpenGL.QGLWidget):
         angle = self.normalizeAngle(angle)
         if angle != self.xRot:
             self.xRot = angle
-            self.xRotationChanged.emit(angle)
-            # self.updateGL()
 
     def setYRotation(self, angle):
         angle = self.normalizeAngle(angle)
         if angle != self.yRot:
             self.yRot = angle
-            self.yRotationChanged.emit(angle)
-            # self.updateGL()
 
     def setZRotation(self, angle):
         angle = self.normalizeAngle(angle)
         if angle != self.zRot:
             self.zRot = angle
-            self.zRotationChanged.emit(angle)
-            # self.updateGL()
 
     def initializeGL(self):
         GL.glShadeModel(GL.GL_FLAT)
@@ -209,35 +148,58 @@ class GLWidget(QtOpenGL.QGLWidget):
                          modelView[1][1] * self.key[2],
                          modelView[2][1] * self.key[2])
 
-        self.xRot = 0
-        self.yRot = 0
-        self.zRot = 0
-        self.key[0] = 0
-        self.zoom = 0
+        # self.xRot = 0
+        # self.yRot = 0
+        # self.zRot = 0
+        # self.key[0] = 0
+        # self.zoom = 0
 
     def paintGL(self):
 
         GL.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT)
 
-        # GL.glLoadIdentity()
+        GL.glLoadIdentity()
+
+        dt = 0.03*2
+        k = 5
 
         self.moveEvents()
 
         drawCoord((0, 0, 0))
 
-        self.drawSphere(1, 10, 10)
+        distanceb = np.subtract(self.ball2.pos, self.ball.pos)
+        elasticab = -k * np.array(distanceb + [0, 0, 0]) / self.ball.mass
+        acelerationsb = self.ball.gravity + elasticab
+        self.ball2.vel = self.ball2.vel + np.array(acelerationsb) * dt
+        self.ball2.pos = self.ball2.pos + np.array(self.ball2.vel) * dt + np.array(acelerationsb) * dt ** 2
 
+
+        distance = np.subtract(self.ball.pos, self.bass.pos)
+        distance2 = np.subtract(self.ball.pos, self.bass2.pos)
+        elastica = -k*np.array(distance+[0, 0, 3]+distance2 + [0, 0, 3])/self.ball.mass
+        elastica2 = -k * np.array(distance2 + [0, 0, 3]) / self.ball.mass
+
+        acelerations = self.ball.gravity+elastica
+
+        self.ball.vel =self.ball.vel + np.array(acelerations)*dt
+
+        self.ball.pos =self.ball.pos + np.array(self.ball.vel)*dt + np.array(acelerations)*dt**2
+
+        self.bass.pos = [0, 0, 10]
+
+        self.bass.update()
+        self.bass2.update()
+        self.ball.update()
+        self.ball2.update()
+        # print len(self.tet.totalpos[0][0][2])
+        self.tet.update()
+        self.distance.emit('Time: ' + str(self.dt) +
+                           ' Distance: ' + str(distance)
+                           )
         drawGrid(0)
+        self.dt += dt
+        # GL.glPopMatrix()
 
-        # print self.key
-    def drawSphere(self, radius, slices, stacks):
-
-        # GL.glBegin(GL_LINE_LOOP)
-        quadric = GLU.gluNewQuadric()
-        GLU.gluQuadricDrawStyle(quadric, GLU.GLU_LINE)
-        GLU.gluSphere(quadric, radius, slices, stacks)
-        GLU.gluDeleteQuadric(quadric)
-        # glEnd()
 
     def resizeGL(self, width, height):
         # print 'resize'
@@ -252,20 +214,18 @@ class GLWidget(QtOpenGL.QGLWidget):
         self.lastPos = event.pos()
 
     def mouseMoveEvent(self, event):
-
         dx = event.x() - self.lastPos.x()
         dy = event.y() - self.lastPos.y()
         if event.buttons() & QtCore.Qt.LeftButton:
-            self.setXRotation(8 * dy)
-            self.setYRotation(8 * dx)
-            # self.setXRotation(self.xRot + 8 * dy)
-            # self.setYRotation(self.yRot + 8 * dx)
+            # self.setXRotation(8 * dy)
+            # self.setYRotation(8 * dx)
+            self.setXRotation(self.xRot + 8 * dy)
+            self.setYRotation(self.yRot + 8 * dx)
         elif event.buttons() & QtCore.Qt.RightButton:
-            self.setXRotation(8 * dy)
-            self.setZRotation(8 * dx)
-            # self.setXRotation(self.xRot + 8 * dy)
-            # self.setZRotation(self.zRot + 8 * dx)
-
+            # self.setXRotation(8 * dy)
+            # self.setZRotation(8 * dx)
+            self.setXRotation(self.xRot + 8 * dy)
+            self.setZRotation(self.zRot + 8 * dx)
         self.lastPos = event.pos()
 
     def wheelEvent(self, event):
@@ -278,21 +238,22 @@ class GLWidget(QtOpenGL.QGLWidget):
         modelView = glGetDoublev(GL_MODELVIEW_MATRIX)
 
     def keyPressEvent(self, event):
+        print 'e'
         key = event.key()
         if key == 16777234:
-            self.key[1] = -0.2
+            self.key[1] += -0.2
             self.key[0] = 1
 
         if key == 16777235:
-            self.key[2] = 0.2
+            self.key[2] += 0.2
             self.key[0] = 2
 
         if key == 16777236:
-            self.key[1] = 0.2
+            self.key[1] += 0.2
             self.key[0] = 1
 
         if key == 16777237:
-            self.key[2] = -0.2
+            self.key[2] += -0.2
             self.key[0] = 2
 
     def normalizeAngle(self, angle):
@@ -309,6 +270,6 @@ class GLWidget(QtOpenGL.QGLWidget):
 if __name__ == '__main__':
 
     app = QtGui.QApplication(sys.argv)
-    window = GLWidget()
+    window = Window()
     window.show()
     sys.exit(app.exec_())

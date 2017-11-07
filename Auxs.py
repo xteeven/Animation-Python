@@ -5,7 +5,7 @@ import pygame
 from pygame.locals import *
 import numpy as np
 from math import sin, cos, radians, degrees, atan
-
+import colorsys
 
 def moveInCurve(curve, i):
 
@@ -275,6 +275,62 @@ class Arm:
 def cosd(x): return cos(radians(x))
 
 def sind(x): return sin(radians(x))
+
+class Ball:
+    def __init__(self, radius=0.25, slices=10, stacks=10, hue=0.5, pos=[0,0,0]):
+
+        self.radius = radius
+        self.slices = slices
+        self.stacks = stacks
+        self.mass = 1
+        self.gravity = [0, 0, -9.8]
+        self.vel = np.array([0, 0, 0])
+        self.pos = np.array(pos)
+        self.color = colorsys.hsv_to_rgb(hue/100.0, 1, 1)
+
+    def drawSphere(self, radius, slices, stacks):
+
+        glColor3f(self.color[0], self.color[1], self.color[2])
+        quadric = gluNewQuadric()
+        gluQuadricDrawStyle(quadric, GLU_LINE)
+        gluSphere(quadric, radius, slices, stacks)
+        gluDeleteQuadric(quadric)
+
+
+
+    def update(self):
+
+        glPushMatrix()
+        glTranslatef(self.pos[0], self.pos[1], self.pos[2])
+        self.drawSphere(self.radius, self.slices, self.stacks)
+        glPopMatrix()
+
+
+class Matrix:
+
+    def __init__(self, z=10):
+        self.mat = []
+        self.total = []
+        for i in range(10):
+            self.mat.append([Ball(pos=[i-5, j-5, z], hue=i*j, radius=0.1) for j in range(10)])
+        for line in self.mat:
+            self.total.append([[ball.mass, ball.vel] for ball in line])
+
+    def currentpos(self):
+        pos = []
+        for line in self.mat:
+            pos.append([ball.pos for ball in line])
+        return pos
+
+    def update(self):
+        iter = np.transpose(
+            0 + np.array([np.array([-1, -1, -1, 0, 0, 1, 1, 1]),
+                          np.array([-1, 0, 1, -1, 1, -1, 0, 1])]))
+
+        for line in self.mat:
+            [ball.update() for ball in line]
+
+
 
 
 if __name__ == "__main__":
