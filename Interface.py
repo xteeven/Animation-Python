@@ -135,6 +135,7 @@ class GLWidget(QtOpenGL.QGLWidget):
         self.yRot = 0
         self.zRot = 0
         self.zoom = 0
+        self.key = [0, 0, 0]  # axis, axis1value, axis2value
         pygame.init()
 
         self.lastPos = QtCore.QPoint()
@@ -172,8 +173,6 @@ class GLWidget(QtOpenGL.QGLWidget):
             # self.updateGL()
 
     def initializeGL(self):
-
-        print 'begin'
         GL.glShadeModel(GL.GL_FLAT)
         GL.glMatrixMode(GL.GL_MODELVIEW)
         GL.glViewport(0, 0, self.frameGeometry().width(), self.frameGeometry().height())
@@ -183,28 +182,62 @@ class GLWidget(QtOpenGL.QGLWidget):
         GL.glMatrixMode(GL.GL_PROJECTION)
 
         GLU.gluPerspective(45, self.frameGeometry().width() / self.frameGeometry().height(), 1, 250.0)
-        GL.glTranslatef(0.0, 0.0, -10)
+        GL.glTranslatef(0.0, 0.0, -30)
         GL.glRotate(-45, 1, 0, 1)
         GL.glEnable(GL.GL_DEPTH_TEST)
         GL.glEnable(GL.GL_CULL_FACE)
 
     def moveEvents(self):
         modelView = glGetDoublev(GL_MODELVIEW_MATRIX)
+
         glTranslatef(modelView[0][2] * 2 * self.zoom,
                      modelView[1][2] * 2 * self.zoom,
                      modelView[2][2] * 2 * self.zoom)
+
         GL.glRotated(self.xRot / 16.0, 1.0, 0.0, 0.0)
         GL.glRotated(self.yRot / 16.0, 0.0, 1.0, 0.0)
         GL.glRotated(self.zRot / 16.0, 0.0, 0.0, 1.0)
 
+        if self.key[0] == 1:
+            glTranslatef(modelView[0][0] * self.key[1] / 2.0,
+                         modelView[1][0] * self.key[1] / 2.0,
+                         modelView[2][0] * self.key[1] / 2.0)
+
+
+        if self.key[0] == 2:
+            glTranslatef(modelView[0][1] * self.key[2],
+                         modelView[1][1] * self.key[2],
+                         modelView[2][1] * self.key[2])
+
+        self.xRot = 0
+        self.yRot = 0
+        self.zRot = 0
+        self.key[0] = 0
+        self.zoom = 0
+
     def paintGL(self):
 
         GL.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT)
-        GL.glLoadIdentity()
+
+        # GL.glLoadIdentity()
+
         self.moveEvents()
+
         drawCoord((0, 0, 0))
+
+        self.drawSphere(1, 10, 10)
+
         drawGrid(0)
 
+        # print self.key
+    def drawSphere(self, radius, slices, stacks):
+
+        # GL.glBegin(GL_LINE_LOOP)
+        quadric = GLU.gluNewQuadric()
+        GLU.gluQuadricDrawStyle(quadric, GLU.GLU_LINE)
+        GLU.gluSphere(quadric, radius, slices, stacks)
+        GLU.gluDeleteQuadric(quadric)
+        # glEnd()
 
     def resizeGL(self, width, height):
         # print 'resize'
@@ -215,21 +248,23 @@ class GLWidget(QtOpenGL.QGLWidget):
         GL.glMatrixMode(GL.GL_MODELVIEW)
         GL.glLoadIdentity()
 
-
     def mousePressEvent(self, event):
         self.lastPos = event.pos()
-
 
     def mouseMoveEvent(self, event):
 
         dx = event.x() - self.lastPos.x()
         dy = event.y() - self.lastPos.y()
         if event.buttons() & QtCore.Qt.LeftButton:
-            self.setXRotation(self.xRot + 8 * dy)
-            self.setYRotation(self.yRot + 8 * dx)
+            self.setXRotation(8 * dy)
+            self.setYRotation(8 * dx)
+            # self.setXRotation(self.xRot + 8 * dy)
+            # self.setYRotation(self.yRot + 8 * dx)
         elif event.buttons() & QtCore.Qt.RightButton:
-            self.setXRotation(self.xRot + 8 * dy)
-            self.setZRotation(self.zRot + 8 * dx)
+            self.setXRotation(8 * dy)
+            self.setZRotation(8 * dx)
+            # self.setXRotation(self.xRot + 8 * dy)
+            # self.setZRotation(self.zRot + 8 * dx)
 
         self.lastPos = event.pos()
 
@@ -242,7 +277,23 @@ class GLWidget(QtOpenGL.QGLWidget):
             else self.zoom
         modelView = glGetDoublev(GL_MODELVIEW_MATRIX)
 
+    def keyPressEvent(self, event):
+        key = event.key()
+        if key == 16777234:
+            self.key[1] = -0.2
+            self.key[0] = 1
 
+        if key == 16777235:
+            self.key[2] = 0.2
+            self.key[0] = 2
+
+        if key == 16777236:
+            self.key[1] = 0.2
+            self.key[0] = 1
+
+        if key == 16777237:
+            self.key[2] = -0.2
+            self.key[0] = 2
 
     def normalizeAngle(self, angle):
         while angle < 0:
