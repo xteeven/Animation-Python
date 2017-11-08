@@ -312,15 +312,15 @@ class Matrix:
         self.mat = []
         self.total = []
         for i in range(10):
-            self.mat.append([Ball(pos=[i-5, j-5, z], hue=i*j, radius=0.1) for j in range(10)])
+            self.mat.append([Ball(pos=[i-5, j-5, z], hue=i*j*10.0, radius=0.1) for j in range(10)])
         for line in self.mat:
             self.total.append([[ball.mass, ball.vel] for ball in line])
 
     def currentpos(self):
-        pos = []
+        pos = np.array([])
         for line in self.mat:
-            pos.append([ball.pos for ball in line])
-        return pos
+            pos = np.append(pos, [ball.pos for ball in line])
+        return pos.reshape(10, 10, 3)
 
     def update(self):
         iter = np.transpose(

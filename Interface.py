@@ -73,6 +73,7 @@ class GLWidget(QtOpenGL.QGLWidget):
         self.yRot = 0
         self.zRot = 0
         self.zoom = 0
+        self.gravity = [0, 0, -9.8]
         self.key = [0, 0, 0]  # axis, axis1value, axis2value
         self.dt = 0
         self.bass = Ball(hue=85)
@@ -154,6 +155,13 @@ class GLWidget(QtOpenGL.QGLWidget):
         # self.key[0] = 0
         # self.zoom = 0
 
+    def elasticForce(self, k=5, *args):
+        points = np.array([ball.pos for ball in args])
+        distance = sum(points[0]-points[1:])
+        elastic = -k * distance / args[0].mass
+        return self.gravity + elastic
+
+
     def paintGL(self):
 
         GL.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT)
@@ -167,34 +175,26 @@ class GLWidget(QtOpenGL.QGLWidget):
 
         drawCoord((0, 0, 0))
 
-        distanceb = np.subtract(self.ball2.pos, self.ball.pos)
-        elasticab = -k * np.array(distanceb + [0, 0, 0]) / self.ball.mass
-        acelerationsb = self.ball.gravity + elasticab
+        acelerationsb = self.elasticForce(8, self.ball2, self.ball)
+
         self.ball2.vel = self.ball2.vel + np.array(acelerationsb) * dt
         self.ball2.pos = self.ball2.pos + np.array(self.ball2.vel) * dt + np.array(acelerationsb) * dt ** 2
 
+        acelerations = self.elasticForce(5, self.ball, self.bass, self.bass2)
 
-        distance = np.subtract(self.ball.pos, self.bass.pos)
-        distance2 = np.subtract(self.ball.pos, self.bass2.pos)
-        elastica = -k*np.array(distance+[0, 0, 3]+distance2 + [0, 0, 3])/self.ball.mass
-        elastica2 = -k * np.array(distance2 + [0, 0, 3]) / self.ball.mass
-
-        acelerations = self.ball.gravity+elastica
-
-        self.ball.vel =self.ball.vel + np.array(acelerations)*dt
-
-        self.ball.pos =self.ball.pos + np.array(self.ball.vel)*dt + np.array(acelerations)*dt**2
-
+        self.ball.vel = self.ball.vel + np.array(acelerations)*dt
+        self.ball.pos = self.ball.pos + np.array(self.ball.vel)*dt + np.array(acelerations)*dt**2
         self.bass.pos = [0, 0, 10]
 
         self.bass.update()
         self.bass2.update()
         self.ball.update()
         self.ball2.update()
-        # print len(self.tet.totalpos[0][0][2])
-        self.tet.update()
+
+
+        # self.tet.update()
         self.distance.emit('Time: ' + str(self.dt) +
-                           ' Distance: ' + str(distance)
+                           ' Distance: ' + str(self.ball.pos )
                            )
         drawGrid(0)
         self.dt += dt
