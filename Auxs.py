@@ -277,15 +277,15 @@ def cosd(x): return cos(radians(x))
 def sind(x): return sin(radians(x))
 
 class Ball:
-    def __init__(self, radius=0.25, slices=10, stacks=10, hue=0.5, pos=[0,0,0]):
+    def __init__(self, radius=0.25, slices=10, stacks=10, hue=0.5, pos=[0, 0, 0]):
 
         self.radius = radius
         self.slices = slices
         self.stacks = stacks
         self.mass = 1
-        self.gravity = [0, 0, -9.8]
         self.vel = np.array([0, 0, 0])
-        self.pos = np.array(pos)
+        self.posinicial = np.array(pos)
+        self.pos = self.posinicial
         self.color = colorsys.hsv_to_rgb(hue/100.0, 1, 1)
 
     def drawSphere(self, radius, slices, stacks):
@@ -295,8 +295,6 @@ class Ball:
         gluQuadricDrawStyle(quadric, GLU_LINE)
         gluSphere(quadric, radius, slices, stacks)
         gluDeleteQuadric(quadric)
-
-
 
     def update(self):
 
