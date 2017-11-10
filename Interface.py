@@ -75,12 +75,13 @@ class GLWidget(QtOpenGL.QGLWidget):
         self.zoom = 0
         self.gravity = [0, 0, -9.8]
         self.key = [0, 0, 0]  # axis, axis1value, axis2value
-        self.dt = 0
-        self.bass = Ball(hue=85, pos=np.array([0, 0, 10]))
-        self.bass2 = Ball(hue=85, pos=np.array([0, 0, 10]))
-        self.bass3 = Ball(hue=85, pos=np.array([0, 0, 10]))
-        self.ball = Ball(hue=15, pos=np.array([0, 0, 9]))
-        self.ball2 = Ball(hue=20)
+        self.dt = 0.03*2
+        self.bass = Ball(hue=85, pos=np.array([0, 0, 10]), isFixed=True)
+        self.bass2 = Ball(hue=85, pos=np.array([-10, 0, 10]), isFixed=True)
+        self.bass3 = Ball(hue=85, pos=np.array([0, 10, 10]), isFixed=True)
+        self.ball = Ball(hue=15, pos=np.array([0, 1, 9]))
+        self.ball2 = Ball(hue=20, pos=np.array([0, 0, 8]))
+
         self.tet = Matrix(5)
         # self.ball.pos = np.array([0, -5, 9])
         # self.bass.pos = np.array([-10, -10, 10])
@@ -90,6 +91,10 @@ class GLWidget(QtOpenGL.QGLWidget):
         self.retract_timer.setInterval(0)
         self.retract_timer.timeout.connect(self.updateGL)
         self.retract_timer.start()
+
+        self.spring = Spring(self.ball, self.bass, k=5)
+        self.spring2 = Spring(self.ball2, self.ball, k=5)
+        self.spring3 = Spring(self.ball2, self.bass2, k=5)
 
 
     def minimumSizeHint(self):
@@ -156,51 +161,41 @@ class GLWidget(QtOpenGL.QGLWidget):
         # self.key[0] = 0
         # self.zoom = 0
 
-    def elasticForce(self,  balls = None, k=5, dt=0.03*2):
-        # k factor, deltat, balls
-        if balls:
-            points = np.array([ball.pos for ball in balls])
-            distance = sum(points[0]-points[1:]) - np.array([0, 0, 0])
-            elastic = -k * distance / balls[0].mass
-            balls[0].vel = balls[0].vel + np.array(self.gravity + elastic) * dt
-            balls[0].pos = balls[0].pos + np.array(balls[0].vel) * dt + np.array(self.gravity + elastic) * dt ** 2
-            # print range(1, len(balls))
-            [drawLine(balls[i].pos - balls[0].pos, balls[0].pos) for i in range(1, len(balls))]
-            balls[0].update()
+    # def elasticForce(self,  balls = None, k=5, dt=0.03*2):
+    #     # k factor, deltat, balls
+    #     if balls:
+    #         points = np.array([ball.pos for ball in balls])
+    #         distance = sum(points[0]-points[1:]) - np.array([0, 0, 0])
+    #         elastic = -k * distance / balls[0].mass
+    #         balls[0].vel = balls[0].vel + np.array(self.gravity + elastic) * dt
+    #         balls[0].pos = balls[0].pos + np.array(balls[0].vel) * dt + np.array(self.gravity + elastic) * dt ** 2
+    #         # print range(1, len(balls))
+    #         [drawLine(balls[i].pos - balls[0].pos, balls[0].pos) for i in range(1, len(balls))]
+    #         balls[0].update()
 
     def paintGL(self):
 
         GL.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT)
         GL.glLoadIdentity()
-
         self.moveEvents()
         drawCoord((0, 0, 0))
 
-        # self.elasticForce([self.ball2, self.ball, self.bass, self.bass3])
-        # self.elasticForce([self.ball, self.bass, self.bass2, self.ball2])
-        self.elasticForce([self.bass3, self.ball], k=20)
+        self.ball.update(self.dt, self.gravity)
+        self.ball2.update(self.dt, self.gravity)
 
-        self.elasticForce([self.bass, self.bass3], k=20)
-        # self.elasticForce([self.bass3, self.bass], k=0)
+        self.bass.update(self.dt, self.gravity)
+        self.bass2.update(self.dt, self.gravity)
+        self.bass3.update(self.dt, self.gravity)
 
-        self.elasticForce([self.bass2, self.bass], k=20)
-        # self.elasticForce([self.bass, self.bass2], k=0)
-
-        self.elasticForce([self.ball2, self.bass2], k=20)
-        # self.elasticForce([self.bass2, self.ball2], k=0)
-
-        self.bass.update()
-        self.bass2.update()
-        self.bass3.update()
-        self.ball.update()
-        self.ball2.update()
-
+        self.spring.forces()
+        self.spring2.forces()
+        self.spring3.forces()
 
         self.distance.emit('Time: ' + str(self.dt) +
                            ' pos: ' + str(self.ball.pos)
                            )
         drawGrid(0)
-        self.dt += 0.03
+
         # GL.glPopMatrix()
 
 

@@ -277,31 +277,76 @@ def cosd(x): return cos(radians(x))
 def sind(x): return sin(radians(x))
 
 class Ball:
-    def __init__(self, radius=0.25, slices=10, stacks=10, hue=0.5, pos=[0, 0, 0]):
+    def __init__(self, pos=[0, 0, 0], hue=0.5, radius = 0.25, isFixed = False):
 
         self.radius = radius
-        self.slices = slices
-        self.stacks = stacks
+        self.slices = 10
+        self.stacks = 10
+        self.color = colorsys.hsv_to_rgb(hue / 100.0, 1, 1)
+        self.springs = []
         self.mass = 1
         self.vel = np.array([0, 0, 0])
-        self.posinicial = np.array(pos)
-        self.pos = self.posinicial
-        self.color = colorsys.hsv_to_rgb(hue/100.0, 1, 1)
+        self.pos = pos
+        self.fixed = isFixed
 
-    def drawSphere(self, radius, slices, stacks):
-
+    def drawSphere(self, coords):
+        glPushMatrix()
+        glTranslatef(coords[0], coords[1], coords[2])
         glColor3f(self.color[0], self.color[1], self.color[2])
         quadric = gluNewQuadric()
         gluQuadricDrawStyle(quadric, GLU_LINE)
-        gluSphere(quadric, radius, slices, stacks)
+        gluSphere(quadric, self.radius, self.slices, self.stacks)
         gluDeleteQuadric(quadric)
-
-    def update(self):
-
-        glPushMatrix()
-        glTranslatef(self.pos[0], self.pos[1], self.pos[2])
-        self.drawSphere(self.radius, self.slices, self.stacks)
         glPopMatrix()
+
+    def update(self, delta, g):
+        if not self.fixed:
+            accel = np.array(self.calculateForces(g))
+
+
+            self.vel = self.vel + accel*delta
+            self.pos = np.array(self.pos) + self.vel * delta
+
+        self.drawSphere(self.pos)
+
+    def calculateForces(self, g):
+
+        forces1 = np.array([i.getForceDirection(self) for i in self.springs])
+        forces = np.array(sum(forces1))
+
+        return forces/self.mass + g
+
+
+
+
+class Spring:
+    def __init__(self, ball1=Ball, ball2=Ball, k=5):
+        self.b1 = ball1
+        self.b2 = ball2
+        self.k = k
+        self.b1.springs.append(self)
+        self.b2.springs.append(self)
+        self.length0 = self.distances()[0]
+        self.force = np.array([0, 0, 0])
+
+    def distances(self):
+        distances = np.subtract(self.b1.pos, self.b2.pos)
+        norm = np.linalg.norm(distances)
+        return norm, distances/norm
+
+    def forces(self):
+        distances = self.distances()
+        x = np.subtract(self.length0, distances[0])
+        self.force = -self.k*x*distances[1]
+
+    def getForceDirection(self, ball=Ball):
+        print ball == self.b2
+        if ball == self.b2:
+            return np.array(self.force)
+        else:
+            return -1*np.array(self.force)
+
+
 
 
 class Matrix:
