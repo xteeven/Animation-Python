@@ -5,24 +5,30 @@ import pygame
 from pygame.locals import *
 from Auxs import *
 
-def drawLine(dir=[1, 1, 1], pos=(0, 0, 0)):
+def drawLine(dir=[1, 1, 1], pos=(0, 0, 0), hue=0, line=1):
 
     # Draw a test line to evaluate the directions
-    # and positions previously calculated. (Only debuging)
+    # and positions previously calculated. (Only debugging)
 
-    glLineWidth(1)
+    glPushMatrix()
+    color = colorsys.hsv_to_rgb(hue / 100.0, 0.7, 0.8)
+    glLineWidth(line)
+    glColor3f(color[0], color[1], color[2])
     glBegin(GL_LINES)
-    glColor3f(.5, .5, .5)
+    # glColor3f(.5, .5, .5)
+    glNormal3f(0, 0, 1)
     glVertex3fv(pos)
+    glNormal3f(0, 0, 1)
     glVertex3fv((dir[0] + pos[0], dir[1] + pos[1], dir[2] + pos[2]))
     glEnd()
+    glPopMatrix()
 
 
 def drawCoord(origin=(0, 0, 0)):
 
     # Draw coordinate systems in the given position
-
-    axis1 = (1,0,0)
+    glPushMatrix()
+    axis1 = (1, 0, 0)
     axis1m = np.linalg.norm(axis1)
     axis2 = np.cross(axis1 / axis1m, (0, 1, 0))
     axis2m = np.linalg.norm(axis2)
@@ -31,17 +37,24 @@ def drawCoord(origin=(0, 0, 0)):
 
     glLineWidth(4)
     glBegin(GL_LINES)
+
     glColor(0.5, 0, 0)
+    glNormal3f(0, 0, 1)
     glVertex(origin)
+    glNormal3f(0, 0, 1)
     glVertex(sumtup(tuple(axis1), origin))
     glColor(0, 1, 0)
+    glNormal3f(0, 0, 1)
     glVertex(origin)
+    glNormal3f(0, 0, 1)
     glVertex(sumtup(tuple(axis2), origin))
     glColor(0, 0, 1)
+    glNormal3f(0, 0, 1)
     glVertex(origin)
+    glNormal3f(0, 0, 1)
     glVertex(sumtup(tuple(axis3), origin))
     glEnd()
-
+    glPopMatrix()
 
 def drawCurve(Curve):
 
@@ -85,16 +98,16 @@ def drawPlane():
 
 
 def drawGrid(zpos):
-
+    glPushMatrix()
     glLineWidth(1)
     glBegin(GL_LINES)
     glColor3f(.2, .2, .2)
     for i in range(-20, 20):
-        [glVertex3fv((i/2.0, j/2.0, zpos)) for j in range(-20, 20)]
+        [(glNormal3f(1,1,1), glVertex3fv((i/2.0, j/2.0, zpos))) for j in range(-20, 20)]
     for i in range(-20, 20):
-        [glVertex3fv((j / 2.0, i / 2.0, zpos)) for j in range(-20, 20)]
+        [(glNormal3f(1,1,1), glVertex3fv((j / 2.0, i / 2.0, zpos))) for j in range(-20, 20)]
     glEnd()
-
+    glPopMatrix()
 def drawLink(x=1, y=1, z=1, color = (.2, 0, 0)):
 
     glPushMatrix()

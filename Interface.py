@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-
+import time
 from Drawings import *
 import sys
 import math
@@ -16,6 +16,7 @@ except ImportError:
     QtGui.QMessageBox.critical(None, "OpenGL Animation",
             "PyOpenGL must be installed to run this example.")
     sys.exit(1)
+
 
 
 class Window(QtGui.QWidget):
@@ -75,14 +76,18 @@ class GLWidget(QtOpenGL.QGLWidget):
         self.zoom = 0
         self.gravity = [0, 0, -9.8]
         self.key = [0, 0, 0]  # axis, axis1value, axis2value
-        self.dt = 0.03*2
+        self.dt = 0.01
         self.bass = Ball(hue=85, pos=np.array([0, 0, 10]), isFixed=True)
         self.bass2 = Ball(hue=85, pos=np.array([-10, 0, 10]), isFixed=True)
         self.bass3 = Ball(hue=85, pos=np.array([0, 10, 10]), isFixed=True)
         self.ball = Ball(hue=15, pos=np.array([0, 1, 9]))
         self.ball2 = Ball(hue=20, pos=np.array([0, 0, 8]))
 
-        self.tet = Matrix(5)
+
+
+
+        self.tela = Matrix(5)
+        self.tela.arrange()
         # self.ball.pos = np.array([0, -5, 9])
         # self.bass.pos = np.array([-10, -10, 10])
         # self.bass2.pos = np.array([12, 0, 10])
@@ -95,6 +100,7 @@ class GLWidget(QtOpenGL.QGLWidget):
         self.spring = Spring(self.ball, self.bass, k=5)
         self.spring2 = Spring(self.ball2, self.ball, k=5)
         self.spring3 = Spring(self.ball2, self.bass2, k=5)
+
 
 
     def minimumSizeHint(self):
@@ -130,8 +136,22 @@ class GLWidget(QtOpenGL.QGLWidget):
         GLU.gluPerspective(45, self.frameGeometry().width() / self.frameGeometry().height(), 1, 250.0)
         GL.glTranslatef(0.0, 0.0, -30)
         GL.glRotate(-45, 1, 0, 1)
+
+        # glMaterialfv(GL_FRONT, GL_SPECULAR, [ 1.0, 1.0, 1.0, 0.5])
+        # glMaterialfv(GL_FRONT, GL_SHININESS,  50.0)
+        # glLightfv(GL_LIGHT0, GL_POSITION, [1.0, 1.0, 1.0, 0.0])
+        # glLightfv(GL_LIGHT1, GL_POSITION, [0.0, 1.0, 1.0, 0.0])
+        # glLightfv(GL_LIGHT2, GL_POSITION, [1.0, 0.0, 1.0, 0.0])
+        #
+
+
+        # glEnable(GL_LIGHTING)
+        # glEnable(GL_LIGHT0)
+        # glEnable(GL_LIGHT1)
+        # glEnable(GL_LIGHT2)
         GL.glEnable(GL.GL_DEPTH_TEST)
         GL.glEnable(GL.GL_CULL_FACE)
+
 
     def moveEvents(self):
         modelView = glGetDoublev(GL_MODELVIEW_MATRIX)
@@ -178,21 +198,22 @@ class GLWidget(QtOpenGL.QGLWidget):
         GL.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT)
         GL.glLoadIdentity()
         self.moveEvents()
-        drawCoord((0, 0, 0))
-
-        self.ball.update(self.dt, self.gravity)
-        self.ball2.update(self.dt, self.gravity)
-
-        self.bass.update(self.dt, self.gravity)
-        self.bass2.update(self.dt, self.gravity)
-        self.bass3.update(self.dt, self.gravity)
-
-        self.spring.forces()
-        self.spring2.forces()
-        self.spring3.forces()
+        # drawCoord((0, 0, 0))
+        #
+        # self.ball.update(self.dt, self.gravity)
+        # self.ball2.update(self.dt, self.gravity)
+        #
+        # self.bass.update(self.dt, self.gravity)
+        # self.bass2.update(self.dt, self.gravity)
+        # self.bass3.update(self.dt, self.gravity)
+        #
+        # self.spring.forces()
+        # self.spring2.forces()
+        # self.spring3.forces()
+        self.tela.update(self.dt, self.gravity)
 
         self.distance.emit('Time: ' + str(self.dt) +
-                           ' pos: ' + str(self.ball.pos)
+                           ' pos: ' + str(self.ball.position)
                            )
         drawGrid(0)
 

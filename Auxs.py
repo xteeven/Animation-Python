@@ -4,6 +4,7 @@ from OpenGL.GLU import *
 import pygame
 from pygame.locals import *
 import numpy as np
+import Drawings as draw
 from math import sin, cos, radians, degrees, atan
 import colorsys
 
@@ -285,38 +286,36 @@ class Ball:
         self.color = colorsys.hsv_to_rgb(hue / 100.0, 1, 1)
         self.springs = []
         self.mass = 1
-        self.vel = np.array([0, 0, 0])
-        self.pos = pos
+        self.velocity = np.array([0, 0, 0])
+        self.position = pos
         self.fixed = isFixed
+        self.damping = 0.98
 
     def drawSphere(self, coords):
         glPushMatrix()
+        glLineWidth(1)
         glTranslatef(coords[0], coords[1], coords[2])
         glColor3f(self.color[0], self.color[1], self.color[2])
         quadric = gluNewQuadric()
-        gluQuadricDrawStyle(quadric, GLU_LINE)
+        gluQuadricDrawStyle(quadric, GLU_FILL)
+        gluQuadricNormals(quadric, GLU_SMOOTH)
         gluSphere(quadric, self.radius, self.slices, self.stacks)
         gluDeleteQuadric(quadric)
         glPopMatrix()
 
     def update(self, delta, g):
         if not self.fixed:
-            accel = np.array(self.calculateForces(g))
+            acceleration = np.array(self.calculateAcceleration(g))
 
+            self.velocity = self.velocity + acceleration * delta * self.damping
 
-            self.vel = self.vel + accel*delta
-            self.pos = np.array(self.pos) + self.vel * delta
+            self.position = np.array(self.position) + self.velocity * delta
 
-        self.drawSphere(self.pos)
+        # self.drawSphere(self.pos)
 
-    def calculateForces(self, g):
-
-        forces1 = np.array([i.getForceDirection(self) for i in self.springs])
-        forces = np.array(sum(forces1))
-
+    def calculateAcceleration(self, g):
+        forces = np.array(sum([i.getAccelerationDirection(self) for i in self.springs]))
         return forces/self.mass + g
-
-
 
 
 class Spring:
@@ -330,17 +329,30 @@ class Spring:
         self.force = np.array([0, 0, 0])
 
     def distances(self):
-        distances = np.subtract(self.b1.pos, self.b2.pos)
+        distances = np.subtract(self.b1.position, self.b2.position)
         norm = np.linalg.norm(distances)
         return norm, distances/norm
 
     def forces(self):
         distances = self.distances()
+
         x = np.subtract(self.length0, distances[0])
+
         self.force = -self.k*x*distances[1]
 
-    def getForceDirection(self, ball=Ball):
-        print ball == self.b2
+        self.drawSpring()
+
+    def drawSpring(self):
+
+        dx = np.subtract(self.b1.position, self.b2.position)
+        dxm = dx/np.linalg.norm(dx)*self.length0
+        # draw.drawLine(dxm,
+        #               self.b2.pos+(dx-dxm)/2,
+        #               hue=0/360.0*100, line=3)
+        draw.drawLine(dx, self.b2.position, hue=180/360.0*100, line=1)
+
+    def getAccelerationDirection(self, ball=Ball):
+        # print ball == self.b2
         if ball == self.b2:
             return np.array(self.force)
         else:
@@ -354,24 +366,33 @@ class Matrix:
     def __init__(self, z=10):
         self.mat = []
         self.total = []
-        for i in range(10):
-            self.mat.append([Ball(pos=[i-5, j-5, z], hue=i*j*10.0, radius=0.1) for j in range(10)])
-        for line in self.mat:
-            self.total.append([[ball.mass, ball.vel] for ball in line])
+        self.springs = []
+        for i in range(20):
+            self.mat.append(
+                [Ball(pos=[i*0.5-5, j*0.5-5, z],
+                      hue=i*j*0, radius=0.1,
+                      isFixed=(not(i>0 and i<19 and j>0 and j<19)))
+                        for j in range(20)])
 
-    def currentpos(self):
-        pos = np.array([])
-        for line in self.mat:
-            pos = np.append(pos, [ball.pos for ball in line])
-        return pos.reshape(10, 10, 3)
 
-    def update(self):
-        iter = np.transpose(
-            0 + np.array([np.array([-1, -1, -1, 0, 0, 1, 1, 1]),
-                          np.array([-1, 0, 1, -1, 1, -1, 0, 1])]))
+    def arrange(self):
+        for line in range(len(self.mat)-1):
+            for row in range(len(self.mat[0])):
+                self.springs.append(Spring(self.mat[line][row], self.mat[line+1][row],k=500))
+        for line in range(len(self.mat)):
+            for row in range(len(self.mat[0])-1):
+                self.springs.append(Spring(self.mat[line][row], self.mat[line][row+1],k=500))
+
+
+    def update(self, delta, g):
 
         for line in self.mat:
-            [ball.update() for ball in line]
+            [ball.update(delta, g) for ball in line]
+
+        for spring in self.springs:
+            spring.forces()
+
+
 
 
 
