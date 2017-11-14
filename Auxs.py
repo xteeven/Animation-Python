@@ -80,7 +80,7 @@ def mouseMove(event):
     keyboard = pygame.key.get_pressed()
 
     p3d = gluUnProject(mousepos[0], 600-mousepos[1], 0.997, modelView, projection, viewport)
-    # print p3d
+
 
     if mousepressed[2] & keyboard[K_LSHIFT] & ((mouse[0] != 0)):
         glRotatef(int((vel)), 0, 0, mouse[0])
@@ -278,18 +278,19 @@ def cosd(x): return cos(radians(x))
 def sind(x): return sin(radians(x))
 
 class Ball:
-    def __init__(self, pos=[0, 0, 0], hue=0.5, radius = 0.25, isFixed = False):
+    def __init__(self, pos=[0, 0, 0], hue=0.5, radius=0.25, isFixed=False):
 
         self.radius = radius
         self.slices = 10
         self.stacks = 10
         self.color = colorsys.hsv_to_rgb(hue / 100.0, 1, 1)
         self.springs = []
-        self.mass = 1
+        self.mass = 0.1
         self.velocity = np.array([0, 0, 0])
-        self.position = pos
+        self.position = np.array(pos)
         self.fixed = isFixed
         self.damping = 0.98
+        self.acceleration = 0
 
     def drawSphere(self, coords):
         glPushMatrix()
@@ -299,22 +300,22 @@ class Ball:
         quadric = gluNewQuadric()
         gluQuadricDrawStyle(quadric, GLU_FILL)
         gluQuadricNormals(quadric, GLU_SMOOTH)
-        gluSphere(quadric, self.radius, self.slices, self.stacks)
+        gluSphere(quadric, 0.1+self.mass/70.0, self.slices, self.stacks)
         gluDeleteQuadric(quadric)
         glPopMatrix()
 
-    def update(self, delta, g):
+    def update(self, delta, g, damping=0.98, draw=True):
         if not self.fixed:
-            acceleration = np.array(self.calculateAcceleration(g))
+            acceleration = self.calculateAcceleration(g)
 
-            self.velocity = self.velocity + acceleration * delta * self.damping
+            self.velocity = (self.velocity + acceleration * delta) * damping
 
-            self.position = np.array(self.position) + self.velocity * delta
-
-        # self.drawSphere(self.pos)
+            self.position = self.position + self.velocity * delta
+        if draw:
+            self.drawSphere(self.position)
 
     def calculateAcceleration(self, g):
-        forces = np.array(sum([i.getAccelerationDirection(self) for i in self.springs]))
+        forces = sum([i.getAccelerationDirection(self) for i in self.springs])
         return forces/self.mass + g
 
 
@@ -326,76 +327,117 @@ class Spring:
         self.b1.springs.append(self)
         self.b2.springs.append(self)
         self.length0 = self.distances()[0]
+        self.plastic = self.length0
         self.force = np.array([0, 0, 0])
+        self.elasticoption = True
+        self.draw=1
 
     def distances(self):
-        distances = np.subtract(self.b1.position, self.b2.position)
+        distances = self.b1.position-self.b2.position
         norm = np.linalg.norm(distances)
         return norm, distances/norm
 
-    def forces(self):
+    def forces(self, lines=True, l0=True):
         distances = self.distances()
-
-        x = np.subtract(self.length0, distances[0])
-
+        x = self.length0-distances[0]
         self.force = -self.k*x*distances[1]
 
-        self.drawSpring()
+        if self.elasticoption:
+            if np.linalg.norm(self.force)>20:
+                self.length0 = self.distances()[0]
+                if np.linalg.norm(self.length0)/np.linalg.norm(self.plastic)>10:
+                    self.draw = 0
+                    try:
+                        del self.b1.springs[self.b1.springs.index(self)]
+                    except:
+                        pass
 
-    def drawSpring(self):
+        self.drawSpring(lines*self.draw, l0)
 
-        dx = np.subtract(self.b1.position, self.b2.position)
-        dxm = dx/np.linalg.norm(dx)*self.length0
-        # draw.drawLine(dxm,
-        #               self.b2.pos+(dx-dxm)/2,
-        #               hue=0/360.0*100, line=3)
-        draw.drawLine(dx, self.b2.position, hue=180/360.0*100, line=1)
+    def drawSpring(self, lines = True, L0 = True):
+        dx = self.b1.position - self.b2.position
+        if lines:
+
+            draw.drawLine(dx, self.b2.position, hue=180 / 360.0 * 100, line=1)
+        if L0:
+            dxm = dx/np.linalg.norm(dx)*self.length0
+            draw.drawLine(dxm,
+                          self.b2.position+(dx-dxm)/2,
+                          hue=0/360.0*100, line=3)
+
 
     def getAccelerationDirection(self, ball=Ball):
-        # print ball == self.b2
         if ball == self.b2:
-            return np.array(self.force)
+            return self.force
         else:
-            return -1*np.array(self.force)
-
+            return -self.force
 
 
 
 class Matrix:
 
-    def __init__(self, z=10):
+    def __init__(self, z=10, x=10, y=10):
         self.mat = []
         self.total = []
         self.springs = []
-        for i in range(20):
+        self.mass = 0.1
+        for i in range(x):
             self.mat.append(
-                [Ball(pos=[i*0.5-5, j*0.5-5, z],
+                [Ball(pos=[i*0.5-x/4, j*0.5-y/4, z],
                       hue=i*j*0, radius=0.1,
-                      isFixed=(not(i>0 and i<19 and j>0 and j<19)))
-                        for j in range(20)])
+                      isFixed=(not(i>0 and i<x-1 and j>0 and j<y-1)))
+                        for j in range(y)])
+        self.arrange()
 
 
     def arrange(self):
         for line in range(len(self.mat)-1):
             for row in range(len(self.mat[0])):
-                self.springs.append(Spring(self.mat[line][row], self.mat[line+1][row],k=500))
+                self.springs.append(Spring(self.mat[line][row], self.mat[line+1][row],k=50))
         for line in range(len(self.mat)):
             for row in range(len(self.mat[0])-1):
-                self.springs.append(Spring(self.mat[line][row], self.mat[line][row+1],k=500))
+                self.springs.append(Spring(self.mat[line][row], self.mat[line][row+1],k=50))
 
-
-    def update(self, delta, g):
-
+    def changeMass(self, mass):
         for line in self.mat:
-            [ball.update(delta, g) for ball in line]
+            for ball in line:
+                ball.mass = mass
+        self.mass = mass
+
+    def update(self, delta, g, damping = 0.98, drawBalls=True, drawLines=True, drawL0=False):
 
         for spring in self.springs:
-            spring.forces()
+            spring.forces(drawLines, drawL0)
 
+        for line in self.mat:
+            [ball.update(delta, g, damping, drawBalls) for ball in line]
 
+class Hair:
 
+    def __init__(self, z=10, x=20, y=0):
+        self.mat = []
+        self.total = []
+        self.springs = []
+        self.mass = 0.1
+        self.mat = [Ball(pos=[i, y, z], isFixed=(i==(0))) for i in range(0,x/2)]
+        self.arrange()
 
+    def arrange(self):
+        for balls in range(len(self.mat)-2):
+            self.springs.append(Spring(self.mat[balls], self.mat[balls + 1]))
+            self.springs.append(Spring(self.mat[balls], self.mat[balls + 2]))
 
+    def changeMass(self, mass):
+        for ball in self.mat:
+            ball.mass = mass
+        self.mass = mass
+
+    def update(self, delta, g, damping = 0.98, drawBalls=True, drawLines=True, drawL0=False):
+        for spring in enumerate(self.springs):
+            spring[1].forces(spring[0]%2==0 and drawLines, drawL0)
+
+        for ball in self.mat:
+            ball.update(delta, g, damping, drawBalls)
 
 if __name__ == "__main__":
     pass

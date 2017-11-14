@@ -5,6 +5,7 @@ import pygame
 from pygame.locals import *
 from Auxs import *
 
+
 def drawLine(dir=[1, 1, 1], pos=(0, 0, 0), hue=0, line=1):
 
     # Draw a test line to evaluate the directions
@@ -15,10 +16,7 @@ def drawLine(dir=[1, 1, 1], pos=(0, 0, 0), hue=0, line=1):
     glLineWidth(line)
     glColor3f(color[0], color[1], color[2])
     glBegin(GL_LINES)
-    # glColor3f(.5, .5, .5)
-    glNormal3f(0, 0, 1)
     glVertex3fv(pos)
-    glNormal3f(0, 0, 1)
     glVertex3fv((dir[0] + pos[0], dir[1] + pos[1], dir[2] + pos[2]))
     glEnd()
     glPopMatrix()
@@ -55,6 +53,7 @@ def drawCoord(origin=(0, 0, 0)):
     glVertex(sumtup(tuple(axis3), origin))
     glEnd()
     glPopMatrix()
+
 
 def drawCurve(Curve):
 
@@ -97,17 +96,29 @@ def drawPlane():
     glPopMatrix()
 
 
-def drawGrid(zpos):
+def drawGrid(x, y, zpos, solid= False):
     glPushMatrix()
-    glLineWidth(1)
-    glBegin(GL_LINES)
-    glColor3f(.2, .2, .2)
-    for i in range(-20, 20):
-        [(glNormal3f(1,1,1), glVertex3fv((i/2.0, j/2.0, zpos))) for j in range(-20, 20)]
-    for i in range(-20, 20):
-        [(glNormal3f(1,1,1), glVertex3fv((j / 2.0, i / 2.0, zpos))) for j in range(-20, 20)]
-    glEnd()
+
+    if solid:
+        glBegin(GL_QUADS)
+        glColor3f(.2, .2, .2)
+        glVertex3fv((x / 2.0, y / 2.0, zpos))
+        glVertex3fv((x / 2.0, -y / 2.0, zpos))
+        glVertex3fv((-x / 2.0, -y / 2.0, zpos))
+        glVertex3fv((-x / 2.0, y / 2.0, zpos))
+        glEnd()
+        pass
+
+    else:
+        glLineWidth(1)
+        glBegin(GL_LINES)
+        glColor3f(.2, .2, .2)
+        [(glVertex3fv((i / 2.0, y / 2.0, zpos)), glVertex3fv((i / 2.0, -y / 2.0, zpos))) for i in range(-x, x+1)]
+        [(glVertex3fv((-x/2.0, j/2.0, zpos)), glVertex3fv((x/2.0, j/2.0, zpos))) for j in range(-y, y+1)]
+        glEnd()
     glPopMatrix()
+
+
 def drawLink(x=1, y=1, z=1, color = (.2, 0, 0)):
 
     glPushMatrix()
