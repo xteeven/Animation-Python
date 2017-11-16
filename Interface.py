@@ -6,8 +6,6 @@ import math
 
 from PyQt4 import QtCore, QtGui, QtOpenGL
 
-
-
 try:
     from OpenGL import GL, GLU
 except ImportError:
@@ -15,8 +13,6 @@ except ImportError:
     QtGui.QMessageBox.critical(None, "OpenGL Animation",
             "PyOpenGL must be installed to run this example.")
     sys.exit(1)
-
-
 
 class Window(QtGui.QWidget):
     def __init__(self):
@@ -34,62 +30,46 @@ class Window(QtGui.QWidget):
         self.reset = QtGui.QPushButton("Reset")
         self.reset.pressed.connect(self.glWidget.matrixSize)
         self.selectBalls.setChecked(True)
-        self.selectEnlongation.setChecked(True)
+        self.selectSprings.setChecked(True)
+        self.selectEnlongation.setChecked(False)
         self.model = QtGui.QComboBox()
         self.model.addItems(["Matrix", "Hair", "Points"])
         self.model.setCurrentIndex(2)
-
         self.model.currentIndexChanged.connect(self.glWidget.selector)
-
         self.selectBalls.toggled.connect(self.glWidget.selectBalls)
         self.selectSprings.toggled.connect(self.glWidget.selectSprings)
         self.selectInicialLength.toggled.connect(self.glWidget.selectL0)
         self.selectEnlongation.toggled.connect(self.glWidget.enlongation)
-
-
         self.spintext = QtGui.QLabel('Dimension')
         self.spinbox = QtGui.QSpinBox()
         self.spinbox.setValue(10)
         self.spinbox.valueChanged.connect(self.glWidget.matrixSize)
-
         self.gravitySlider = self.createSlider(-500, 100)
         self.gravitySlider.valueChanged.connect(self.glWidget.setGravity)
-
         self.dampingSlider = self.createSlider(0, 100)
         self.dampingSlider.valueChanged.connect(self.glWidget.setDamping)
-
         self.massSlider = self.createSlider(1, 100)
         self.massSlider.valueChanged.connect(self.glWidget.setMass)
 
         mainLayout = QtGui.QHBoxLayout()
-        # mainLayout.addStretch(1)
         mainLayout.addWidget(self.glWidget)
-
-
         baseLayout = QtGui.QVBoxLayout()
         selecLayout = QtGui.QHBoxLayout()
-
         selecLayout.addWidget(self.textbox)
-
         glayout = QtGui.QVBoxLayout()
         glayout.addWidget(self.textg)
         glayout.addWidget(self.gravitySlider)
         self.gravitySlider.setValue(-98)
-
         dlayout = QtGui.QVBoxLayout()
         dlayout.addWidget(self.textd)
         dlayout.addWidget(self.dampingSlider)
         self.dampingSlider.setValue(98)
-
         mlayout = QtGui.QVBoxLayout()
         mlayout.addWidget(self.textm)
         mlayout.addWidget(self.massSlider)
-
         mainLayout.addLayout(glayout)
         mainLayout.addLayout(dlayout)
         mainLayout.addLayout(mlayout)
-
-        # selecLayout.addSpacing(100)
         selecLayout.addStretch(0)
         selecLayout.addWidget(self.reset)
         selecLayout.addWidget(self.selectBalls)
@@ -100,17 +80,12 @@ class Window(QtGui.QWidget):
         selecLayout.addWidget(self.spintext)
         selecLayout.addWidget(self.spinbox)
         selecLayout.addWidget(self.model)
-
         baseLayout.addLayout(selecLayout)
-
-
         baseLayout.addLayout(mainLayout)
 
         self.setLayout(baseLayout)
-
         self.spintext.setStyleSheet("color: white; font: bold 14px;")
         self.spinbox.setStyleSheet("background-color: #222222; color: white; font: bold 14px;")
-
         self.reset.setStyleSheet("""
         QPushButton {
          background-color: #222222;
@@ -139,9 +114,7 @@ class Window(QtGui.QWidget):
         self.textm.setStyleSheet("background-color: black; color: white; font: bold 14px;")
         self.textbox.setStyleSheet("background-color: black; color: white; font: bold 14px;")
 
-
         self.glWidget.distance.connect(self.textbox.setText)
-
 
     def createSlider(self, xmin=-10, xmax=10):
         slider = QtGui.QSlider(QtCore.Qt.Vertical)
@@ -150,15 +123,12 @@ class Window(QtGui.QWidget):
         slider.setPageStep(1 * 1)
         slider.setTickInterval((xmax-xmin)/100)
         slider.setTickPosition(QtGui.QSlider.TicksRight)
-
         return slider
-
 
 class GLWidget(QtOpenGL.QGLWidget):
 
     times = QtCore.pyqtSignal(str)
     distance = QtCore.pyqtSignal(str)
-
 
     def __init__(self, parent=None):
         super(GLWidget, self).__init__(parent)
@@ -171,9 +141,9 @@ class GLWidget(QtOpenGL.QGLWidget):
         self.damping = 0.98
         self.key = np.array([0, 0, 0])
         self.dt = 0.02
-        self.mass = 0.1
+        self.mass = 0.2
 
-        self.elasticity = True
+        self.elasticity = False
         self.ballselected = True
         self.springselected = True
         self.L0selected = False
@@ -193,7 +163,6 @@ class GLWidget(QtOpenGL.QGLWidget):
 
 
         # self.spring3 = Spring(self.ball2, self.bass2, k=5)
-
 
     def defineDemo(self):
         self.demoBalls = []
@@ -232,22 +201,19 @@ class GLWidget(QtOpenGL.QGLWidget):
 
     def enlongation(self, option):
         if self.options is 'Matrix':
-            self.elasticity = option
+            self.tela.turnElastisity(option)
         if self.options is 'Hair':
             self.cabelo.turnElastisity(option)
         if self.options is 'Points':
             for spring in self.demoSprings:
                 spring.elasticoption = option
+        self.elasticity = option
 
     def setGravity(self, g=False):
-        print g
         if g is not False:
             self.gravity = np.array([0, 0, g / 10.0])
 
-
     def setDamping(self, d):
-
-        # self.damping = 1-d/100.0
         self.damping = d/100.0
 
     def setMass(self, m):
@@ -276,24 +242,21 @@ class GLWidget(QtOpenGL.QGLWidget):
             self.cabelo = Hair(x=arg)
         if self.options is 'Points':
             self.defineDemo()
-
         self.setGravity(self.gravity[-1]*10)
         self.setMass(self.mass)
         self.setDamping(self.damping*100)
         self.enlongation(self.elasticity)
 
-
     def selector(self, option):
         options = ["Matrix", "Hair", "Points"]
         self.options = options[option]
+        self.matrixSize()
 
     def moveEvents(self):
         modelView = glGetDoublev(GL_MODELVIEW_MATRIX)
-
         glTranslatef(modelView[0][2] * 2 * self.zoom,
                      modelView[1][2] * 2 * self.zoom,
                      modelView[2][2] * 2 * self.zoom)
-
         GL.glRotated(self.xRot / 16.0, 1.0, 0.0, 0.0)
         GL.glRotated(self.yRot / 16.0, 0.0, 1.0, 0.0)
         GL.glRotated(self.zRot / 16.0, 0.0, 0.0, 1.0)
@@ -302,7 +265,6 @@ class GLWidget(QtOpenGL.QGLWidget):
             glTranslatef(modelView[0][0] * self.key[1] / 2.0,
                          modelView[1][0] * self.key[1] / 2.0,
                          modelView[2][0] * self.key[1] / 2.0)
-
 
         if self.key[0] == 2:
             glTranslatef(modelView[0][1] * self.key[2],
@@ -319,30 +281,13 @@ class GLWidget(QtOpenGL.QGLWidget):
     def initializeGL(self):
         GL.glShadeModel(GL.GL_FLAT)
         GL.glMatrixMode(GL.GL_MODELVIEW)
-        # GL.glClearColor(0,0,1)
         GL.glViewport(0, 0, self.frameGeometry().width(), self.frameGeometry().height())
-
         GL.glRotate(-45, 1, 0, 1)
         GL.glMatrixMode(GL.GL_PROJECTION)
-
         GLU.gluPerspective(45, self.frameGeometry().width() / self.frameGeometry().height(), 1, 250.0)
         GL.glTranslatef(0.0, 0.0, -30)
         GL.glRotate(-45, 1, 0, 1)
-
-        # glMaterialfv(GL_FRONT, GL_SPECULAR, [ 1.0, 1.0, 1.0, 0.5])
-        # glMaterialfv(GL_FRONT, GL_SHININESS,  50.0)
-        # glLightfv(GL_LIGHT0, GL_POSITION, [1.0, 1.0, 1.0, 0.0])
-        # glLightfv(GL_LIGHT1, GL_POSITION, [0.0, 1.0, 1.0, 0.0])
-        # glLightfv(GL_LIGHT2, GL_POSITION, [1.0, 0.0, 1.0, 0.0])
-        #
-
-
-        # glEnable(GL_LIGHTING)
-        # glEnable(GL_LIGHT0)
-        # glEnable(GL_LIGHT1)
-        # glEnable(GL_LIGHT2)
         GL.glEnable(GL.GL_DEPTH_TEST)
-        # GL.glEnable(GL.GL_CULL_FACE)
 
     def paintGL(self):
 
@@ -367,14 +312,12 @@ class GLWidget(QtOpenGL.QGLWidget):
                                self.springselected,
                                self.L0selected,
                                self.p3d)
-
         if self.options is 'Points':
             for spring in enumerate(self.demoSprings):
                 spring[1].forces(self.springselected, self.L0selected)
 
             for ball in self.demoBalls:
                 ball.update(self.dt, self.gravity,  self.damping, self.ballselected, self.p3d)
-
 
         self.distance.emit('gravity: ' + str(self.gravity) +
                            ' damping: ' + str(self.damping)
@@ -384,24 +327,12 @@ class GLWidget(QtOpenGL.QGLWidget):
         #                     + ' Mass: ' + str(self.tela.mass)
                            )
         drawGrid(20, 20, 0, solid=False)
-        # if self.p3d[-1]:
-        #     drawCoord((self.p3d[0], self.p3d[1],  self.p3d[2]))
 
     def resizeGL(self, width, height):
-
-        # print 'resize'
-
         side = max(width, height)
         self.viewSize = [height]
-
         if side < 0:
             return
-
-        # print (width - side) // 2, (height - side) // 2
-        # GL.glMatrixMode(GL.GL_PROJECTION)
-
-        # GLU.gluPerspective(45, width / height, 0.5, 250.0)
-
         GL.glViewport((width - side) // 2, (height - side) // 2, side, side)
         GL.glMatrixMode(GL.GL_MODELVIEW)
         GL.glLoadIdentity()
@@ -412,7 +343,7 @@ class GLWidget(QtOpenGL.QGLWidget):
             self.unproject(event.x(), 600-event.y())
         self.lastPos = event.pos()
 
-    def unproject(self, x, y):
+    def unProject(self, x, y):
         modelView = glGetDoublev(GL_MODELVIEW_MATRIX)
         projection = glGetDoublev(GL_PROJECTION_MATRIX)
         viewport = glGetIntegerv(GL_VIEWPORT)
@@ -439,19 +370,16 @@ class GLWidget(QtOpenGL.QGLWidget):
         self.lastPos = event.pos()
 
     def wheelEvent(self, event):
-        delta  = event.delta()/np.abs(event.delta())*0.5
-
+        delta = event.delta()/np.abs(event.delta())*0.5
         self.zoom = self.zoom + delta \
-            if (self.zoom+delta>-10) \
-            and (self.zoom+delta<1) \
+            if (self.zoom+delta > -15) \
+            and (self.zoom+delta < 5) \
             else self.zoom
-        modelView = glGetDoublev(GL_MODELVIEW_MATRIX)
 
     def mouseReleaseEvent(self, *args, **kwargs):
         if type(args[0]) is QtGui.QMouseEvent:
             self.currentMousePosition = QtCore.QPoint()
             self.p3d[-1] = False
-
 
     def keyPressEvent(self, event):
         print 'e'

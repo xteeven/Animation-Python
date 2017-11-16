@@ -342,8 +342,9 @@ class Spring:
         self.length0 = self.distances()[0]
         self.plastic = self.length0
         self.force = np.array([0, 0, 0])
-        self.elasticoption = True
+        self.elasticoption = False
         self.draw=1
+        self.hue = 180
 
     def distances(self):
         distances = self.b1.position-self.b2.position
@@ -358,7 +359,9 @@ class Spring:
         if self.elasticoption:
             if np.linalg.norm(self.force)>50:
                 self.length0 += self.distances()[0]*0.001
-                if np.linalg.norm(self.length0)/np.linalg.norm(self.plastic)>10:
+                norm = np.linalg.norm(self.length0) / np.linalg.norm(self.plastic)
+                self.hue = 180 - 180*norm/5.0
+                if norm>5:
                     self.draw = 0
                     try:
                         del self.b1.springs[self.b1.springs.index(self)]
@@ -375,7 +378,7 @@ class Spring:
 
         dx = self.b1.position - self.b2.position
         if lines:
-            draw.drawLine(dx, self.b2.position, hue=180 / 360.0 * 100, line=1)
+            draw.drawLine(dx, self.b2.position, hue=self.hue / 360.0 * 100, line=1)
         if L0:
             dxm = dx/np.linalg.norm(dx)*self.length0
             draw.drawLine(dxm,
@@ -395,7 +398,7 @@ class Matrix:
         self.mat = []
         self.total = []
         self.springs = []
-        self.mass = 0.1
+        self.mass = 0.5
         for i in range(x):
             self.mat.append(
                 [Ball(pos=[i*0.5-x/4, j*0.5-y/4, z],
@@ -419,8 +422,9 @@ class Matrix:
                 ball.mass = mass
         self.mass = mass
 
-    def setElastic(self, bool=True):
-        pass
+    def turnElastisity(self, isOn):
+        for spring in self.springs:
+            spring.elasticoption = isOn
 
     def update(self, delta, g, damping = 0.98, drawBalls=True, drawLines=True, drawL0=False, p3d=[0, 0, 0, False]):
 
