@@ -6,8 +6,7 @@ import math
 
 from PyQt4 import QtCore, QtGui, QtOpenGL
 
-def tick():
-    print 'tick'
+
 
 try:
     from OpenGL import GL, GLU
@@ -28,18 +27,27 @@ class Window(QtGui.QWidget):
         self.textg = QtGui.QLabel('Gravity')
         self.textd = QtGui.QLabel('Damping')
         self.textm = QtGui.QLabel('Mass')
-
         self.selectBalls = QtGui.QCheckBox("Balls", self)
         self.selectSprings = QtGui.QCheckBox("Springs", self)
         self.selectInicialLength =QtGui.QCheckBox("Rest Length", self)
-
+        self.selectEnlongation = QtGui.QCheckBox("Elasticity", self)
+        self.reset = QtGui.QPushButton("Reset")
+        self.reset.pressed.connect(self.glWidget.matrixSize)
         self.selectBalls.setChecked(True)
+        self.selectEnlongation.setChecked(True)
+        self.model = QtGui.QComboBox()
+        self.model.addItems(["Matrix", "Hair", "Points"])
+        self.model.setCurrentIndex(2)
+
+        self.model.currentIndexChanged.connect(self.glWidget.selector)
 
         self.selectBalls.toggled.connect(self.glWidget.selectBalls)
         self.selectSprings.toggled.connect(self.glWidget.selectSprings)
         self.selectInicialLength.toggled.connect(self.glWidget.selectL0)
+        self.selectEnlongation.toggled.connect(self.glWidget.enlongation)
 
-        self.spintext = QtGui.QLabel('Matrix dimension')
+
+        self.spintext = QtGui.QLabel('Dimension')
         self.spinbox = QtGui.QSpinBox()
         self.spinbox.setValue(10)
         self.spinbox.valueChanged.connect(self.glWidget.matrixSize)
@@ -54,19 +62,24 @@ class Window(QtGui.QWidget):
         self.massSlider.valueChanged.connect(self.glWidget.setMass)
 
         mainLayout = QtGui.QHBoxLayout()
+        # mainLayout.addStretch(1)
         mainLayout.addWidget(self.glWidget)
+
 
         baseLayout = QtGui.QVBoxLayout()
         selecLayout = QtGui.QHBoxLayout()
+
         selecLayout.addWidget(self.textbox)
 
         glayout = QtGui.QVBoxLayout()
         glayout.addWidget(self.textg)
         glayout.addWidget(self.gravitySlider)
+        self.gravitySlider.setValue(-98)
 
         dlayout = QtGui.QVBoxLayout()
         dlayout.addWidget(self.textd)
         dlayout.addWidget(self.dampingSlider)
+        self.dampingSlider.setValue(98)
 
         mlayout = QtGui.QVBoxLayout()
         mlayout.addWidget(self.textm)
@@ -76,13 +89,17 @@ class Window(QtGui.QWidget):
         mainLayout.addLayout(dlayout)
         mainLayout.addLayout(mlayout)
 
-        selecLayout.addSpacing(100)
+        # selecLayout.addSpacing(100)
+        selecLayout.addStretch(0)
+        selecLayout.addWidget(self.reset)
         selecLayout.addWidget(self.selectBalls)
         selecLayout.addWidget(self.selectSprings)
         selecLayout.addWidget(self.selectInicialLength)
-        selecLayout.addSpacing(100)
+        selecLayout.addWidget(self.selectEnlongation)
+        selecLayout.addSpacing(50)
         selecLayout.addWidget(self.spintext)
         selecLayout.addWidget(self.spinbox)
+        selecLayout.addWidget(self.model)
 
         baseLayout.addLayout(selecLayout)
 
@@ -92,12 +109,27 @@ class Window(QtGui.QWidget):
         self.setLayout(baseLayout)
 
         self.spintext.setStyleSheet("color: white; font: bold 14px;")
-        self.spinbox.setStyleSheet("color: white; font: bold 14px;")
+        self.spinbox.setStyleSheet("background-color: #222222; color: white; font: bold 14px;")
 
+        self.reset.setStyleSheet("""
+        QPushButton {
+         background-color: #222222;
+         color: white; 
+         font: bold 14px;
+        }   
+        QPushButton:hover {
+            background-color: #333333;
+        }
+        QPushButton:pressed {
+        background-color: #188BC9;     
+        }
+        """)
+        self.model.setStyleSheet("background-color: #222222; color: white; font: bold 14px;")
         self.selectBalls.setStyleSheet("color: white; font: bold 14px;")
         self.selectSprings.setStyleSheet("color: white; font: bold 14px;")
         self.selectInicialLength.setStyleSheet("color: white; font: bold 14px;")
-
+        self.selectEnlongation.setStyleSheet("color: white; font: bold 14px;")
+        self.glWidget.setStyleSheet("background-color: white")
         self.setWindowTitle("Deformavel")
         self.setStyleSheet("background-color: black")
         self.gravitySlider.setStyleSheet("background-color: black")
@@ -137,39 +169,45 @@ class GLWidget(QtOpenGL.QGLWidget):
         self.zoom = 0
         self.gravity = np.array([0, 0, -9.8])
         self.damping = 0.98
-        self.key = np.array([0, 0, 0]) # axis, axis1value, axis2value
+        self.key = np.array([0, 0, 0])
         self.dt = 0.02
-        self.bass = Ball(hue=85, pos=np.array([0, 0, 10]), isFixed=True)
-        self.bass2 = Ball(hue=85, pos=np.array([-10, 0, 10]), isFixed=True)
-        self.bass3 = Ball(hue=85, pos=np.array([0, 10, 10]), isFixed=True)
-        self.ball = Ball(hue=15, pos=np.array([0, 1, 9]))
-        self.ball2 = Ball(hue=20, pos=np.array([0, 0, 8]))
+        self.mass = 0.1
 
-        self.p3d = [0,0,0, False]
-        self.viewSize = []
+        self.elasticity = True
         self.ballselected = True
-        self.springselected = False
+        self.springselected = True
         self.L0selected = False
         self.tela = Matrix(5)
-        # self.tela.arrange()
-
+        self.options = 'Points'
+        self.p3d = np.array([0,0,0, False])
+        self.viewSize = []
         self.cabelo = Hair()
-        self.cabelo2 = Hair(x=50, y=2)
-        # self.ball.pos = np.array([0, -5, 9])
-        # self.bass.pos = np.array([-10, -10, 10])
-        # self.bass2.pos = np.array([12, 0, 10])
         self.currentMousePosition = QtCore.QPoint()
         self.lastPos = QtCore.QPoint()
         self.retract_timer = QtCore.QTimer(self)
         self.retract_timer.setInterval(0)
         self.retract_timer.timeout.connect(self.updateGL)
         self.retract_timer.start()
-
-        self.spring = Spring(self.ball, self.bass, k=5)
-        self.spring2 = Spring(self.ball2, self.ball, k=5)
-        self.spring3 = Spring(self.ball2, self.bass2, k=5)
+        self.defineDemo()
 
 
+
+        # self.spring3 = Spring(self.ball2, self.bass2, k=5)
+
+
+    def defineDemo(self):
+        self.demoBalls = []
+        self.demoBalls.append(Ball(hue=85, pos=np.array([0, 0, 10]), isFixed=True))
+        self.demoBalls.append(Ball(hue=85, pos=np.array([-10, 0, 10]), isFixed=True))
+        self.demoBalls.append(Ball(hue=85, pos=np.array([0, 10, 10]), isFixed=True))
+        self.demoBalls.append(Ball(hue=15, pos=np.array([0, 1, 9])))
+        self.demoBalls.append(Ball(hue=20, pos=np.array([0, 0, 8])))
+
+        self.demoSprings = []
+        self.demoSprings.append(Spring(self.demoBalls[3], self.demoBalls[0],  k=5))
+        self.demoSprings.append(Spring(self.demoBalls[3], self.demoBalls[1], k=5))
+        self.demoSprings.append(Spring(self.demoBalls[3], self.demoBalls[2], k=5))
+        self.demoSprings.append(Spring(self.demoBalls[4], self.demoBalls[3], k=5))
 
     def minimumSizeHint(self):
         return QtCore.QSize(400, 400)
@@ -192,43 +230,35 @@ class GLWidget(QtOpenGL.QGLWidget):
         if angle != self.zRot:
             self.zRot = angle
 
-    def initializeGL(self):
-        GL.glShadeModel(GL.GL_FLAT)
-        GL.glMatrixMode(GL.GL_MODELVIEW)
-        GL.glViewport(0, 0, self.frameGeometry().width(), self.frameGeometry().height())
+    def enlongation(self, option):
+        if self.options is 'Matrix':
+            self.elasticity = option
+        if self.options is 'Hair':
+            self.cabelo.turnElastisity(option)
+        if self.options is 'Points':
+            for spring in self.demoSprings:
+                spring.elasticoption = option
 
+    def setGravity(self, g=False):
+        print g
+        if g is not False:
+            self.gravity = np.array([0, 0, g / 10.0])
 
-        GL.glRotate(-45, 1, 0, 1)
-        GL.glMatrixMode(GL.GL_PROJECTION)
-
-        GLU.gluPerspective(45, self.frameGeometry().width() / self.frameGeometry().height(), 1, 250.0)
-        GL.glTranslatef(0.0, 0.0, -30)
-        GL.glRotate(-45, 1, 0, 1)
-
-        # glMaterialfv(GL_FRONT, GL_SPECULAR, [ 1.0, 1.0, 1.0, 0.5])
-        # glMaterialfv(GL_FRONT, GL_SHININESS,  50.0)
-        # glLightfv(GL_LIGHT0, GL_POSITION, [1.0, 1.0, 1.0, 0.0])
-        # glLightfv(GL_LIGHT1, GL_POSITION, [0.0, 1.0, 1.0, 0.0])
-        # glLightfv(GL_LIGHT2, GL_POSITION, [1.0, 0.0, 1.0, 0.0])
-        #
-
-
-        # glEnable(GL_LIGHTING)
-        # glEnable(GL_LIGHT0)
-        # glEnable(GL_LIGHT1)
-        # glEnable(GL_LIGHT2)
-        GL.glEnable(GL.GL_DEPTH_TEST)
-        # GL.glEnable(GL.GL_CULL_FACE)
-
-    def setGravity(self, g):
-        self.gravity = [0, 0, g/10.0]
 
     def setDamping(self, d):
-        self.damping = 1-d/100.0
+
+        # self.damping = 1-d/100.0
+        self.damping = d/100.0
 
     def setMass(self, m):
-        self.tela.changeMass(m/10.0)
-        self.cabelo.changeMass(m/10.0)
+        if self.options is 'Matrix':
+            self.tela.changeMass(m/10.0)
+        if self.options is 'Hair':
+            self.cabelo.changeMass(m/10.0)
+        if self.options is 'Points':
+            for ball in self.demoBalls:
+                ball.mass = m
+        self.mass = m
 
     def selectBalls(self, option):
         self.ballselected = option
@@ -239,10 +269,23 @@ class GLWidget(QtOpenGL.QGLWidget):
     def selectL0(self, option):
         self.L0selected = option
 
-    def matrixSize(self, arg):
-        self.tela = Matrix(5, arg, arg)
-        self.cabelo = Hair(x=arg)
-        # self.tela.arrange()
+    def matrixSize(self, arg=10):
+        if self.options is 'Matrix':
+            self.tela = Matrix(5, arg, arg)
+        if self.options is 'Hair':
+            self.cabelo = Hair(x=arg)
+        if self.options is 'Points':
+            self.defineDemo()
+
+        self.setGravity(self.gravity[-1]*10)
+        self.setMass(self.mass)
+        self.setDamping(self.damping*100)
+        self.enlongation(self.elasticity)
+
+
+    def selector(self, option):
+        options = ["Matrix", "Hair", "Points"]
+        self.options = options[option]
 
     def moveEvents(self):
         modelView = glGetDoublev(GL_MODELVIEW_MATRIX)
@@ -273,66 +316,100 @@ class GLWidget(QtOpenGL.QGLWidget):
         # self.key[0] = 0
         # self.zoom = 0
 
-    # def elasticForce(self,  balls = None, k=5, dt=0.03*2):
-    #     # k factor, deltat, balls
-    #     if balls:
-    #         points = np.array([ball.pos for ball in balls])
-    #         distance = sum(points[0]-points[1:]) - np.array([0, 0, 0])
-    #         elastic = -k * distance / balls[0].mass
-    #         balls[0].vel = balls[0].vel + np.array(self.gravity + elastic) * dt
-    #         balls[0].pos = balls[0].pos + np.array(balls[0].vel) * dt + np.array(self.gravity + elastic) * dt ** 2
-    #         # print range(1, len(balls))
-    #         [drawLine(balls[i].pos - balls[0].pos, balls[0].pos) for i in range(1, len(balls))]
-    #         balls[0].update()
+    def initializeGL(self):
+        GL.glShadeModel(GL.GL_FLAT)
+        GL.glMatrixMode(GL.GL_MODELVIEW)
+        # GL.glClearColor(0,0,1)
+        GL.glViewport(0, 0, self.frameGeometry().width(), self.frameGeometry().height())
+
+        GL.glRotate(-45, 1, 0, 1)
+        GL.glMatrixMode(GL.GL_PROJECTION)
+
+        GLU.gluPerspective(45, self.frameGeometry().width() / self.frameGeometry().height(), 1, 250.0)
+        GL.glTranslatef(0.0, 0.0, -30)
+        GL.glRotate(-45, 1, 0, 1)
+
+        # glMaterialfv(GL_FRONT, GL_SPECULAR, [ 1.0, 1.0, 1.0, 0.5])
+        # glMaterialfv(GL_FRONT, GL_SHININESS,  50.0)
+        # glLightfv(GL_LIGHT0, GL_POSITION, [1.0, 1.0, 1.0, 0.0])
+        # glLightfv(GL_LIGHT1, GL_POSITION, [0.0, 1.0, 1.0, 0.0])
+        # glLightfv(GL_LIGHT2, GL_POSITION, [1.0, 0.0, 1.0, 0.0])
+        #
+
+
+        # glEnable(GL_LIGHTING)
+        # glEnable(GL_LIGHT0)
+        # glEnable(GL_LIGHT1)
+        # glEnable(GL_LIGHT2)
+        GL.glEnable(GL.GL_DEPTH_TEST)
+        # GL.glEnable(GL.GL_CULL_FACE)
 
     def paintGL(self):
 
         GL.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT)
         GL.glLoadIdentity()
         self.moveEvents()
-        # drawCoord((0, 0, 0))
+        drawCoord((0, 0, 0))
 
-        # self.ball.update(self.dt, self.gravity,self.tela.mass)
-        # self.ball2.update(self.dt, self.gravity,self.tela.mass)
-        #
-        # self.bass.update(self.dt, self.gravity)
-        # self.bass2.update(self.dt, self.gravity)
-        # self.bass3.update(self.dt, self.gravity)
-        #
-        # self.spring.forces()
-        # self.spring2.forces()
-        # self.spring3.forces()
+        if self.options is 'Matrix':
+            self.tela.update(self.dt,
+                             self.gravity,
+                             self.damping,
+                             self.ballselected,
+                             self.springselected,
+                             self.L0selected,
+                             self.p3d)
+        if self.options is 'Hair':
+            self.cabelo.update(self.dt,
+                               self.gravity,
+                               self.damping,
+                               self.ballselected,
+                               self.springselected,
+                               self.L0selected,
+                               self.p3d)
 
-        # self.tela.update(self.dt, self.gravity, self.damping, self.ballselected, self.springselected, self.L0selected)
+        if self.options is 'Points':
+            for spring in enumerate(self.demoSprings):
+                spring[1].forces(self.springselected, self.L0selected)
 
-        # self.cabelo.update(self.dt, self.gravity, self.damping, self.ballselected, self.springselected, self.L0selected)
+            for ball in self.demoBalls:
+                ball.update(self.dt, self.gravity,  self.damping, self.ballselected, self.p3d)
 
-        # self.cabelo2.update(self.dt, self.gravity, self.damping, self.ballselected, self.springselected, self.L0selected)
 
         self.distance.emit('gravity: ' + str(self.gravity) +
-                           ' damping: ' + str(self.damping) +
-                           ' Mouse: ' +
-                           str((self.currentMousePosition.x(), self.currentMousePosition.y()))
-                            + ' Mass: ' + str(self.tela.mass)
+                           ' damping: ' + str(self.damping)
+                           # ' Mouse: ' +
+                           # str((self.currentMousePosition.x(), self.currentMousePosition.y()))
+                           #  + ' P3D: ' + str(np.round(self.p3d[:-1], 1))
+        #                     + ' Mass: ' + str(self.tela.mass)
                            )
-        drawGrid(20, 20, 0)
-        if self.p3d[-1]:
-            drawCoord(self.p3d[:-1])
-
-
+        drawGrid(20, 20, 0, solid=False)
+        # if self.p3d[-1]:
+        #     drawCoord((self.p3d[0], self.p3d[1],  self.p3d[2]))
 
     def resizeGL(self, width, height):
 
         # print 'resize'
-        self.viewSize = height
+
         side = max(width, height)
+        self.viewSize = [height]
+
         if side < 0:
             return
+
+        # print (width - side) // 2, (height - side) // 2
+        # GL.glMatrixMode(GL.GL_PROJECTION)
+
+        # GLU.gluPerspective(45, width / height, 0.5, 250.0)
+
         GL.glViewport((width - side) // 2, (height - side) // 2, side, side)
         GL.glMatrixMode(GL.GL_MODELVIEW)
         GL.glLoadIdentity()
 
     def mousePressEvent(self, event):
+        if event.buttons() & QtCore.Qt.LeftButton:
+            self.currentMousePosition = event.pos()
+            self.unproject(event.x(), 600-event.y())
         self.lastPos = event.pos()
 
     def unproject(self, x, y):
@@ -341,11 +418,11 @@ class GLWidget(QtOpenGL.QGLWidget):
         viewport = glGetIntegerv(GL_VIEWPORT)
         #69 - 669
         #376 - 976
-        self.p3d[:-1] = gluUnProject(x, y+self.viewSize-600, 0.997, modelView, projection, viewport)
-        self.p3d[-1] = True
-        print self.p3d
+        # print self.viewSize, y
+        z = glReadPixels(x, y+int(self.viewSize[0]-600), 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT)
+        self.p3d = np.hstack([gluUnProject(x, y+self.viewSize[0]-600, z, modelView, projection, viewport),1])
 
-
+        # self.p3d[2] = glReadPixels(x, y, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT)
 
     def mouseMoveEvent(self, event):
         dx = event.x() - self.lastPos.x()

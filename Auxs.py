@@ -304,13 +304,26 @@ class Ball:
         gluDeleteQuadric(quadric)
         glPopMatrix()
 
-    def update(self, delta, g, damping=0.98, draw=True):
+    def update(self, delta, g, damping=0.98, draw=True, p3d=[0, 0, 0, False]):
         if not self.fixed:
             acceleration = self.calculateAcceleration(g)
-
             self.velocity = (self.velocity + acceleration * delta) * damping
+            if p3d[-1] and np.linalg.norm(np.subtract(p3d[:-1], self.position))<self.radius*5:
+                self.color = colorsys.hsv_to_rgb(30 / 100.0, 1, 1)
+                self.position = np.hstack([p3d[:-2], self.position[-1]])
+                # self.position = self.position + self.velocity * delta
 
-            self.position = self.position + self.velocity * delta
+            else:
+                self.position = self.position + self.velocity * delta
+                self.color = colorsys.hsv_to_rgb(0 / 100.0, 1, 1)
+        else:
+            if p3d[-1] and np.linalg.norm(np.subtract(p3d[:-1], self.position)) < self.radius * 4:
+                self.color = colorsys.hsv_to_rgb(80 / 100.0, 1, 1)
+                self.position = np.hstack([p3d[:-2], self.position[-1]])
+            else:
+                self.color = colorsys.hsv_to_rgb(0 / 100.0, 1, 1)
+
+
         if draw:
             self.drawSphere(self.position)
 
@@ -343,21 +356,25 @@ class Spring:
         self.force = -self.k*x*distances[1]
 
         if self.elasticoption:
-            if np.linalg.norm(self.force)>20:
-                self.length0 = self.distances()[0]
+            if np.linalg.norm(self.force)>50:
+                self.length0 += self.distances()[0]*0.001
                 if np.linalg.norm(self.length0)/np.linalg.norm(self.plastic)>10:
                     self.draw = 0
                     try:
                         del self.b1.springs[self.b1.springs.index(self)]
                     except:
                         pass
+                    try:
+                        del self.b2.springs[self.b1.springs.index(self)]
+                    except:
+                        pass
 
-        self.drawSpring(lines*self.draw, l0)
+        self.drawSpring(lines*self.draw, l0*self.draw)
 
     def drawSpring(self, lines = True, L0 = True):
+
         dx = self.b1.position - self.b2.position
         if lines:
-
             draw.drawLine(dx, self.b2.position, hue=180 / 360.0 * 100, line=1)
         if L0:
             dxm = dx/np.linalg.norm(dx)*self.length0
@@ -368,11 +385,9 @@ class Spring:
 
     def getAccelerationDirection(self, ball=Ball):
         if ball == self.b2:
-            return self.force
+            return self.force*self.draw
         else:
-            return -self.force
-
-
+            return -self.force*self.draw
 
 class Matrix:
 
@@ -404,13 +419,16 @@ class Matrix:
                 ball.mass = mass
         self.mass = mass
 
-    def update(self, delta, g, damping = 0.98, drawBalls=True, drawLines=True, drawL0=False):
+    def setElastic(self, bool=True):
+        pass
+
+    def update(self, delta, g, damping = 0.98, drawBalls=True, drawLines=True, drawL0=False, p3d=[0, 0, 0, False]):
 
         for spring in self.springs:
             spring.forces(drawLines, drawL0)
 
         for line in self.mat:
-            [ball.update(delta, g, damping, drawBalls) for ball in line]
+            [ball.update(delta, g, damping, drawBalls, p3d) for ball in line]
 
 class Hair:
 
@@ -419,7 +437,7 @@ class Hair:
         self.total = []
         self.springs = []
         self.mass = 0.1
-        self.mat = [Ball(pos=[i, y, z], isFixed=(i==(0))) for i in range(0,x/2)]
+        self.mat = [Ball(pos=[i, y, z], isFixed=(i==(0))) for i in range(0, x)]
         self.arrange()
 
     def arrange(self):
@@ -432,12 +450,16 @@ class Hair:
             ball.mass = mass
         self.mass = mass
 
-    def update(self, delta, g, damping = 0.98, drawBalls=True, drawLines=True, drawL0=False):
+    def turnElastisity(self, isOn):
+        for spring in self.springs:
+            spring.elasticoption = isOn
+
+    def update(self, delta, g, damping = 0.98, drawBalls=True, drawLines=True, drawL0=False, p3d=[0, 0, 0, False]):
         for spring in enumerate(self.springs):
-            spring[1].forces(spring[0]%2==0 and drawLines, drawL0)
+            spring[1].forces((spring[0])%2==0 and drawLines, drawL0)
 
         for ball in self.mat:
-            ball.update(delta, g, damping, drawBalls)
+            ball.update(delta, g, damping, drawBalls, p3d)
 
 if __name__ == "__main__":
     pass
